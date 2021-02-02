@@ -1,0 +1,27 @@
+
+/* font face declarations */
+
+@font-face {
+  font-family: "FolioBkBT";
+  src: url("/assets/fonts/Folio-Bk-BT-Book.ttf") format("truetype");
+  font-weight: normal;
+}
+
+/* type styles */
+
+html {
+  font-family: "FolioBkBT", Arial, Helvetica, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+li,
+p {
+  font-size: 18px;
+  font-weight: normal;
+}
+
+/* media queries */

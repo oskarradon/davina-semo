@@ -1,0 +1,19 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  margin: 30px;
+}
+
+section::before {
+ content: "└";
+ float: left;
+ padding: 3px 10px 0 0 ;
+}
+/* 
+section:hover > * {
+  background: var(--yellow);
+} */
