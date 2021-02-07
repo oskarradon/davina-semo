@@ -8,12 +8,34 @@ main {
   margin: 30px;
 }
 
-section::before {
+h1 {
+  margin-bottom: 7px;
+}
+
+/* section::before {
  content: "└";
  float: left;
  padding: 3px 10px 0 0 ;
-}
-/* 
+} */
+/*
 section:hover > * {
   background: var(--yellow);
 } */
+
+article {
+  display: grid;
+  margin-bottom: 7px;
+}
+
+article.i-1 {
+  grid-template-columns: 1px 20px 1fr;
+}
+
+article.i-2 {
+  grid-template-columns: 20px 20px 1fr;
+  margin-bottom: 18px;
+}
+
+article .bracket {
+  padding-top: 3px;
+}
