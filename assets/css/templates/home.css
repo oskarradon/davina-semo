@@ -12,30 +12,27 @@ h1 {
   margin-bottom: 7px;
 }
 
-/* section::before {
- content: "└";
- float: left;
- padding: 3px 10px 0 0 ;
-} */
-/*
-section:hover > * {
-  background: var(--yellow);
-} */
-
-article {
-  display: grid;
-  margin-bottom: 7px;
+ul {
+	position: relative;
+	list-style: none;
+	margin-left: 0;
+	padding-left: 1.2em;
 }
 
-article.i-1 {
-  grid-template-columns: 1px 20px 1fr;
+ul li {
+  margin-bottom: 12px;
 }
 
-article.i-2 {
-  grid-template-columns: 20px 20px 1fr;
-  margin-bottom: 18px;
+ul li:before {
+	content: "└";
+	position: absolute;
+	left: 0;
 }
 
-article .bracket {
-  padding-top: 3px;
+ul li.i-2, ul li.i-2:before {
+  margin-left: 20px;
+}
+
+ul li.i-3, ul li.i-3:before {
+  margin-left: 40px;
 }
