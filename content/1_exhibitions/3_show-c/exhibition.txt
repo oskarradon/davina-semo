@@ -1,9 +1,0 @@
-title: Project title 3
-----
-text: Project description
-----
-year: maybe a year when the project has been created
-----
-tags: maybe, some additional, tags, to characterize, the project
-----
-url: http://projecturl.com
