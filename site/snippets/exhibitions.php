@@ -13,23 +13,25 @@
 
   if($current->isNotEmpty()):
 ?>
-  <ul id="currently">
-    <li class="i-1">Currently</li>
-    <?php foreach($current as $e) : ?>
-      <li class="i-2">
-        <h3><?= $e->title() ?></h3>
-        <p><?= $e->start()->toDate('F j, Y') ?> &ndash; <?= $e->end()->toDate('F j, Y') ?></p>
-        <?= $e->text()->kt() ?>
-      </li>
-    <?php endforeach ?>
-  </ul>
+  <section id="currently">
+    <div class="i i-1 collapsible"><h1>Currently</h1></div>
+    <div class="content">
+      <?php foreach($current as $e) : ?>
+        <div class="i i-2">
+          <h3><?= $e->title() ?></h3>
+          <p><?= $e->start()->toDate('F j, Y') ?> &ndash; <?= $e->end()->toDate('F j, Y') ?></p>
+          <?= $e->text()->kt() ?>
+        </div>
+      <?php endforeach ?>
+    </div>
+  </section>
 <?php endif ?>
 
 <?php if($past->isNotEmpty()): ?>
-  <ul id="exhibitions">
-    <li class="i-1"><?= $data->title() ?></li>
-
-    <?php
+  <section id="exhibitions">
+    <div class="i i-1 collapsible"><?= $data->title() ?></div>
+    <div class="content">
+      <?php
 
       // function that returns the formatted date
       $callback = function($p) {
@@ -41,18 +43,19 @@
 
       // output exhibitions by year
       foreach($groupedItems as $year => $itemsPerYear):
-    ?>
-      <li class="i-2">
-        <?= $year ?>
-      </li>
-      <?php foreach($itemsPerYear as $item) : ?>
-        <li class="i-3">
-          <?php time() ?>
-          <h3><?= $item->title() ?></h3>
-          <p><?= $item->start()->toDate('F j, Y') ?> &ndash; <?= $item->end()->toDate('F j, Y') ?></p>
-          <?= $item->text()->kt() ?>
-        </li>
+      ?>
+        <div class="i i-2 collapsible"><?= $year ?></div>
+        <div class="content">
+          <?php foreach($itemsPerYear as $item) : ?>
+            <div class="i i-3">
+              <?php time() ?>
+              <h3><?= $item->title() ?></h3>
+              <p><?= $item->start()->toDate('F j, Y') ?> &ndash; <?= $item->end()->toDate('F j, Y') ?></p>
+              <?= $item->text()->kt() ?>
+            </div>
+          <?php endforeach; ?>
+        </div>
       <?php endforeach; ?>
-    <?php endforeach; ?>
-  </ul>
+    </div>
+  </section>
 <?php endif ?>

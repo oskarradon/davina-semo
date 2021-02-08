@@ -9,42 +9,44 @@ main {
   max-width: 480px;
 }
 
-ul {
-	position: relative;
-	list-style: none;
-	margin-left: 0;
-	padding-left: 1.2em;
-}
-
-ul li {
+/* .i {
   margin-bottom: 12px;
-}
+} */
 
-ul li:before {
+/* .i:before {
 	content: "└";
 	position: absolute;
 	left: 0;
-}
+} */
 
 /* hover behavior */
 
-ul li:hover {
+.i:hover {
   background: var(--yellow);
   cursor: pointer;
 }
 
 /* indentation classes */
 
-ul li.i-2, ul li.i-2:before {
+.i-2, .i-2:before {
   margin-left: 20px;
 }
 
-ul li.i-3, ul li.i-3:before {
+.i-3, .i-3:before {
   margin-left: 40px;
 }
 
 /* toggle-able class to show/hide li, used by js */
 
-ul li.hidden {
-  display: none;
+.collapsible ~ .content{
+  max-height: 0px;
+}
+
+.collapsible.active + .content{
+  max-height: 100%;
+}
+
+.content {
+  /* padding: 0 18px; */
+  overflow: hidden;
 }
