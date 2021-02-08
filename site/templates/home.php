@@ -4,7 +4,6 @@
   <title><?= $site->title() ?></title>
 
   <?= css('assets/css/main.css') ?>
-  <?= css(['assets/css/main.css', '@auto']) ?>
 </head>
 
 <body>
@@ -20,3 +19,5 @@
   </main>
 
 </body>
+
+<?= js('assets/js/site.js') ?>
