@@ -9,15 +9,9 @@ main {
   max-width: 480px;
 }
 
-/* .i {
-  margin-bottom: 12px;
-} */
-
-/* .i:before {
-	content: "└";
-	position: absolute;
-	left: 0;
-} */
+.i, h1 {
+  margin-bottom: 7px;
+}
 
 /* hover behavior */
 
@@ -28,25 +22,43 @@ main {
 
 /* indentation classes */
 
-.i-2, .i-2:before {
+.i-1 {
   margin-left: 20px;
 }
 
-.i-3, .i-3:before {
+.i-1:before {
+  margin-left: 30px;
+}
+
+.i-2 {
   margin-left: 40px;
+}
+
+.i-2:before {
+  margin-left: 50px;
+}
+
+.i-3 {
+  margin-left: 60px;
+}
+
+.i-3:before {
+  margin-left: 70px;
 }
 
 /* toggle-able class to show/hide li, used by js */
 
 .collapsible ~ .content{
-  max-height: 0px;
+  display: none;
 }
 
 .collapsible.active + .content{
-  max-height: 100%;
+  display: block;
 }
 
-.content {
-  /* padding: 0 18px; */
-  overflow: hidden;
+.collapsible.active + .content .i:before,
+.i-1:before {
+  content: "└";
+	position: absolute;
+	left: 0;
 }
