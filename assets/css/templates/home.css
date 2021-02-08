@@ -30,6 +30,7 @@ ul li:before {
 
 ul li:hover {
   background: var(--yellow);
+  cursor: pointer;
 }
 
 /* indentation classes */
