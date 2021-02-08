@@ -1,3 +1,2 @@
 title: Exhibitions
 ----
-text: An introduction to your work

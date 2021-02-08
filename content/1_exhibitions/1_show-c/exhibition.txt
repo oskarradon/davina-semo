@@ -2,11 +2,11 @@ Title: Reverberation
 
 ----
 
-Start: 2021-08-20
+Start: 2020-08-20
 
 ----
 
-End: 2022-08-18
+End: 2021-04-18
 
 ----
 
@@ -17,4 +17,4 @@ ON VIEW!!
 
 ----
 
-Link: 
+Link: https://www.publicartfund.org/exhibitions/view/davina-semo-reverberation/?mc_cid=209656bbd2&mc_eid=6560eb6cb0
