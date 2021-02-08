@@ -14,7 +14,7 @@
   if($current->isNotEmpty()):
 ?>
   <section id="currently">
-    <div class="i i-1 collapsible"><h1>Currently</h1></div>
+    <div class="i i-1 collapsible"><h2>Currently</h2></div>
     <div class="content">
       <?php foreach($current as $e) : ?>
         <div class="i i-2">
@@ -29,7 +29,7 @@
 
 <?php if($past->isNotEmpty()): ?>
   <section id="exhibitions">
-    <div class="i i-1 collapsible"><?= $data->title() ?></div>
+    <div class="i i-1 collapsible"><h2><?= $data->title() ?></h2></div>
     <div class="content">
       <?php
 
@@ -48,7 +48,6 @@
         <div class="content">
           <?php foreach($itemsPerYear as $item) : ?>
             <div class="i i-3">
-              <?php time() ?>
               <h3><?= $item->title() ?></h3>
               <p><?= $item->start()->toDate('F j, Y') ?> &ndash; <?= $item->end()->toDate('F j, Y') ?></p>
               <?= $item->text()->kt() ?>
