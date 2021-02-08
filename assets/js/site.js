@@ -7,27 +7,7 @@ document.querySelectorAll('ul li').forEach((el) => {
     v.preventDefault();
     console.log(iL);
     console.log(typeof iL)
-
-    var getSiblings = function (elem) {
-
-    	// Setup siblings array and get the first sibling
-    	var siblings = [];
-    	var sibling = elem.parentNode.firstChild;
-
-    	// Loop through each sibling and push to the array
-    	while (sibling) {
-    		if (sibling.nodeType === 1 && sibling !== elem) {
-    			siblings.push(sibling);
-    		}
-    		sibling = sibling.nextSibling
-    	}
-
-    	return siblings;
-
-    };
-
-    var x = getSiblings(el);
-    console.log(x)
+    console.log(getSiblings(el))
     // const listArray = Array.from(el.children);
     // listArray.forEach((item) => {
     //   console.log(item)
@@ -38,3 +18,17 @@ document.querySelectorAll('ul li').forEach((el) => {
 
 // when you click on an element with class list i-NUMBER
 // show all sibling elements with class i-NUMBER++
+
+function getSiblings(elem) {
+  // Setup siblings array and get the first sibling
+  var siblings = [];
+  var sibling = elem.parentNode.firstChild;
+  // Loop through each sibling and push to the array
+  while (sibling) {
+    if (sibling.nodeType === 1 && sibling !== elem) {
+      siblings.push(sibling);
+    }
+    sibling = sibling.nextSibling
+  }
+  return siblings;
+};
