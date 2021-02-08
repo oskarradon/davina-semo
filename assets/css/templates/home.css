@@ -6,10 +6,7 @@ body {
 
 main {
   margin: 30px;
-}
-
-h1 {
-  margin-bottom: 7px;
+  max-width: 480px;
 }
 
 ul {
@@ -28,6 +25,14 @@ ul li:before {
 	position: absolute;
 	left: 0;
 }
+
+/* hover behavior */
+
+ul li:hover {
+  background: var(--yellow);
+}
+
+/* indentation classes */
 
 ul li.i-2, ul li.i-2:before {
   margin-left: 20px;
