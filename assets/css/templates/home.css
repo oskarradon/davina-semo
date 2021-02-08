@@ -18,14 +18,12 @@ ul {
 
 ul li {
   margin-bottom: 12px;
-  /* margin-left: 20px; */
 }
 
 ul li:before {
 	content: "└";
 	position: absolute;
 	left: 0;
-  /* margin-left: 20px; */
 }
 
 /* hover behavior */
@@ -37,16 +35,16 @@ ul li:hover {
 
 /* indentation classes */
 
-ul.i-2 li, ul.i-2 li:before {
-  margin-left: 0px;
+ul li.i-2, ul li.i-2:before {
+  margin-left: 20px;
 }
 
-ul.i-3 li, ul.i-3 li:before {
-  margin-left: 0px;
+ul li.i-3, ul li.i-3:before {
+  margin-left: 40px;
 }
 
 /* toggle-able class to show/hide li, used by js */
 
-ul.hidden li {
+ul li.hidden {
   display: none;
 }
