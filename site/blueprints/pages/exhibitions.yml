@@ -1,0 +1,16 @@
+title: Exhibitions
+sections:
+  drafts:
+    headline: Drafts
+    type: pages
+    layout: list
+    template: exhibition
+    info: "{{ page.start.toDate('F j, Y') }} - {{ page.end.toDate('F j, Y') }}"
+    status: drafts
+  published:
+    headline: Published Projects
+    type: pages
+    layout: list
+    template: exhibition
+    info: "{{ page.start.toDate('F j, Y') }} - {{ page.end.toDate('F j, Y') }}"
+    status: published
