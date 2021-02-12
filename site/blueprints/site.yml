@@ -1,3 +1,31 @@
 title: Site
-preset: pages
-unlisted: true
+
+columns:
+  - width: 2/3
+    sections:
+      # ex_drafts:
+      #   extends: sections/shows
+      #   headline: Drafted exhibitions
+      #   status: draft
+      ex_published:
+        extends: sections/shows
+        headline: Exhibitions
+        status: listed
+      # pr_drafts:
+      #   extends: sections/links
+      #   headline: Drafted press
+      #   status: draft
+      pr_published:
+        extends: sections/links
+        headline: Selected press
+        status: listed
+
+  - width: 1/3
+      sections:
+        home_image:
+          type: files
+          layout: cards
+          headline: Background image
+          cover: true
+          max: 1
+          size: large
