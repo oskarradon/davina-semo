@@ -1,16 +1,17 @@
 <?php
+  // filtered collection of all current exhibitions
   $current = $data
     ->children()
     ->filter(function ($child) {
       return $child->start()->toDate() <= time() && $child->end()->toDate() >= time();
     });
-
+  // filtered collection of all past exhibitions
   $past = $data
     ->children()
     ->filter(function ($child) {
       return $child->start()->toDate() > time() || $child->end()->toDate() < time();
     });
-
+  // only show "currently" section if there are pages that match above criteria
   if($current->isNotEmpty()):
 ?>
   <section id="currently">
@@ -27,30 +28,32 @@
   </section>
 <?php endif ?>
 
-<?php if($past->isNotEmpty()): ?>
+<?php
+  // collection of past exhibitions should never be empty, but just in case
+  if($past->isNotEmpty()):
+?>
   <section id="exhibitions">
     <div class="i i-1 collapsible"><h2><?= $data->title() ?></h2></div>
     <div class="content">
       <?php
-
-      // function that returns the formatted date
-      $callback = function($p) {
-        return $p->start()->date()->toDate('Y');
-      };
-
-      // group items using $callback
-      $groupedItems = $past->group($callback);
-
-      // output exhibitions by year
-      foreach($groupedItems as $year => $itemsPerYear):
+        // returns the year of an exhibition
+        $callback = function($p) {
+          return $p->start()->date()->toDate('Y');
+        };
+        // group items using $callback
+        $groupedItems = $past->group($callback);
+        // output exhibitions by year
+        foreach($groupedItems as $year => $itemsPerYear):
       ?>
         <div class="i i-2 collapsible"><?= $year ?></div>
         <div class="content">
           <?php foreach($itemsPerYear as $item) : ?>
             <div class="i i-3">
-              <h3><?= $item->title() ?></h3>
-              <p><?= $item->start()->toDate('F j, Y') ?> &ndash; <?= $item->end()->toDate('F j, Y') ?></p>
-              <?= $item->text()->kt() ?>
+              <h3 class="collapsible"><?= $item->title() ?></h3>
+              <div class="content">
+                <p><?= $item->start()->toDate('F j, Y') ?> &ndash; <?= $item->end()->toDate('F j, Y') ?></p>
+                <?= $item->text()->kt() ?>
+              </div>
             </div>
           <?php endforeach; ?>
         </div>
