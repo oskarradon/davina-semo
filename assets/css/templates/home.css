@@ -26,16 +26,12 @@ main {
   margin-left: 20px;
 }
 
-.i-1:before {
-  margin-left: 30px;
-}
-
 .i-2 {
   margin-left: 40px;
 }
 
 .i-2:before {
-  margin-left: 50px;
+  margin-left: 20px;
 }
 
 .i-3 {
@@ -43,7 +39,7 @@ main {
 }
 
 .i-3:before {
-  margin-left: 70px;
+  margin-left: 40px;
 }
 
 /* toggle-able class to show/hide li, used by js */
@@ -61,4 +57,53 @@ main {
   content: "└";
 	position: absolute;
 	left: 0;
+}
+
+/* backgroiund image */
+
+body, main {
+  width: 100vw;
+}
+
+main {
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  mix-blend-mode: multiply;
+}
+
+#main-image {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -99;
+  position: absolute;
+}
+
+#main-image img {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+/* footer */
+
+
+footer {
+  width: calc(100vw - 60px);
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  padding: 0 30px 30px;
+  /* background: white; */
+  z-index: 2;
+}
+
+footer input {
+  /* margin: 0 auto; */
+  width: calc(40vw - 60px);
+  max-width: 500px;
 }
