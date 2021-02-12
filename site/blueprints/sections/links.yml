@@ -1,0 +1,6 @@
+type: pages
+parent: kirby.page("press")
+headline: Selected Press Article
+layout: list
+image: false
+info: " {{ page.link }} "
