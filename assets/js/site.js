@@ -6,3 +6,13 @@ for (i = 0; i < coll.length; i++) {
     this.classList.toggle("active");
   });
 }
+
+
+
+
+
+var zoomImage = document.querySelector('#main-image img');
+var slider = document.getElementById('slider');
+slider.addEventListener('input', function() {
+    zoomImage.style.width = slider.value+'%';
+}, false);
