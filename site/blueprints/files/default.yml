@@ -1,0 +1,7 @@
+title: Default File
+
+fields:
+  alt:
+    width: 1/2
+    label: Alt Text
+    type: text
