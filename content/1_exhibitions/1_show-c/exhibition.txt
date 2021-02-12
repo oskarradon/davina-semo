@@ -10,11 +10,19 @@ End: 2021-04-18
 
 ----
 
-Text:
+Asdf: false
 
-Public Art Fund, Brooklyn Bridge Park, Pier 1, NY
-ON VIEW!!
+----
+
+Description: 
 
 ----
 
 Link: https://www.publicartfund.org/exhibitions/view/davina-semo-reverberation/?mc_cid=209656bbd2&mc_eid=6560eb6cb0
+
+----
+
+Text:
+
+Public Art Fund, Brooklyn Bridge Park, Pier 1, NY
+ON VIEW!!
