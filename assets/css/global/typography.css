@@ -27,4 +27,11 @@ p {
   margin: 0;
 }
 
+a, a:visited, a:active {
+  text-decoration: none;
+  color: black;
+}
+
+
+
 /* media queries */
