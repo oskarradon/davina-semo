@@ -1,16 +1,16 @@
 title: Exhibitions
 sections:
   drafts:
-    headline: Drafts
-    type: pages
-    layout: list
-    template: exhibition
-    info: "{{ page.start.toDate('F j, Y') }} - {{ page.end.toDate('F j, Y') }}"
-    status: drafts
+    extends: sections/shows
+    headline: Draft exhibitions
+    status: draft
+
+  unlisted:
+    extends: sections/shows
+    headline: Unlisted exhibitions
+    status: unlisted
+
   published:
-    headline: Published Projects
-    type: pages
-    layout: list
-    template: exhibition
-    info: "{{ page.start.toDate('F j, Y') }} - {{ page.end.toDate('F j, Y') }}"
-    status: published
+    extends: sections/shows
+    headline: Published exhibitions
+    status: listed
