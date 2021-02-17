@@ -18,9 +18,9 @@
     ?>
   </main>
   <div id="main-image"><?= $site->images()->first() ?></div>
-  <footer>
+  <aside>
     <input id="slider" type="range" min="1" max="200">
-  </footer>
+  </aside>
 </body>
 
 <?= js('assets/js/site.js') ?>
