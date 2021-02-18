@@ -4,6 +4,7 @@
   <title><?= $site->title() ?></title>
 
   <?= css('assets/css/main.css') ?>
+
 </head>
 
 <body>
@@ -23,4 +24,5 @@
   </aside>
 </body>
 
+<?= js('assets/js/glightbox.min.js') ?>
 <?= js('assets/js/site.js') ?>

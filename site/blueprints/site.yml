@@ -27,5 +27,4 @@ columns:
           layout: cards
           headline: Background image
           cover: true
-          max: 1
-          size: large
+          help: Only the first image will be used as the background, drag them to re-order.

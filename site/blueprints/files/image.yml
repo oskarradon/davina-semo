@@ -1,0 +1,10 @@
+title: Image File
+
+accept: image/*
+
+fields:
+  description:
+    width: 1/2
+    label: Description
+    type: text
+    help: This text will be displayed at the bottom of the image carousel.

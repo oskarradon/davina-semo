@@ -1,0 +1,10 @@
+title: Document File
+
+accept: document/*, application/pdf
+
+fields:
+  description:
+    width: 1/2
+    label: Description
+    type: text
+    help: The title of the document or a short description.
