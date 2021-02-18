@@ -29,3 +29,7 @@ function mainImgToggle() {
     }
   }
 }
+
+const lightbox = GLightbox({
+  width: "100vw"
+});
