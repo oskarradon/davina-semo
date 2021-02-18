@@ -2,5 +2,6 @@
 @import 'global/typography.css';
 
 @import 'components/slider.css';
+@import 'components/glightbox.min.css';
 
 @import 'templates/home.css';
