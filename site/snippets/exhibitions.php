@@ -25,7 +25,7 @@
           <?= $e->text()->kt() ?>
         </div>
 
-        <div class="wgallery">
+        <div class="gallery">
           <?php foreach($e->images() as $i) :
             static $imageCount = 0;
             $imageCount++; ?>
