@@ -21,34 +21,36 @@
               static $showCount = 0;
               $showCount++; ?>
 
-        <div class="i i-2 asdf">
+        <div class="i i-2">
           <h3><?= $e->title() ?></h3>
           <p><?= $e->start()->toDate('F j, Y') ?> &ndash; <?= $e->end()->toDate('F j, Y') ?></p>
           <?= $e->text()->kt() ?>
-        </div>
 
-        <?php if($e->images()) :
-              // only show gallery el if exhibition has imgs ?>
-          <div class="gallery">
-            <?php foreach($e->images() as $i) :
-                    static $imageCount = 0;
-                    $imageCount++; ?>
-              <figure>
-                <a href="<?= $i->url() ?>"
-                   class="glightbox"
-                   data-gallery="gallery<?php echo $showCount ?>"
-                   data-glightbox="description: .custom-desc<?php echo $imageCount ?>">
-                  <img src="<?= $i->url() ?>" alt="">
-                </a>
-                <figcaption class="glightbox-desc
-                                   custom-desc<?php echo $imageCount ?>">
-                  <p><?= $i->description() ?></p>
-                  <span><?php echo $imageCount ?> / <?= $e->images()->count() ?></span>
-                </figcaption>
-              </figure>
-            <?php endforeach ?>
-          </div>
-        <?php endif ?>
+
+          <?php if($e->images()->isNotEmpty()) :
+                // only show gallery el if exhibition has imgs ?>
+            <div class="gallery">
+              <?php foreach($e->images() as $i) :
+                      static $imageCount = 0;
+                      $imageCount++; ?>
+                <figure>
+                  <a href="<?= $i->url() ?>"
+                     class="glightbox"
+                     data-gallery="gallery<?php echo $showCount ?>"
+                     data-glightbox="description: .custom-desc<?php echo $imageCount ?>">
+                    <img src="<?= $i->url() ?>" alt="">
+                  </a>
+                  <figcaption class="glightbox-desc
+                                     custom-desc<?php echo $imageCount ?>">
+                    <p><?= $i->description() ?></p>
+                    <span><?php echo $imageCount ?> / <?= $e->images()->count() ?></span>
+                  </figcaption>
+                </figure>
+              <?php endforeach ?>
+            </div>
+          <?php endif ?>
+
+        </div>
 
         <?php foreach($e->documents() as $d) : ?>
           <div class="i i-3">
@@ -56,7 +58,7 @@
           </div>
         <?php endforeach ?>
 
-        <?php if($e->link()) : ?>
+        <?php if($e->link()->isNotEmpty()) : ?>
           <div class="i i-3">
             <a href="<?= $e->link()->url() ?>">View documentation</a>
           </div>

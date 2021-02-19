@@ -45,17 +45,21 @@ function mainImgToggle() {
 
 const lightbox = GLightbox();
 
-document.querySelector('.asdf').addEventListener("click", function () {
-  console.log("fgff")
-  lightbox.open(document.querySelector('figure a[data-gallery=gallery1]'))
+const i2 = document.querySelectorAll('.i-2')
+
+i2.forEach((elem, index) => {
+
+  var hasChild = elem.querySelector(".gallery") != null;
+  var gallerySelector = 'figure a[data-gallery=gallery'.concat( index + 1 , ']' )
+  if (hasChild) {
+    elem.addEventListener("click", function () {
+
+      lightbox.open(document.querySelector(gallerySelector))
+
+    });
+  }
+
 });
-
-var lBT = document.querySelectorAll(".i-2:has(> .gallery)"); // light Box Trigger elements
-// ".i-2:has(> .gallery)" not supported by browsers yet !!! NEED WORKAROUND
-console.log(lBT);
-
-// attach click event handler to .i-2
-// then open lightbox with gallery number == $showCount
 
 // schema:
 // div.i-2
