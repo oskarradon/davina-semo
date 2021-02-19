@@ -50,8 +50,9 @@ document.querySelector('.asdf').addEventListener("click", function () {
   lightbox.open(document.querySelector('figure a[data-gallery=gallery1]'))
 });
 
-// for every div with class .content
-// that contains div with class .gallery
+var lBT = document.querySelectorAll(".i-2:has(> .gallery)"); // light Box Trigger elements
+// ".i-2:has(> .gallery)" not supported by browsers yet !!! NEED WORKAROUND
+console.log(lBT);
 
 // attach click event handler to .i-2
 // then open lightbox with gallery number == $showCount
