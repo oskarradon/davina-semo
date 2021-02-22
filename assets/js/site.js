@@ -1,5 +1,5 @@
 // * * * * * *
-// EXPANDABLE DATA TREE
+// EXPANDABLE TREE
 // * * * * * *
 
 var coll = document.getElementsByClassName("collapsible");
@@ -48,17 +48,13 @@ const lightbox = GLightbox();
 const i2 = document.querySelectorAll('.i-2')
 
 i2.forEach((elem, index) => {
-
   var hasChild = elem.querySelector(".gallery") != null;
   var gallerySelector = 'figure a[data-gallery=gallery'.concat( index + 1 , ']' )
   if (hasChild) {
     elem.addEventListener("click", function () {
-
       lightbox.open(document.querySelector(gallerySelector))
-
     });
   }
-
 });
 
 // schema:

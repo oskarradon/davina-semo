@@ -30,7 +30,10 @@
           <?php if($e->images()->isNotEmpty()) :
                 // only show gallery el if exhibition has imgs ?>
             <div class="gallery">
-              <?php foreach($e->images() as $i) :
+              <?php
+              $images = $e->images();
+              $total = $images->count();
+              foreach($images as $i) :
                       static $imageCount = 0;
                       $imageCount++; ?>
                 <figure>
@@ -43,7 +46,9 @@
                   <figcaption class="glightbox-desc
                                      custom-desc<?php echo $imageCount ?>">
                     <p><?= $i->description() ?></p>
-                    <span><?php echo $imageCount ?> / <?= $e->images()->count() ?></span>
+                    <div class="image-counter">
+                       <?= $images->indexOf($i) + 1 . "/" . $total;?>
+                     </div>
                   </figcaption>
                 </figure>
               <?php endforeach ?>
