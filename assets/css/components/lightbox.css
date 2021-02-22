@@ -1,0 +1,44 @@
+.gslide-image img {
+  /* width: 100vw !important; */
+  height: 100vh;
+  object-fit: cover;
+}
+
+.glightbox-clean .gclose,
+.glightbox-clean .gclose:hover {
+  background-color: white;
+  opacity: 1;
+  border: 1px solid black;
+  border-radius: 19px;
+  font-size: 18px;
+  width: 43px;
+  height: 38px;
+}
+
+.glightbox-clean button.gnext,
+.glightbox-clean button.gprev {
+  display: none !important;
+}
+
+#glightbox-body div.goverlay {
+  background-color: white !important;
+}
+
+.gslide-media {
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+}
+
+.gdesc-inner div.gslide-desc {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.gslide-description {
+  max-width: none !important;
+}
+
+.image-counter {
+  font-size: 18px;
+}
