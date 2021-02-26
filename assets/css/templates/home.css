@@ -65,12 +65,14 @@ main {
   display: block;
 }
 
-.collapsible.active + .content .i:before,
-.i-1:before {
-  content: "└";
-	position: absolute;
-	left: 0;
+.collapsible.active + .content .i,
+.i-1 {
+  display: list-item;
+  list-style-type: "└";
+  padding-inline-start: 1ch;
 }
+
+
 
 /* backgroiund image */
 
