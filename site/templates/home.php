@@ -26,9 +26,9 @@
     <div class="column" id="column2" data-overflow="#column1"></div>
     <div class="column" id="column3" data-overflow="#column2"></div>
     <div class="column" id="column4" data-overflow="#column3"></div>
-    <div class="column" id="column5" data-overflow="#column4"></div>
+    <!-- <div class="column" id="column5" data-overflow="#column4"></div>
     <div class="column" id="column6" data-overflow="#column5"></div>
-    <div class="column" id="column7" data-overflow="#column6"></div>
+    <div class="column" id="column7" data-overflow="#column6"></div> -->
 
   </main>
 
