@@ -2,15 +2,28 @@
 // EXPANDABLE TREE
 // * * * * * * * *
 
-var coll = document.getElementsByClassName("collapsible");
-
-//set elements with class 'collapsible' to extend on click
-
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function () {
+document.querySelectorAll('.column .collapsible').forEach((elem, index) => {
+  elem.addEventListener("click", function () {
     this.classList.toggle("active");
     mainImgToggle()
     overflow()
+  });
+})
+
+
+// * * * * * * * *
+// COLUMN OVERFLOW
+// * * * * * * * *
+
+function overflow() {
+  document.querySelectorAll('.column[data-overflow]').forEach((el, index) => {
+    var parent = document.querySelector(el.dataset.overflow);
+    var colHeight = parent.clientHeight;
+    var scroll = parseInt(colHeight) * (index + 1);
+    var newHeight = "-" + scroll + "px";
+
+    el.innerHTML = parent.innerHTML;
+    document.querySelector('#' + el.id + ' .content').style.marginTop = newHeight;
   });
 }
 
@@ -43,7 +56,7 @@ function mainImgToggle() {
       } else {
         modelViewer.classList.remove("hide")
       }
-    } // need to refactor this into D.R.Y.
+    }
   } else if(mainImage) {
     for (var i = 0; i < elements.length; i++) {
       if (elements[i].classList.contains("active")) {
@@ -81,11 +94,9 @@ const lightbox = GLightbox({
   zoomable: false
 });
 
-const i2 = document.querySelectorAll('.i-2')
-
 // if .i-2 contains a gallery, open the corresponding lightbox on click
 
-i2.forEach((elem, index) => {
+document.querySelectorAll('.i-2').forEach((elem, index) => {
   var hasGallery = elem.querySelector(".gallery") != null;
   var gallerySelector = 'figure a[data-gallery=gallery'.concat( index + 1 , ']' )
   if (hasGallery) {
@@ -94,22 +105,3 @@ i2.forEach((elem, index) => {
     });
   }
 });
-
-
-// * * * * * * * *
-// COLUMN OVERFLOW
-// * * * * * * * *
-
-function overflow() {
-  document.querySelectorAll('.column[data-overflow]').forEach((el, index) => {
-
-      var parent = document.querySelector(el.dataset.overflow);
-      var colHeight = parent.clientHeight;
-      var scroll = parseInt(colHeight) * (index + 1);
-      var newHeight = "-" + scroll + "px";
-
-      el.innerHTML = parent.innerHTML;
-      document.querySelector('#' + el.id + ' .content').style.marginTop = newHeight;
-
-  });
-}
