@@ -25,6 +25,6 @@ columns:
         home_image:
           type: files
           layout: cards
-          headline: Background image
+          headline: Background Object
           cover: true
-          help: Only the first image will be used as the background, drag them to re-order.
+          help: Only the first image or object will be used as the background, drag them to re-order.
