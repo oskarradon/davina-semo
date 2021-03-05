@@ -13,15 +13,16 @@
       <h1><?= $site->title() ?></h1>
       <?php
 
-      foreach($pages->listed() as $section) {
-        snippet($section->uid(), ['data' => $section]);
-      }
+        foreach($pages->listed() as $section) {
+          snippet($section->uid(), ['data' => $section]);
+        }
 
       ?>
 
   </main>
 
-  <!-- main image and model viewer -->
+  <!-- main image, preview image, and model viewer -->
+
   <?php
     $file = $site->files()->sortBy('sort')->first();
     if($file->extension() == 'glb') : ?>
@@ -37,6 +38,7 @@
       <input id="slider" type="range" min="1" max="200">
     </aside>
   <?php endif ?>
+
   <div id="preview-image"></div>
 
 </body>
