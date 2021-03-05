@@ -14,7 +14,10 @@ Asdf: false
 
 ----
 
-Description: asdfasdf
+Description:
+
+Public Art Fund, Brooklyn Bridge Park, Pier 1, NY
+ON VIEW!!
 
 ----
 
