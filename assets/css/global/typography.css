@@ -22,9 +22,29 @@ h4,
 h5,
 li,
 p {
-  font-size: 18px;
   font-weight: normal;
   margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+li {
+  font-size: 18px;
+}
+
+p {
+  font-size: 14px;
+}
+
+article p:first-of-type {
+  margin-top: 4px;
+}
+
+article p:last-of-type {
+  margin-bottom: 4px;
 }
 
 a, a:visited, a:active {
