@@ -2,41 +2,38 @@
 // EXPANDABLE TREE
 // * * * * * * * *
 
-document.querySelectorAll('.column .collapsible').forEach((elem, index) => {
-  elem.addEventListener("click", function () {
+for (const collapsible of document.querySelectorAll('.collapsible')) {
+  collapsible.addEventListener('click', function() {
     this.classList.toggle("active");
     mainImgToggle()
-    overflow()
-  });
-})
-
-
-// * * * * * * * *
-// COLUMN OVERFLOW
-// * * * * * * * *
-
-function overflow() {
-  document.querySelectorAll('.column[data-overflow]').forEach((el, index) => {
-    var parent = document.querySelector(el.dataset.overflow);
-    var colHeight = parent.clientHeight;
-    var scroll = parseInt(colHeight) * (index + 1);
-    var newHeight = "-" + scroll + "px";
-
-    el.innerHTML = parent.innerHTML;
-    document.querySelector('#' + el.id + ' .content').style.marginTop = newHeight;
   });
 }
+
+
+
+// * * * * * * * *
+// EXPANDABLE TREE
+// * * * * * * * *
+
+// for (const hoverable of document.querySelectorAll('.i.i-3')) {
+//   hoverable.addEventListener('mouseover', function() {
+//     console.log('asdf')
+//   });
+// }
+
+
 
 
 // * * * * * *
 // MAIN IMAGE
 // * * * * * *
 
-var mainImage = document.querySelector('div#main-image img');
+let mainImage = document.querySelector('div#main-image img');
 
 // image zoom slider
 
-var slider = document.getElementById('slider');
+let slider = document.getElementById('slider');
+
 if (slider) {
   slider.addEventListener('input', function() {
       mainImage.style.width = slider.value+'%';
@@ -45,11 +42,11 @@ if (slider) {
 
 // hides main img/model-viewer & slider if any 1st-level elements are expanded
 function mainImgToggle() {
-  var elements = document.getElementsByClassName('i-1');
-  var modelViewer = document.querySelector('model-viewer');
+  let elements = document.getElementsByClassName('i-1');
+  let modelViewer = document.querySelector('model-viewer');
 
   if (modelViewer) {
-    for (var i = 0; i < elements.length; i++) {
+    for (let i = 0; i < elements.length; i++) {
       if (elements[i].classList.contains("active")) {
         modelViewer.classList.add("hide")
         break // important to exit loop once if statement evaluates to true the first time
@@ -58,7 +55,7 @@ function mainImgToggle() {
       }
     }
   } else if(mainImage) {
-    for (var i = 0; i < elements.length; i++) {
+    for (let i = 0; i < elements.length; i++) {
       if (elements[i].classList.contains("active")) {
         mainImage.classList.add("hide")
         slider.classList.add("hide")
@@ -97,10 +94,23 @@ const lightbox = GLightbox({
 // if .i-2 contains a gallery, open the corresponding lightbox on click
 
 document.querySelectorAll('.i-2').forEach((elem, index) => {
-  var hasGallery = elem.querySelector(".gallery") != null;
-  var gallerySelector = 'figure a[data-gallery=gallery'.concat( index + 1 , ']' )
+  let hasGallery = elem.querySelector(".gallery") != null;
+  let gallerySelector = 'figure a[data-gallery=gallery'.concat( index + 1 , ']' )
+  console.log(gallerySelector)
   if (hasGallery) {
     elem.addEventListener("click", function () {
+      console.log(gallerySelector)
+      lightbox.open(document.querySelector(gallerySelector))
+    });
+  }
+});
+
+document.querySelectorAll('.i-3').forEach((elem, index) => {
+  let hasGallery = elem.querySelector(".gallery") != null;
+  let gallerySelector = 'figure a[data-gallery=gallery'.concat( index + 1 , ']' )
+  if (hasGallery) {
+    elem.addEventListener("click", function () {
+      console.log(gallerySelector)
       lightbox.open(document.querySelector(gallerySelector))
     });
   }
