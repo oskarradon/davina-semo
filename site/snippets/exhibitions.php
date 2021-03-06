@@ -21,7 +21,7 @@
               static $currentCount = 0;
                      $currentCount++; ?>
         <article>
-          <div class="i i-2">
+          <div class="i i-2 galleryToggle toggle<?php echo $currentCount ?>">
             <h3><?= $c->title() ?></h3>
             <p><?= $c->start()->toDate('F j, Y') ?> &ndash; <?= $c->end()->toDate('F j, Y') ?></p>
             <?= $c->text()->kt() ?>
@@ -99,7 +99,7 @@
                         $exhibitionCount++; ?>
 
             <article>
-              <div class="i i-3">
+              <div class="i i-3 galleryToggle toggle<?php echo $exhibitionCount ?>">
                 <h3><?= $e->title() ?></h3>
                 <p><?= $e->start()->toDate('F j, Y') ?> &ndash; <?= $e->end()->toDate('F j, Y') ?></p>
                 <?= $e->text()->kt() ?>

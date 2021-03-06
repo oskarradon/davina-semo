@@ -11,9 +11,9 @@ for (const collapsible of document.querySelectorAll('.collapsible')) {
 
 
 
-// * * * * * * * *
-// EXPANDABLE TREE
-// * * * * * * * *
+// * * * * * * * * *
+// HOVER TO PREVIEW
+// * * * * * * * * *
 
 // for (const hoverable of document.querySelectorAll('.i.i-3')) {
 //   hoverable.addEventListener('mouseover', function() {
@@ -91,27 +91,18 @@ const lightbox = GLightbox({
   zoomable: false
 });
 
-// if .i-2 contains a gallery, open the corresponding lightbox on click
+// if .galleryToggle contains a gallery,
+// open the corresponding lightbox on click
 
-document.querySelectorAll('.i-2').forEach((elem, index) => {
-  let hasGallery = elem.querySelector(".gallery") != null;
-  let gallerySelector = 'figure a[data-gallery=gallery'.concat( index + 1 , ']' )
-  console.log(gallerySelector)
+for (const toggle of document.querySelectorAll('.galleryToggle')) {
+  let hasGallery = toggle.querySelector(".gallery") != null,
+      galleryId  = toggle.classList[3].replace('toggle', ''),
+      gallerySelector = 'figure a[data-gallery=gallery'.concat(galleryId);
   if (hasGallery) {
-    elem.addEventListener("click", function () {
+    toggle.addEventListener('click', function() {
       console.log(gallerySelector)
+      console.log(toggle.classList)
       lightbox.open(document.querySelector(gallerySelector))
     });
   }
-});
-
-document.querySelectorAll('.i-3').forEach((elem, index) => {
-  let hasGallery = elem.querySelector(".gallery") != null;
-  let gallerySelector = 'figure a[data-gallery=gallery'.concat( index + 1 , ']' )
-  if (hasGallery) {
-    elem.addEventListener("click", function () {
-      console.log(gallerySelector)
-      lightbox.open(document.querySelector(gallerySelector))
-    });
-  }
-});
+}
