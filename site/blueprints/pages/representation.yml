@@ -1,0 +1,16 @@
+title: Representation
+sections:
+  drafts:
+    extends: sections/galleries
+    headline: Drafts
+    status: draft
+
+  unlisted:
+    extends: sections/galleries
+    headline: Unlisted
+    status: unlisted
+
+  published:
+    extends: sections/galleries
+    headline: Published
+    status: listed

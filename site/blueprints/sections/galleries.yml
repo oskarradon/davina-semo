@@ -1,0 +1,5 @@
+type: pages
+parent: kirby.page("representation")
+headline: Galleries
+layout: list
+image: false
