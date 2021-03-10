@@ -38,6 +38,20 @@ h1, h2, h3 {
   display: inline-block;
 }
 
+/* custom list symbol */
+
+.collapsible.active + .content .i,
+.i-1 {
+  position:relative;
+}
+
+.collapsible.active + .content .i:before,
+.i-1:before {
+  position: absolute;
+  left: -20px;
+  content: "└";
+}
+
 /* indentation classes */
 
 .i-1 {
@@ -48,24 +62,24 @@ h1, h2, h3 {
   margin-left: 40px;
 }
 
-.i-2:before {
-  margin-left: 20px;
-}
-
 .i-3 {
   margin-left: 60px;
-}
-
-.i-3:before {
-  margin-left: 40px;
 }
 
 .i-4 {
   margin-left: 80px;
 }
 
+.i-2:before {
+  left: -10px;
+}
+
+.i-3:before {
+  left: -10px;
+}
+
 .i-4:before {
-  margin-left: 60px;
+  left: -10px;
 }
 
 article {
@@ -80,15 +94,6 @@ article {
 
 .collapsible.active + .content{
   display: block;
-}
-
-/* custom list symbol */
-
-.collapsible.active + .content .i:before,
-.i-1:before {
-  position: absolute;
-  left: -1px;
-  content: "└";
 }
 
 
