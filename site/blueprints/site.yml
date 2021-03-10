@@ -19,6 +19,14 @@ columns:
         extends: sections/links
         headline: Selected press
         status: listed
+      g_published:
+        extends: sections/galleries
+        headline: Galleries
+        status: listed
+      c_published:
+        extends: sections/contacts
+        headline: Contact information
+        status: listed
 
   - width: 1/3
       sections:
