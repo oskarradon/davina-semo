@@ -1,7 +1,9 @@
 .gslide-image img {
-  /* width: 100vw !important; */
+  width: 100vw !important;
   height: 100vh;
-  object-fit: cover;
+  /* width: 100vw; */
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .glightbox-clean .gclose,
@@ -10,14 +12,38 @@
   opacity: 1;
   border: 1px solid black;
   border-radius: 19px;
-  font-size: 18px;
-  width: 43px;
-  height: 38px;
+  font-size: 16px;
+  width: 38px;
+  height: 33px;
 }
 
 .glightbox-clean button.gnext,
 .glightbox-clean button.gprev {
-  display: none !important;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  display: block;
+  z-index: 10;
+  height: 100vh;
+  width: 50vw;
+  opacity: 0;
+  background: none;
+}
+
+.glightbox-clean button.gprev {
+  left: 0;
+}
+
+.glightbox-clean button.gnext {
+  right: 0;
+}
+
+.glightbox-clean button.gprev:hover {
+  cursor: w-resize;
+}
+
+.glightbox-clean button.gnext:hover {
+  cursor: e-resize;
 }
 
 #glightbox-body div.goverlay {
@@ -39,6 +65,11 @@
   max-width: none !important;
 }
 
-.image-counter {
-  font-size: 18px;
+.glightbox-clean .gdesc-inner {
+    padding: 10px 20px;
+  }
+
+.glightbox-clean .gdesc-inner p {
+  margin: 0;
+  padding: 0;
 }
