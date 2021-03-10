@@ -39,11 +39,13 @@ p {
   font-size: 14px;
 }
 
-article p:first-of-type {
+article p:first-of-type,
+a p:first-of-type {
   margin-top: 4px;
 }
 
-article p:last-of-type {
+article p:last-of-type,
+a p:last-of-type {
   margin-bottom: 4px;
 }
 
