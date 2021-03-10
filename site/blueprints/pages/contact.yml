@@ -1,0 +1,16 @@
+title: Inquiries
+sections:
+  drafts:
+    extends: sections/contacts
+    headline: Drafts
+    status: draft
+
+  unlisted:
+    extends: sections/contacts
+    headline: Unlisted
+    status: unlisted
+
+  published:
+    extends: sections/contacts
+    headline: Published
+    status: listed

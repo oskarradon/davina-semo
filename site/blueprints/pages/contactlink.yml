@@ -1,0 +1,64 @@
+title: Contact Information
+type: fields
+sections:
+  hyperlink:
+    type: fields
+    fields:
+      email:
+        label: Email
+        type: email
+      phone:
+        label: Phone
+        type: tel
+      text:
+        label: Title
+        width: 1/2
+        type: text
+      link:
+        type: url
+        width: 1/2
+        help: This will cause the exhibition to link out to a gallery's website.
+
+# columns:
+#   info:
+#     type: fields
+#     width: 1/2
+#     fields:
+#       start:
+#         label: Start date
+#         # help: If this date is within one month of the current date it will be displayed in the "Currently" section.
+#         type: date
+#         display: D MMMM YYYY
+#         width: 1/3
+#       end:
+#         label: End date
+#         type: date
+#         display: D MMMM YYYY
+#         width: 1/3
+#       asdf:
+#         label: Is this a group show?
+#         type: toggle
+#         width: 1/3
+#         text:
+#           - "no"
+#           - "yes"
+#       description:
+#         type: textarea
+#   files:
+#     width: 1/2
+#     sections:
+#       hyperlink:
+#         type: fields
+#         fields:
+#           link:
+#             type: url
+#             help: This will cause the exhibition to link out to a gallery's website.
+#       documents:
+#         type: files
+#         help: PDFs, .txt, .doc, .pages files, etc.
+#   gallery:
+#     width: 1/1
+#     sections:
+#       images:
+#         type: files
+#         layout: card
