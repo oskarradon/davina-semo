@@ -2,15 +2,15 @@ title: Selected Press
 sections:
   drafts:
     extends: sections/links
-    headline: Selected press drafts
+    headline: Drafts
     status: draft
 
   unlisted:
     extends: sections/links
-    headline: Unlisted selected press
+    headline: Unlisted
     status: unlisted
 
   published:
     extends: sections/links
-    headline: Published selected press
+    headline: Published
     status: listed
