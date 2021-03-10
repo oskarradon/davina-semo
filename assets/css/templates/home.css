@@ -82,13 +82,13 @@ article {
   display: block;
 }
 
-.collapsible.active + .content .i,
-.i-1 {
-  display: list-item;
-  list-style: none;
-  list-style-type: "└";
-  -webkit-padding-start: 1ch;
-          padding-inline-start: 1ch;
+/* custom list symbol */
+
+.collapsible.active + .content .i:before,
+.i-1:before {
+  position: absolute;
+  left: -1px;
+  content: "└";
 }
 
 
