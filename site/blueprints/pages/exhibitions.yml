@@ -2,15 +2,15 @@ title: Exhibitions
 sections:
   drafts:
     extends: sections/shows
-    headline: Draft exhibitions
+    headline: Drafts
     status: draft
 
   unlisted:
     extends: sections/shows
-    headline: Unlisted exhibitions
+    headline: Unlisted
     status: unlisted
 
   published:
     extends: sections/shows
-    headline: Published exhibitions
+    headline: Published
     status: listed
