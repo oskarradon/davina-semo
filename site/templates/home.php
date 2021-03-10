@@ -39,8 +39,6 @@
     </aside>
   <?php endif ?>
 
-  <div id="preview-image"></div>
-
 </body>
 
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
