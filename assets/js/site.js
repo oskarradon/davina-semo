@@ -3,26 +3,11 @@
 // * * * * * * * *
 
 for (const collapsible of document.querySelectorAll('.collapsible')) {
-  collapsible.addEventListener('click', function() {
-    this.classList.toggle("active");
-    mainImgToggle()
+  collapsible.addEventListener('click', function () {
+    this.classList.toggle('active');
+    mainImgToggle();
   });
 }
-
-
-
-// * * * * * * * * *
-// HOVER TO PREVIEW
-// * * * * * * * * *
-
-// for (const hoverable of document.querySelectorAll('.i.i-3')) {
-//   hoverable.addEventListener('mouseover', function() {
-//     console.log('asdf')
-//   });
-// }
-
-
-
 
 // * * * * * *
 // MAIN IMAGE
@@ -35,9 +20,9 @@ let mainImage = document.querySelector('div#main-image img');
 let slider = document.getElementById('slider');
 
 if (slider) {
-  slider.addEventListener('input', function() {
-      mainImage.style.width = slider.value+'%';
-  }, false);
+  slider.addEventListener('input', function () {
+      mainImage.style.width = slider.value + '%';
+    }, false);
 }
 
 // hides main img/model-viewer & slider if any 1st-level elements are expanded
@@ -47,27 +32,26 @@ function mainImgToggle() {
 
   if (modelViewer) {
     for (let i = 0; i < elements.length; i++) {
-      if (elements[i].classList.contains("active")) {
-        modelViewer.classList.add("hide")
-        break // important to exit loop once if statement evaluates to true the first time
+      if (elements[i].classList.contains('active')) {
+        modelViewer.classList.add('hide');
+        break; // important to exit loop once if statement evaluates to true the first time
       } else {
-        modelViewer.classList.remove("hide")
+        modelViewer.classList.remove('hide');
       }
     }
-  } else if(mainImage) {
+  } else if (mainImage) {
     for (let i = 0; i < elements.length; i++) {
-      if (elements[i].classList.contains("active")) {
-        mainImage.classList.add("hide")
-        slider.classList.add("hide")
-        break
+      if (elements[i].classList.contains('active')) {
+        mainImage.classList.add('hide');
+        slider.classList.add('hide');
+        break;
       } else {
-        mainImage.classList.remove("hide")
-        slider.classList.remove("hide")
+        mainImage.classList.remove('hide');
+        slider.classList.remove('hide');
       }
     }
   }
 }
-
 
 // * * * * *
 // LIGHTBOX
@@ -78,8 +62,8 @@ const customLightboxHTML = `<div id="glightbox-body" class="glightbox-container"
     <div class="goverlay"></div>
     <div class="gcontainer">
     <div id="glightbox-slider" class="gslider"></div>
-    <button class="gnext gbtn" tabindex="0" aria-label="Next" data-customattribute="example">{nextSVG}</button>
-    <button class="gprev gbtn" tabindex="1" aria-label="Previous">{prevSVG}</button>
+    <button class="gnext gbtn" tabindex="0" aria-label="Next" data-customattribute="example"></button>
+    <button class="gprev gbtn" tabindex="1" aria-label="Previous"></button>
     <button class="gclose gbtn" tabindex="2" aria-label="Close">x</button>
 </div>
 </div>`;
@@ -88,21 +72,19 @@ const customLightboxHTML = `<div id="glightbox-body" class="glightbox-container"
 
 const lightbox = GLightbox({
   lightboxHTML: customLightboxHTML,
-  zoomable: false
+  zoomable: false,
 });
 
 // if .galleryToggle contains a gallery,
 // open the corresponding lightbox on click
 
 for (const toggle of document.querySelectorAll('.galleryToggle')) {
-  let hasGallery = toggle.querySelector(".gallery") != null,
-      galleryId  = toggle.classList[3].replace('toggle', ''),
-      gallerySelector = 'figure a[data-gallery=gallery'.concat(galleryId);
+  let hasGallery = toggle.querySelector('.gallery') != null;
+  let  galleryId  = toggle.classList[3].replace('toggle', '');
+  let gallerySelector = 'figure a[data-gallery=gallery'.concat(galleryId);
   if (hasGallery) {
-    toggle.addEventListener('click', function() {
-      console.log(gallerySelector)
-      console.log(toggle.classList)
-      lightbox.open(document.querySelector(gallerySelector))
+    toggle.addEventListener('click', function () {
+      lightbox.open(document.querySelector(gallerySelector));
     });
   }
 }
