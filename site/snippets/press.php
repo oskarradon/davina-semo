@@ -9,7 +9,7 @@
     <div class="content">
       <?php foreach($press as $p) : ?>
         <div class="i i-2">
-          <a href="<?= $p->link() ?>"><?= $p->title() ?></a>
+          <a href="<?= $p->link() ?>"><?= $p->text() ?></a>
         </div>
       <?php endforeach ?>
     </div>
