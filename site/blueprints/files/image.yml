@@ -2,9 +2,18 @@ title: Image File
 
 accept: image/*
 
+options:
+  delete:
+    *: true
+  replace:
+    *: true
+  update:
+    *: true
+  sortable: true
+
 fields:
   description:
     width: 1/2
     label: Description
-    type: text
+    type: textarea
     help: This text will be displayed at the bottom of the image carousel.
