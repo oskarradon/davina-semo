@@ -20,8 +20,9 @@ let mainImage = document.querySelector('div#main-image img');
 let slider = document.getElementById('slider');
 
 if (slider) {
+  mainImage.style.height = slider.value + '%';
   slider.addEventListener('input', function () {
-      mainImage.style.width = slider.value + '%';
+      mainImage.style.height = slider.value + '%';
     }, false);
 }
 
