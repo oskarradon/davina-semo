@@ -5,7 +5,7 @@
   if($press->isNotEmpty()):
 ?>
   <section id="press">
-    <div class="i i-1 collapsible"><h2>Selected Press</h2></div>
+    <div class="i i-1 collapsible"><h2><?= $data->title() ?></h2></div>
     <div class="content">
       <?php foreach($press as $p) : ?>
         <div class="i i-2">
