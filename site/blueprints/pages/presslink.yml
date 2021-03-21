@@ -11,7 +11,6 @@ sections:
       link:
         type: url
         width: 1/2
-        help: This will cause the exhibition to link out to a gallery's website.
   documents:
     type: files
     help: PDFs, .txt, .doc, .pages files, etc.
