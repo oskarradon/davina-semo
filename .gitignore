@@ -1,3 +1,5 @@
+/content/*
+
 /media/*
 !/media/index.html
 
