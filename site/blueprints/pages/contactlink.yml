@@ -5,19 +5,20 @@ sections:
     type: fields
     fields:
       email:
+        width: 1/2
         label: Email
         type: email
       phone:
+        width: 1/2
         label: Phone
         type: tel
       text:
-        label: Title
+        label: External Link Title
         width: 1/2
         type: text
       link:
         type: url
         width: 1/2
-        help: This will cause the exhibition to link out to a gallery's website.
 
 # columns:
 #   info:
