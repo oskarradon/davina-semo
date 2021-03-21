@@ -5,7 +5,7 @@
   if($contact->isNotEmpty()):
 ?>
   <section id="contact">
-    <div class="i i-1 collapsible"><h2>Inquiries</h2></div>
+    <div class="i i-1 collapsible"><h2><?= $data->title() ?></h2></div>
     <div class="content">
       <?php foreach($contact as $c) :
               if($c->phone()->isNotEmpty()): ?>
