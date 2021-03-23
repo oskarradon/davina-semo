@@ -27,16 +27,12 @@
     <?php endif ?>
 
   <main>
-
-      <h1><?= $site->title() ?></h1>
-      <?php
-
-        foreach($pages->listed() as $section) {
-          snippet($section->uid(), ['data' => $section]);
-        }
-
-      ?>
-
+    <h1><?= $site->title() ?></h1>
+    <?php
+      foreach($pages->listed() as $section) {
+        snippet($section->uid(), ['data' => $section]);
+      }
+    ?>
   </main>
 
 </body>
