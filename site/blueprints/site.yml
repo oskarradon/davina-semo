@@ -3,30 +3,48 @@ title: Site
 columns:
   - width: 2/3
     sections:
+      drafts:
+        headline: Section Drafts
+        type: pages
+        status: draft
+        templates: default
+        # help: Use the plus button on the top right to add a new Section
+
+      published:
+        headline: Published Sections
+        type: pages
+        status: listed
+        # templates: article
+
       # ex_drafts:
       #   extends: sections/shows
       #   headline: Drafted exhibitions
       #   status: draft
+
       ex_published:
         extends: sections/shows
         headline: Exhibitions
         status: listed
+
       # pr_drafts:
       #   extends: sections/links
       #   headline: Drafted press
       #   status: draft
-      pr_published:
-        extends: sections/links
-        headline: Selected press
-        status: listed
-      g_published:
-        extends: sections/galleries
-        headline: Galleries
-        status: listed
-      c_published:
-        extends: sections/contacts
-        headline: Contact information
-        status: listed
+
+      # pr_published:
+      #   extends: sections/links
+      #   headline: Selected press
+      #   status: listed
+
+      # # g_published:
+      # #   extends: sections/galleries
+      # #   headline: Galleries
+      # #   status: listed
+
+      # # c_published:
+      # #   extends: sections/contacts
+      # #   headline: Contact information
+      # #   status: listed
 
   - width: 1/3
       sections:
@@ -35,4 +53,4 @@ columns:
           layout: cards
           headline: Background Object
           cover: true
-          help: Only the first image or object will be used as the background, drag them to re-order.
+          help: Only the first image or object will be used as the background, drag them to re-order. 3D objects must be in .glb format.
