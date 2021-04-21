@@ -24,6 +24,7 @@ columns:
           other: Other work
       description:
         type: textarea
+        size: medium
 
   - width: 1/2
     sections:
@@ -40,6 +41,8 @@ columns:
                 label: Link
                 options:
                   - url
+                  - tel
+                  - email
                 settings: false
       doclist:
         type: fields
@@ -56,7 +59,7 @@ columns:
 
   - width: 1/1
     sections:
-      lightbox:
+      gallery:
         type: files
         layout: cards
         info: "{{ file.dimensions }}"
