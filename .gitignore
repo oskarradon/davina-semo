@@ -1,4 +1,4 @@
-/content/*
+content/
 
 /media/*
 !/media/index.html
