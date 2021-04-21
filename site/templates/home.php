@@ -8,29 +8,37 @@
 
 <body>
 
-    <!-- main image, preview image, and model viewer -->
+  <?php
+    $file = $site->files()->sortBy('sort')->first();
+    if($file->extension() == 'glb') : ?>
+    <model-viewer id="main-image" src="<?= $file->url() ?>" auto-rotate camera-controls>
+      <div class="progress-bar hide" slot="progress-bar">
+          <div class="update-bar"></div>
+      </div>
+    </model-viewer>
+  
+  <?php elseif($file->type() == 'video') : ?>
 
-    <?php
-      $file = $site->files()->sortBy('sort')->first();
-      if($file->extension() == 'glb') : ?>
-      <model-viewer id="main-image" src="<?= $file->url() ?>" auto-rotate camera-controls>
-        <div class="progress-bar hide" slot="progress-bar">
-            <div class="update-bar"></div>
-        </div>
-      </model-viewer>
+    <video playsinline autoplay muted loop id="main-image">
+      <source src="<?= $file->url() ?>" type="<?= $file->mime() ?>">
+    </video>
 
-    <?php else : ?>
-      <div id="main-image"><?= $file ?></div>
-      <aside>
-        <input id="slider" type="range" min="1" max="200">
-      </aside>
-    <?php endif ?>
+  <?php else : ?>
+    <div id="main-image"><?= $file ?></div>
+    <aside>
+      <input id="slider" type="range" min="1" max="200">
+    </aside>
+  <?php endif ?>
 
   <main>
-    <h1><?= $site->title() ?></h1>
+    <h1 id="logo"><?= $site->title() ?></h1>
     <?php
       foreach($pages->listed() as $section) {
-        snippet($section->uid(), ['data' => $section]);
+        if ($section->uid() == 'exhibitions') {
+          snippet('exhibitions', ['data' => $section]);
+        } else {
+          snippet('section', ['data' => $section]);
+        }
       }
     ?>
   </main>
