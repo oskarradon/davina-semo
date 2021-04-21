@@ -2,17 +2,16 @@ title: Default Page
 # icon: 📝
 
 columns:
-  info:
-    type: fields
-    width: 1/2
+  - width: 1/2
     fields:
       description:
         type: textarea
+        size: medium
       link:
         type: url
-        help: This will cause the heading to link out directly.
-  files:
-    width: 1/2
+        help: This will cause the section to link out directly to given URL.
+
+  - width: 1/2
     sections:
       linklist:
         type: fields
@@ -27,10 +26,10 @@ columns:
                 label: Link
                 options:
                   - url
-                  - email
                   - tel
+                  - email
                 settings: false
-      filelist:
+      doclist:
         type: fields
         fields:
           docs:
@@ -46,11 +45,15 @@ columns:
         type: pages
         template: default
 
-  gallery:
-    width: 1/1
+  - width: 1/1
     sections:
-      lightbox:
+      gallery:
         type: files
-        layout: card
-        template: image
+        layout: cards
+        info: "{{ file.dimensions }}"
+        template: carousel
+        image:
+          ratio: 5/4
+          cover: true
+        size: small
         help: Images, videos, and sound files will be displayed in the carousel in the order they appear above.
