@@ -1,9 +1,0 @@
-Title: Test
-
-----
-
-Text: Test Press posting
-
-----
-
-Link: https://google.com
