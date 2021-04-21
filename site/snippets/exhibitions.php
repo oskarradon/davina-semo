@@ -11,6 +11,10 @@
     ->filter(function ($child) {
       return $child->start()->toDate() > time() || $child->end()->toDate() < time();
     });
+  // filter past collection into categories
+  $solo = $past->filterBy('category', 'solo');
+  $group = $past->filterBy('category', 'group');
+  $other = $past->filterBy('category', 'other');
   // only show "currently" section if there are pages that match above criteria
   if($current->isNotEmpty()):
 ?>
@@ -36,19 +40,40 @@
         // returns the year of an exhibition
         $returnYear = function($p) {
           return $p->start()->date()->toDate('Y');
-        };
-        // group items using $callback
-        $groupedExhibitions = $past->group($returnYear);
-        // output exhibitions by year
-        foreach($groupedExhibitions as $year => $exhibitionsPerYear):
-      ?>
-        <div class="i i-2 collapsible"><h2><?= $year ?></h2></div>
+        }; ?>
+        <div class="i i-2 collapsible"><h2>Solo exhibitions</h2></div>
         <div class="content">
-          <?php foreach($exhibitionsPerYear as $article) : ?>
-            <?php snippet('article', ['article' => $article]); ?>
+          <?php foreach($solo->group($returnYear) as $year => $soloPerYear): ?>
+            <div class="i i-3 collapsible"><h2><?= $year ?></h2></div>
+            <div class="content">
+              <?php foreach($soloPerYear as $s) : ?>
+                <?php snippet('article', ['article' => $s]); ?>
+              <?php endforeach; ?>
+            </div>
           <?php endforeach; ?>
         </div>
-
-      <?php endforeach; ?>
+        <div class="i i-2 collapsible"><h2>Group exhibitions</h2></div>
+        <div class="content">
+          <?php foreach($group->group($returnYear) as $year => $groupPerYear): ?>
+            <div class="i i-3 collapsible"><h2><?= $year ?></h2></div>
+            <div class="content">
+              <?php foreach($groupPerYear as $g) : ?>
+                <?php snippet('article', ['article' => $g]); ?>
+              <?php endforeach; ?>
+            </div>
+          <?php endforeach; ?>
+        </div>
+        <div class="i i-2 collapsible"><h2>Other work</h2></div>
+        <div class="content">
+          <?php foreach($other->group($returnYear) as $year => $otherPerYear): ?>
+            <div class="i i-3 collapsible"><h2><?= $year ?></h2></div>
+            <div class="content">
+              <?php foreach($otherPerYear as $o) : ?>
+                <?php snippet('article', ['article' => $o]); ?>
+              <?php endforeach; ?>
+            </div>
+          <?php endforeach; ?>
+        </div>
+      </div>
   </section>
 <?php endif ?>
