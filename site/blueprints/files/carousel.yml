@@ -1,0 +1,19 @@
+title: Carousel file
+
+accept: image/*, audio/*, video/*
+
+options:
+  delete:
+    *: true
+  replace:
+    *: true
+  update:
+    *: true
+  sortable: true
+
+fields:
+  description:
+    width: 1/2
+    label: Description
+    type: textarea
+    help: This text will be displayed at the bottom of the image carousel.
