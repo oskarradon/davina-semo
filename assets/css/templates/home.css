@@ -7,7 +7,7 @@ body {
 
 main {
   margin: 15px;
-  height: calc(100vh - 30px) ;
+  height: calc(100vh - 30px);
   position: absolute;
   left: 0;
   /* isolation: isolate; */
@@ -16,20 +16,22 @@ main {
 @media (min-width: 500px) {
   main {
     margin: 30px;
-    height: calc(100vh - 60px) ;
+    height: calc(100vh - 60px);
     -moz-columns: 300px 5;
-         columns: 300px 5;
+    columns: 300px 5;
     -moz-column-fill: auto;
-         column-fill: auto;
-   }
+    column-fill: auto;
+  }
 }
 
-
-.i, h1 {
+.i,
+h1 {
   margin-bottom: 7px;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   display: inline-block;
 }
 
@@ -43,15 +45,14 @@ h1, h2, h3 {
   background: var(--yellow);
   cursor: pointer;
   mix-blend-mode: multiply;
-    will-change: opacity;
+  will-change: opacity;
   -webkit-mix-blend-mode: multiply;
-       -moz-mix-blend-mode: multiply;
-       -o-mix-blend-mode: multiply;
-       -ms-mix-blend-mode: multiply;
+  -moz-mix-blend-mode: multiply;
+  -o-mix-blend-mode: multiply;
+  -ms-mix-blend-mode: multiply;
 }
 
 /* background image */
-
 
 #main-image,
 .preview-image {
@@ -61,6 +62,10 @@ h1, h2, h3 {
   position: fixed;
   top: 0;
   left: 0;
+}
+
+video#main-image {
+  object-fit: cover;
 }
 
 #main-image img,
@@ -85,7 +90,7 @@ h1, h2, h3 {
   height: 100vh;
   width: 100vw;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .galleryToggle:hover + .preview-image img {
@@ -130,6 +135,10 @@ aside #slider {
   margin-left: 80px;
 }
 
+.i-5 {
+  margin-left: 100px;
+}
+
 .i-3 .i-4 {
   margin-left: 20px; /* quick fix */
 }
@@ -152,11 +161,11 @@ article {
 
 /* toggle-able class to show/hide li, used by js */
 
-.collapsible ~ .content{
+.collapsible ~ .content {
   display: none;
 }
 
-.collapsible.active + .content{
+.collapsible.active + .content {
   display: block;
 }
 
@@ -178,4 +187,8 @@ aside #slider {
 
 .gallery {
   display: none;
+}
+
+#logo:hover {
+  cursor: pointer;
 }
