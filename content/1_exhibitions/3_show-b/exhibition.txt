@@ -10,11 +10,11 @@ End: 2021-02-20
 
 ----
 
-Categories: tt
+Category: Group exhibition
 
 ----
 
-Description: 
+Description: Broadway Gallery
 
 ----
 
@@ -26,12 +26,12 @@ Docs:
 
 ----
 
-Category: solo
+Asdf: true
+
+----
+
+Link: https://www.broadwaygallery.nyc/grouper-january-20-february-20-2021/
 
 ----
 
 Text: Broadway
-
-----
-
-Link: https://www.broadwaygallery.nyc/upcoming/

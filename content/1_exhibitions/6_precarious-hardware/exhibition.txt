@@ -10,11 +10,11 @@ End: 2019-05-04
 
 ----
 
-Category: solo
+Category: Solo exhibition
 
 ----
 
-Description: 
+Description: Jessica Silverman Gallery, San Francisco
 
 ----
 
@@ -26,11 +26,15 @@ Docs:
 
 ----
 
+Asdf: false
+
+----
+
+Link: https://jessicasilvermangallery.com/exhibitions/precarious-hardware/
+
+----
+
 Text:
 
 solo exhibition
 Jessica Silverman Gallery, San Francisco
-
-----
-
-Link: 

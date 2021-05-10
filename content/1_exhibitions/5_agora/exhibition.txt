@@ -10,11 +10,11 @@ End: 2020-02-08
 
 ----
 
-Category: solo
+Category: Solo exhibition
 
 ----
 
-Description: 
+Description: Ribordy Thetaz, Geneva
 
 ----
 
@@ -26,11 +26,15 @@ Docs:
 
 ----
 
+Asdf: false
+
+----
+
+Link: https://www.ribordythetaz.com/exhibition/davina-semo-2/
+
+----
+
 Text:
 
 solo exhibition
 Ribordy Thetaz, Geneva, CH
-
-----
-
-Link: 

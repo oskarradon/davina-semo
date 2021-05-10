@@ -10,11 +10,11 @@ End: 2020-06-28
 
 ----
 
-Category: solo
+Category: Solo exhibition
 
 ----
 
-Description: 
+Description: di Rosa Center for Contemporary Art
 
 ----
 
@@ -26,11 +26,15 @@ Docs:
 
 ----
 
-Text:
-
-di Rosa Center for Contemporary Art, Napa, CA
-exhibition closed early due to Covid-19
+Asdf: false
 
 ----
 
 Link: 
+
+----
+
+Text:
+
+di Rosa Center for Contemporary Art, Napa, CA
+exhibition closed early due to Covid-19
