@@ -15,13 +15,12 @@ columns:
         display: D MMMM YYYY
         width: 1/3
       category:
-        type: radio
+        type: select
         width: 1/3
-        default: solo
         options:
-          solo: Solo exhibition
-          group: Group exhibition
-          other: Other work
+          - Solo exhibition
+          - Group exhibition
+          - Other work
       description:
         type: textarea
         size: medium
