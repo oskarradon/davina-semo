@@ -85,15 +85,16 @@ const lightbox = GLightbox({
   lightboxHTML: customLightboxHTML,
   zoomable: false,
   autoplayVideos: true,
+  // skin: "davina",
 });
 
 // if .galleryToggle contains a gallery,
 // open the corresponding lightbox on click
 
 for (const toggle of document.querySelectorAll(".galleryToggle")) {
-  let hasGallery = toggle.querySelector(".gallery") != null;
-  let galleryId = toggle.classList[3].replace("toggle", "");
-  let gallerySelector = "figure a[data-gallery=gallery".concat(galleryId);
+  let hasGallery = toggle.querySelector(".gallery") != null,
+    galleryId = toggle.classList[3].replace("toggle", ""),
+    gallerySelector = "figure a[data-gallery=gallery".concat(galleryId);
   if (hasGallery) {
     toggle.addEventListener("click", function () {
       lightbox.open(document.querySelector(gallerySelector));
