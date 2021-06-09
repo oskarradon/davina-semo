@@ -2,4 +2,5 @@ type: pages
 parent: kirby.page("exhibitions")
 headline: Exhibitions
 layout: list
-info: " {{ page.start.toDate('F j, Y') }} - {{ page.end.toDate('F j, Y') }}"
+info: " {{ page.category }}, {{ page.start.toDate('F j, Y') }}"
+template: exhibition
