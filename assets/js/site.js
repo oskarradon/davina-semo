@@ -5,7 +5,12 @@
 // when you click an expandable tree option
 // read the name of the "link" -- (not really a link)
 //   replace any spaces in the name with daashes and make all lowercase
-// add that "href" to the URL
+// add a "#" char to the front of the string and store it in a var called anchor
+
+// read the current URL
+// if the URL contains anchor
+// remove it from the URL
+// else: add that "href" to the URL
 
 for (const collapsible of document.querySelectorAll(".collapsible")) {
   collapsible.addEventListener("click", function () {
@@ -17,27 +22,27 @@ for (const collapsible of document.querySelectorAll(".collapsible")) {
       history.pushState(null, null, state);
     } else {
       state = state.replace(anchor, "");
-      history.replaceState(null, null, state);
+      history.replaceState(null, null, state); // broken!!
     }
   });
 }
-
-window.onload = function () {
-  let options = [];
-  options.push(
-    window.location
-      .toString()
-      .replace(/^(?:https?:\/\/)?(?:www\.)?/i, "")
-      .split(".")[0]
-      .split("/")
-  );
-};
 
 // on page load
 // look at the URL of the page
 // divide the url into the "href"s of the options that are expanded,
 //   (probably by seperating between each slash character -- use a regex)
 // loop through each expandable tree option and if it's name === "href" found in URL ---> expand that option
+
+// window.onload = function () {
+//   let options = [];
+//   options.push(
+//     window.location
+//       .toString()
+//       .replace(/^(?:https?:\/\/)?(?:www\.)?/i, "")
+//       .split(".")[0]
+//       .split("/")
+//   );
+// };
 
 // * * * * * * * *
 // EXPANDABLE TREE
