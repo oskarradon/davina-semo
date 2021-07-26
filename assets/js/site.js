@@ -36,7 +36,56 @@ if (slider) {
   );
 }
 
+// Make the main image draggable
+
+// dragElement(document.querySelectorAll("#main-image img")[0]);
+
+// function dragElement(elmnt) {
+//   var pos1 = 0,
+//     pos2 = 0,
+//     pos3 = 0,
+//     pos4 = 0;
+//   if (document.getElementById(elmnt.id + "header")) {
+//     // if present, the header is where you move the DIV from:
+//     document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+//   } else {
+//     // otherwise, move the DIV from anywhere inside the DIV:
+//     elmnt.onmousedown = dragMouseDown;
+//   }
+
+//   function dragMouseDown(e) {
+//     e = e || window.event;
+//     e.preventDefault();
+//     // get the mouse cursor position at startup:
+//     pos3 = e.clientX;
+//     pos4 = e.clientY;
+//     document.onmouseup = closeDragElement;
+//     // call a function whenever the cursor moves:
+//     document.onmousemove = elementDrag;
+//   }
+
+//   function elementDrag(e) {
+//     e = e || window.event;
+//     e.preventDefault();
+//     // calculate the new cursor position:
+//     pos1 = pos3 - e.clientX;
+//     pos2 = pos4 - e.clientY;
+//     pos3 = e.clientX;
+//     pos4 = e.clientY;
+//     // set the element's new position:
+//     elmnt.style.top = elmnt.offsetTop - pos2 + "px";
+//     elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
+//   }
+
+//   function closeDragElement() {
+//     // stop moving when mouse button is released:
+//     document.onmouseup = null;
+//     document.onmousemove = null;
+//   }
+// }
+
 // hides main img/model-viewer & slider if any 1st-level elements are expanded
+
 function mainImgToggle() {
   let elements = document.getElementsByClassName("i-1");
   let modelViewer = document.querySelector("model-viewer");
@@ -64,40 +113,90 @@ function mainImgToggle() {
   }
 }
 
+// * * * *
+// SWIPER
+// * * * *
+
+const swiper = new Swiper(".swiper-container", { centeredSlides: true });
+
+// for (const galleryToggle of document.querySelectorAll(".gallery-toggle")) {
+//   galleryToggle.addEventListener("click", function () {
+//     this.classList.toggle("gallery-active");
+//   });
+//   galleryToggle
+//     .querySelectorAll(".close-button")
+//     .addEventListener("click", function () {
+//       this.classList.toggle("gallery-active");
+//     });
+// }
+
+MicroModal.init();
+
 // * * * * *
 // LIGHTBOX
 // * * * * *
 
-const customLightboxHTML = `<div id="glightbox-body" class="glightbox-container">
-    <div class="gloader visible"></div>
-    <div class="goverlay"></div>
-    <div class="gcontainer">
-    <div id="glightbox-slider" class="gslider"></div>
-    <button class="gnext gbtn" tabindex="0" aria-label="Next" data-customattribute="example"></button>
-    <button class="gprev gbtn" tabindex="1" aria-label="Previous"></button>
-    <button class="gclose gbtn" tabindex="2" aria-label="Close">x</button>
-</div>
-</div>`;
+// const customLightboxHTML = `<div id="glightbox-body" class="glightbox-container">
+//     <div class="gloader visible"></div>
+//     <div class="goverlay"></div>
+//     <div class="gcontainer">
+//     <div id="glightbox-slider" class="gslider"></div>
+//     <button class="gnext gbtn" tabindex="0" aria-label="Next" data-customattribute="example"></button>
+//     <button class="gprev gbtn" tabindex="1" aria-label="Previous"></button>
+//     <button class="gclose gbtn" tabindex="2" aria-label="Close">x</button>
+// </div>
+// </div>`;
+
+// // if .galleryToggle contains a gallery,
+// // open the corresponding lightbox on click
+
+// for (const toggle of document.querySelectorAll(".galleryToggle")) {
+//   let hasGallery = toggle.querySelector(".gallery") != null,
+//     galleryId = toggle.classList[3].replace("toggle", ""),
+//     gallerySelector = "figure a[data-gallery=gallery".concat(galleryId);
+//   if (hasGallery) {
+//     toggle.addEventListener("click", function () {
+//       let lightboxElements = toggle.querySelectorAll(".gallery figure");
+//       console.log(lightboxElements);
+//       lightboxContent = [];
+
+//       for (const el of lightboxElements) {
+//         lightboxContent.push({
+//           content: el,
+//         });
+//       }
+
+//       // initialize lightbox
+
+//       let lightbox = GLightbox({
+//         zoomable: false,
+//         autoplayVideos: true,
+//         // skin: "davina",
+//       });
+
+//       lightbox.setElements(lightboxContent);
+
+//       lightbox.open();
+//     });
+//   }
+// }
 
 // initialize lightbox
 
-const lightbox = GLightbox({
-  lightboxHTML: customLightboxHTML,
-  zoomable: false,
-  autoplayVideos: true,
-  // skin: "davina",
-});
+// const lightbox = GLightbox({
+//   lightboxHTML: customLightboxHTML,
+//   zoomable: false,
+//   autoplayVideos: true,
+//   // skin: "davina",
+// });
 
-// if .galleryToggle contains a gallery,
-// open the corresponding lightbox on click
-
-for (const toggle of document.querySelectorAll(".galleryToggle")) {
-  let hasGallery = toggle.querySelector(".gallery") != null,
-    galleryId = toggle.classList[3].replace("toggle", ""),
-    gallerySelector = "figure a[data-gallery=gallery".concat(galleryId);
-  if (hasGallery) {
-    toggle.addEventListener("click", function () {
-      lightbox.open(document.querySelector(gallerySelector));
-    });
-  }
-}
+// for (const toggle of document.querySelectorAll(".galleryToggle")) {
+//   let hasGallery = toggle.querySelector(".gallery") != null,
+//     galleryId = toggle.classList[3].replace("toggle", ""),
+//     gallerySelector = "figure a[data-gallery=gallery".concat(galleryId);
+//   if (hasGallery) {
+//     toggle.addEventListener("click", function () {
+//       lightbox.open(document.querySelector(gallerySelector));
+//     });
+//   }
+// }
