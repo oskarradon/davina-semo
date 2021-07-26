@@ -2,36 +2,19 @@
 // READING AND WRITING URL
 // * * * * * * * * * * * *
 
-// for (const collapsible of document.querySelectorAll(".collapsible")) {
-//   collapsible.addEventListener("click", function () {
-//     let anchor =
-//         "#" +
-//         collapsible.firstChild.innerHTML.replace(/\s+/g, "-").toLowerCase(),
-//       state = window.location + anchor;
-//     if (!window.location.toString().includes(anchor)) {
-//       history.pushState(null, null, state);
-//     } else {
-//       state = state.replace(anchor, "");
-//       history.replaceState(null, null, state); // broken!!
-//     }
-//   });
-// }
-
 for (const collapsible of document.querySelectorAll(".collapsible")) {
   collapsible.addEventListener("click", function () {
-    updateURL(collapsible);
+    updateHash(collapsible);
   });
 }
 
-function updateURL(element) {
+function updateHash(element) {
   let anchor =
       "#" + element.firstChild.innerHTML.replace(/\s+/g, "-").toLowerCase(),
-    currentURL = window.location.href,
-    currentHash = currentURL.substring(currentURL.lastIndexOf("/") + 1);
+    currentHash = window.location.hash;
   if (currentHash === anchor) {
     history.pushState(null, null, " ");
-  }
-  if (currentHash.includes(anchor)) {
+  } else if (currentHash.includes(anchor)) {
     let newHash = currentHash.replace(anchor, "");
     history.pushState(null, null, newHash);
   } else {
