@@ -1,16 +1,11 @@
 <article>
   <div class="i i-4" data-micromodal-trigger="<?= $article->uid() ?>">
-    <!-- <a href="<?= $article->url() ?>"> -->
+    <a href="<?= $article->url() ?>">
       <h3><?= $article->title() ?></h3>
       <p><?= $article->start()->toDate('F j, Y') ?> &ndash; <?= $article->end()->toDate('F j, Y') ?></p>
       <?= $article->description()->kt() ?>
-    <!-- </a> -->
+    </a>
   </div>
-
- 
-        
-
-  
 
   <?php $c = $page->files()->template("carousel");
     if($c->isNotEmpty()) : 
