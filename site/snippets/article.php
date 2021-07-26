@@ -7,7 +7,7 @@
     </a>
   </div>
 
-  <?php $c = $page->files()->template("carousel");
+  <?php $c = $article->files()->template("carousel");
     if($c->isNotEmpty()) : 
       $files = $c->sortBy('sort'); ?>
       <div class="preview-image"><?= $files->filterBy('type', 'image')->first() ?></div>

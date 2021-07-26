@@ -70,7 +70,7 @@ video#main-image {
   object-fit: cover;
 }
 
-.galleryToggle:hover + .preview-image img {
+.i-4:hover + .preview-image img {
   opacity: 1;
 }
 
