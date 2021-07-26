@@ -25,15 +25,21 @@ for (const collapsible of document.querySelectorAll(".collapsible")) {
 
 function updateURL(element) {
   let anchor =
-      "#" + element.firstChild.innerHTML.replace(/\s+/g, "-").toLowerCase(),
-    currentURL = window.location.href,
-    afterDomainURL = currentURL.substring(currentURL.lastIndexOf("/") + 1);
-  if (afterDomainURL.includes(anchor)) {
-    console.log(afterDomainURL, anchor);
-    history.pushState(null, null, afterDomainURL - anchor);
+    "#" + element.firstChild.innerHTML.replace(/\s+/g, "-").toLowerCase();
+  if (window.location.hash.toString().includes(anchor)) {
+    history.pushState(
+      null,
+      null,
+      window.location.hash.toString().replace(anchor, "")
+    );
+    console.log(window.location.hash);
   } else {
-    console.log(afterDomainURL, anchor);
-    history.pushState(null, null, afterDomainURL + anchor);
+    history.pushState(
+      null,
+      null,
+      window.location.hash.toString().concat(anchor)
+    );
+    console.log(window.location.hash);
   }
 }
 
