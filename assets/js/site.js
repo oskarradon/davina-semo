@@ -9,13 +9,29 @@
 
 for (const collapsible of document.querySelectorAll(".collapsible")) {
   collapsible.addEventListener("click", function () {
-    let state =
-      window.location +
-      collapsible.firstChild.innerHTML.replace(/\s+/g, "-").toLowerCase() +
-      "/";
-    history.pushState(null, null, state);
+    let anchor =
+        "#" +
+        collapsible.firstChild.innerHTML.replace(/\s+/g, "-").toLowerCase(),
+      state = window.location + anchor;
+    if (!window.location.toString().includes(anchor)) {
+      history.pushState(null, null, state);
+    } else {
+      state = state.replace(anchor, "");
+      history.replaceState(null, null, state);
+    }
   });
 }
+
+window.onload = function () {
+  let options = [];
+  options.push(
+    window.location
+      .toString()
+      .replace(/^(?:https?:\/\/)?(?:www\.)?/i, "")
+      .split(".")[0]
+      .split("/")
+  );
+};
 
 // on page load
 // look at the URL of the page
