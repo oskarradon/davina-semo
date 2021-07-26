@@ -28,27 +28,15 @@ function updateURL(element) {
       "#" + element.firstChild.innerHTML.replace(/\s+/g, "-").toLowerCase(),
     currentURL = window.location.href,
     currentHash = currentURL.substring(currentURL.lastIndexOf("/") + 1);
-  // if (currentHash.split("#").length == 1) {
-  //   history.pushState(null, null, " ");
-  // }
+  if (currentHash === anchor) {
+    history.pushState(null, null, " ");
+  }
   if (currentHash.includes(anchor)) {
     let newHash = currentHash.replace(anchor, "");
     history.pushState(null, null, newHash);
-    console.log(
-      currentHash,
-      currentHash.split("#"),
-      currentHash.split("#").length,
-      currentHash.split("#").length == 1
-    );
   } else {
     let newHash = currentHash.concat(anchor);
     history.pushState(null, null, newHash);
-    console.log(
-      currentHash,
-      currentHash.split("#"),
-      currentHash.split("#").length,
-      currentHash.split("#").length == 1
-    );
   }
 }
 
