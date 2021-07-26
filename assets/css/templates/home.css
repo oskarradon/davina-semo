@@ -1,44 +1,3 @@
-html,
-body {
-  margin: 0;
-  padding: 0;
-  /* background: #fff; */
-}
-
-main {
-  margin: 15px;
-  height: calc(100vh - 30px);
-  position: absolute;
-  left: 0;
-  /* isolation: isolate; */
-}
-
-@media (min-width: 500px) {
-  main {
-    margin: 30px;
-    height: calc(100vh - 60px);
-    -moz-columns: 300px 5;
-    columns: 300px 5;
-    -moz-column-fill: auto;
-    column-fill: auto;
-  }
-}
-
-.i,
-h1 {
-  margin-bottom: 7px;
-}
-
-h1,
-h2,
-h3 {
-  display: inline-block;
-}
-
-#galleries a {
-  display: block;
-}
-
 /* hover behavior */
 
 .i:hover > * {
@@ -50,6 +9,24 @@ h3 {
   -moz-mix-blend-mode: multiply;
   -o-mix-blend-mode: multiply;
   -ms-mix-blend-mode: multiply;
+}
+
+article {
+  margin-bottom: 24px;
+}
+
+/* toggle-able class to show/hide li, used by js */
+
+.collapsible ~ .content {
+  display: none;
+}
+
+.collapsible.active + .content {
+  display: block;
+}
+
+#galleries a {
+  display: block;
 }
 
 /* background image */
@@ -103,73 +80,7 @@ aside #slider {
   transition: opacity 350ms ease-in-out;
 }
 
-/* custom list symbol */
-
-.collapsible.active + .content .i,
-.i-1 {
-  position: relative;
-}
-
-.collapsible.active + .content .i:before,
-.i-1:before {
-  position: absolute;
-  left: -20px;
-  content: "└";
-}
-
-/* indentation classes */
-
-.i-1 {
-  margin-left: 20px;
-}
-
-.i-2 {
-  margin-left: 40px;
-}
-
-.i-3 {
-  margin-left: 60px;
-}
-
-.i-4 {
-  margin-left: 80px;
-}
-
-.i-5 {
-  margin-left: 100px;
-}
-
-.i-3 .i-4 {
-  margin-left: 20px; /* quick fix */
-}
-
-.i-2:before {
-  left: -10px;
-}
-
-.i-3:before {
-  left: -10px;
-}
-
-.i-4:before {
-  left: -10px;
-}
-
-article {
-  margin-bottom: 24px;
-}
-
-/* toggle-able class to show/hide li, used by js */
-
-.collapsible ~ .content {
-  display: none;
-}
-
-.collapsible.active + .content {
-  display: block;
-}
-
-/* slider */
+/* zoom slider */
 
 aside {
   padding: 0 30px;
@@ -185,10 +96,325 @@ aside #slider {
   width: 250px;
 }
 
-.gallery {
+input[type="range"] {
+  width: 100%;
+  margin: 7.4px 0;
+  background-color: transparent;
+  -webkit-appearance: none;
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  background: #e2e2e2;
+  border: 0;
+  border-radius: 25px;
+  width: 100%;
+  height: 7.2px;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  margin-top: -7.4px;
+  width: 22px;
+  height: 22px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 50px;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+input[type="range"]:focus::-webkit-slider-runnable-track {
+  background: #efefef;
+}
+input[type="range"]::-moz-range-track {
+  background: #e2e2e2;
+  border: 0;
+  border-radius: 25px;
+  width: 100%;
+  height: 7.2px;
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+input[type="range"]::-ms-track {
+  background: transparent;
+  border-color: transparent;
+  border-width: 7.4px 0;
+  color: transparent;
+  width: 100%;
+  height: 7.2px;
+  cursor: pointer;
+}
+
+input[type="range"]::-ms-fill-lower {
+  background: #d5d5d5;
+  border: 0;
+  border-radius: 50px;
+}
+
+input[type="range"]::-ms-fill-upper {
+  background: #e2e2e2;
+  border: 0;
+  border-radius: 50px;
+}
+
+input[type="range"]::-ms-thumb {
+  width: 22px;
+  height: 22px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 50px;
+  cursor: pointer;
+  margin-top: 0px;
+  /*Needed to keep the Edge thumb centred*/
+}
+
+input[type="range"]:focus::-ms-fill-lower {
+  background: #e2e2e2;
+}
+
+input[type="range"]:focus::-ms-fill-upper {
+  background: #efefef;
+}
+
+@supports (-ms-ime-align: auto) {
+  /* Pre-Chromium Edge only styles, selector taken from hhttps://stackoverflow.com/a/32202953/7077589 */
+  input[type="range"] {
+    margin: 0;
+    /*Edge starts the margin from the thumb, not the track as other browsers do*/
+  }
+}
+
+/* gallery */
+
+.swiper-container {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0 auto;
+}
+
+.swiper-container figure {
+  margin: 0px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.swiper-container img.portrait {
+  height: 100vh;
+  width: auto;
+}
+
+.swiper-container img.landscape {
+  height: 100vh;
+  width: auto;
+}
+
+figcaption {
+  position: absolute;
+  bottom: 0px;
+  background: white;
+  width: 100vw;
+  padding: 12px 0;
+}
+
+.caption-inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.caption-inner:first-child {
+  padding-left: 30px;
+}
+
+.caption-inner:last-child {
+  padding-right: 30px;
+}
+
+.close-button {
+  border-radius: 100%;
+  border: 1px solid black;
+  background: white;
+  height: 20px;
+  width: 30px;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  z-index: 99;
+}
+
+.modal__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal__container {
+  background-color: #fff;
+  padding: 30px;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal__title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  color: #00449e;
+  box-sizing: border-box;
+}
+
+.modal__close {
+  background: transparent;
+  border: 0;
+}
+
+.modal__header .modal__close:before {
+  content: "\2715";
+}
+
+.modal__content {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.modal__btn {
+  font-size: 0.875rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: #e6e6e6;
+  color: rgba(0, 0, 0, 0.8);
+  border-radius: 0.25rem;
+  border-style: none;
+  border-width: 0;
+  cursor: pointer;
+  -webkit-appearance: button;
+  text-transform: none;
+  overflow: visible;
+  line-height: 1.15;
+  margin: 0;
+  will-change: transform;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  transition: -webkit-transform 0.25s ease-out;
+  transition: transform 0.25s ease-out;
+  transition: transform 0.25s ease-out, -webkit-transform 0.25s ease-out;
+}
+
+.modal__btn:focus,
+.modal__btn:hover {
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+}
+
+.modal__btn-primary {
+  background-color: #00449e;
+  color: #fff;
+}
+
+/**************************\
+  Demo Animation Style
+\**************************/
+@keyframes mmfadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mmfadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes mmslideIn {
+  from {
+    transform: translateY(15%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes mmslideOut {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10%);
+  }
+}
+
+.micromodal-slide {
   display: none;
 }
 
-#logo:hover {
-  cursor: pointer;
+.micromodal-slide.is-open {
+  display: block;
+}
+
+.micromodal-slide[aria-hidden="false"] .modal__overlay {
+  animation: mmfadeIn 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.micromodal-slide[aria-hidden="false"] .modal__container {
+  animation: mmslideIn 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.micromodal-slide[aria-hidden="true"] .modal__overlay {
+  animation: mmfadeOut 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.micromodal-slide[aria-hidden="true"] .modal__container {
+  animation: mmslideOut 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.micromodal-slide .modal__container,
+.micromodal-slide .modal__overlay {
+  will-change: transform;
 }
