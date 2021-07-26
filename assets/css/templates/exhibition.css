@@ -1,19 +1,4 @@
-#logo:hover > * {
-  background: var(--yellow);
-  cursor: pointer;
-  mix-blend-mode: multiply;
-  will-change: opacity;
-  -webkit-mix-blend-mode: multiply;
-  -moz-mix-blend-mode: multiply;
-  -o-mix-blend-mode: multiply;
-  -ms-mix-blend-mode: multiply;
-}
-
-main#exhibition {
-  margin: 0px;
-  position: relative;
-}
-
+/* 
 article.info {
   max-width: 300px;
   position: absolute;
@@ -36,14 +21,26 @@ article.info {
   display: flex;
   flex-direction: column;
   align-items: center;
+} */
+
+html,
+body {
+  position: relative;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-.swiper-container img.portrait {
+figure {
   height: 100vh;
-  width: auto;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.swiper-container img.landscape {
+.swiper-slide img {
   height: 100vh;
   width: auto;
 }
@@ -68,4 +65,27 @@ figcaption {
 
 .caption-inner:last-child {
   padding-right: 30px;
+}
+
+#close-button {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  border-radius: 20px;
+  width: 40px;
+  height: 30px;
+  background: white;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  z-index: 99;
+}
+
+#close-button span {
+  font-family: "FolioBkBT", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  margin-top: 3px;
 }
