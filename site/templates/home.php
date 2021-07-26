@@ -1,12 +1,4 @@
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=devide-width, initial-scale=1">
-  <title><?= $site->title() ?></title>
-  <?= css('assets/css/main.css') ?>
-
-</head>
-
-<body>
+<?php snippet('header', ['template' => $page->id()]); ?>
 
   <?php
     $file = $site->files()->sortBy('sort')->first();
@@ -26,11 +18,11 @@
   <?php else : ?>
     <div id="main-image"><?= $file ?></div>
     <aside>
-      <input id="slider" type="range" min="1" max="200">
+      <input id="slider" type="range" value="50" min="1" max="800">
     </aside>
   <?php endif ?>
 
-  <main>
+  <main id="home">
     <h1 id="logo"><?= $site->title() ?></h1>
     <?php
       foreach($pages->listed() as $section) {
@@ -43,8 +35,4 @@
     ?>
   </main>
 
-</body>
-
-<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-<?= js('assets/js/glightbox.min.js') ?>
-<?= js('assets/js/site.js') ?>
+<?php snippet('footer'); ?>
