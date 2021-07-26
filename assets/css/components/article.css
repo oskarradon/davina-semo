@@ -1,0 +1,68 @@
+.i,
+h1 {
+  margin-bottom: 7px;
+}
+
+h1,
+h2,
+h3 {
+  display: inline-block;
+}
+
+#logo:hover {
+  cursor: pointer;
+}
+
+/* custom list symbol */
+
+#home .collapsible.active + .content .i,
+#exhibition .i,
+.i-1 {
+  position: relative;
+}
+
+#home .collapsible.active + .content .i:before,
+#exhibition .i:before,
+.i-1:before {
+  position: absolute;
+  left: -20px;
+  content: "└";
+}
+
+/* indentation classes */
+
+.i-1 {
+  margin-left: 20px;
+}
+
+.i-2 {
+  margin-left: 40px;
+}
+
+.i-3 {
+  margin-left: 60px;
+}
+
+.i-4 {
+  margin-left: 80px;
+}
+
+.i-5 {
+  margin-left: 100px;
+}
+
+.i-3 .i-4 {
+  margin-left: 20px; /* quick fix */
+}
+
+.i-2:before {
+  left: -10px;
+}
+
+.i-3:before {
+  left: -10px;
+}
+
+.i-4:before {
+  left: -10px;
+}
