@@ -5,7 +5,7 @@ body {
   /* background: #fff; */
 }
 
-main {
+main#home {
   margin: 15px;
   height: calc(100vh - 30px);
   position: absolute;
@@ -14,7 +14,7 @@ main {
 }
 
 @media (min-width: 500px) {
-  main {
+  main#home {
     margin: 30px;
     height: calc(100vh - 60px);
     -moz-columns: 300px 5;
