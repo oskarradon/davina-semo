@@ -199,7 +199,7 @@ input[type="range"]:focus::-ms-fill-upper {
 
 /* gallery */
 
-.swiper-container {
+/* .swiper-container {
   width: 100vw;
   height: 100vh;
   position: absolute;
@@ -213,7 +213,7 @@ input[type="range"]:focus::-ms-fill-upper {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+} */
 
 .swiper-container img.portrait {
   height: 100vh;
@@ -225,13 +225,13 @@ input[type="range"]:focus::-ms-fill-upper {
   width: auto;
 }
 
-figcaption {
+/* figcaption {
   position: absolute;
   bottom: 0px;
   background: white;
   width: 100vw;
   padding: 12px 0;
-}
+} */
 
 .caption-inner {
   display: flex;

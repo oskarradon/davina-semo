@@ -1,3 +1,28 @@
+// * * * * * * * * * * * *
+// READING AND WRITING URL
+// * * * * * * * * * * * *
+
+// when you click an expandable tree option
+// read the name of the "link" -- (not really a link)
+//   replace any spaces in the name with daashes and make all lowercase
+// add that "href" to the URL
+
+for (const collapsible of document.querySelectorAll(".collapsible")) {
+  collapsible.addEventListener("click", function () {
+    let state =
+      window.location +
+      collapsible.firstChild.innerHTML.replace(/\s+/g, "-").toLowerCase() +
+      "/";
+    history.pushState(null, null, state);
+  });
+}
+
+// on page load
+// look at the URL of the page
+// divide the url into the "href"s of the options that are expanded,
+//   (probably by seperating between each slash character -- use a regex)
+// loop through each expandable tree option and if it's name === "href" found in URL ---> expand that option
+
 // * * * * * * * *
 // EXPANDABLE TREE
 // * * * * * * * *
