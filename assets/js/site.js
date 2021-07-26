@@ -32,14 +32,16 @@ function updateURL(element) {
       null,
       window.location.hash.toString().replace(anchor, "")
     );
-    console.log(window.location.hash);
+    console.log(window.location.hash.toString());
+    console.log(window.location.hash.toString().includes(anchor));
   } else {
     history.pushState(
       null,
       null,
       window.location.hash.toString().concat(anchor)
     );
-    console.log(window.location.hash);
+    console.log(window.location.hash.toString());
+    console.log(window.location.hash.toString().includes(anchor));
   }
 }
 
