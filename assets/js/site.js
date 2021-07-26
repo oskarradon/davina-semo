@@ -29,6 +29,20 @@ function updateHash(element) {
 //   (probably by seperating between each slash character -- use a regex)
 // loop through each expandable tree option and if it's name === "href" found in URL ---> expand that option
 
+expandCollapsibleElements(window.location.hash);
+
+function expandCollapsibleElements(hash) {
+  for (const collapsible of document.querySelectorAll(".collapsible")) {
+    let anchor =
+      "#" + collapsible.firstChild.innerHTML.replace(/\s+/g, "-").toLowerCase();
+    if (hash.includes(anchor)) {
+      collapsible.classList.toggle("active");
+      document.querySelector("div#main-image img").classList.add("hide");
+      document.getElementById("slider").classList.add("hide");
+    }
+  }
+}
+
 // * * * * * * * *
 // EXPANDABLE TREE
 // * * * * * * * *
@@ -40,11 +54,11 @@ for (const collapsible of document.querySelectorAll(".collapsible")) {
   });
 }
 
-document.getElementById("logo").addEventListener("click", function () {
-  for (const collapsible of document.querySelectorAll(".collapsible")) {
-    collapsible.classList.remove("active");
-  }
-});
+// document.getElementById("logo").addEventListener("click", function () {
+//   for (const collapsible of document.querySelectorAll(".collapsible")) {
+//     collapsible.classList.remove("active");
+//   }
+// });
 
 // * * * * * *
 // MAIN IMAGE
@@ -65,6 +79,35 @@ if (slider) {
     },
     false
   );
+}
+
+// hides main img/model-viewer & slider if any 1st-level elements are expanded
+
+function mainImgToggle() {
+  let elements = document.getElementsByClassName("i-1");
+  let modelViewer = document.querySelector("model-viewer");
+
+  if (modelViewer) {
+    for (let i = 0; i < elements.length; i++) {
+      if (elements[i].classList.contains("active")) {
+        modelViewer.classList.add("hide");
+        break; // important to exit loop once if statement evaluates to true the first time
+      } else {
+        modelViewer.classList.remove("hide");
+      }
+    }
+  } else if (mainImage) {
+    for (let i = 0; i < elements.length; i++) {
+      if (elements[i].classList.contains("active")) {
+        mainImage.classList.add("hide");
+        slider.classList.add("hide");
+        break;
+      } else {
+        mainImage.classList.remove("hide");
+        slider.classList.remove("hide");
+      }
+    }
+  }
 }
 
 // Make the main image draggable
@@ -115,35 +158,6 @@ if (slider) {
 //   }
 // }
 
-// hides main img/model-viewer & slider if any 1st-level elements are expanded
-
-function mainImgToggle() {
-  let elements = document.getElementsByClassName("i-1");
-  let modelViewer = document.querySelector("model-viewer");
-
-  if (modelViewer) {
-    for (let i = 0; i < elements.length; i++) {
-      if (elements[i].classList.contains("active")) {
-        modelViewer.classList.add("hide");
-        break; // important to exit loop once if statement evaluates to true the first time
-      } else {
-        modelViewer.classList.remove("hide");
-      }
-    }
-  } else if (mainImage) {
-    for (let i = 0; i < elements.length; i++) {
-      if (elements[i].classList.contains("active")) {
-        mainImage.classList.add("hide");
-        slider.classList.add("hide");
-        break;
-      } else {
-        mainImage.classList.remove("hide");
-        slider.classList.remove("hide");
-      }
-    }
-  }
-}
-
 // * * * *
 // SWIPER
 // * * * *
@@ -161,7 +175,7 @@ const swiper = new Swiper(".swiper-container", { centeredSlides: true });
 //     });
 // }
 
-MicroModal.init();
+// MicroModal.init();
 
 // * * * * *
 // LIGHTBOX
