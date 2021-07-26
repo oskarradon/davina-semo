@@ -2,18 +2,7 @@
 
 <body>
 <main id="exhibition">
-  <article class="info">
-    <h1 id="logo"><a href="/"><?= $site->title() ?></a></h1>
-    <div class="i i-1"><h2>Exhibitions</h2></div>
-    <div class="i i-2"><h2><?= $page->category() ?></h2></div>
-    <div class="i i-3"><h2><?= $page->start()->toDate('Y') ?></h2></div>
-    <div class="i i-4 galleryToggle toggle<?= $page->uid() ?>">
-      <h3><?= $page->title() ?></h3>
-      <p><?= $page->start()->toDate('F j, Y') ?> &ndash; <?= $page->end()->toDate('F j, Y') ?></p>
-      <?= $page->description()->kt() ?>
-    </div>
-  </article>
-
+  <!-- <div id="close-button"><span>x</span></div> -->
   <?php 
     $c = $page->files()->template("carousel");
     if($c->isNotEmpty()) : 
