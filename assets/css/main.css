@@ -1,9 +1,7 @@
-@import 'components/normalize.css';
-@import 'global/vars.css';
-@import 'global/typography.css';
+@import "vendor/normalize.css";
 
-@import 'components/slider.css';
-@import 'components/glightbox.css';
-@import 'components/lightbox.css';
+@import "global/vars.css";
+@import "global/typography.css";
 
-@import 'templates/home.css';
+@import "components/article.css";
+@import "components/container.css";
