@@ -1,0 +1,25 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  /* background: #fff; */
+}
+
+main {
+  margin: 15px;
+  height: calc(100vh - 30px);
+  position: absolute;
+  left: 0;
+  /* isolation: isolate; */
+}
+
+@media (min-width: 500px) {
+  main {
+    margin: 30px;
+    height: calc(100vh - 60px);
+    -moz-columns: 300px 5;
+    columns: 300px 5;
+    -moz-column-fill: auto;
+    column-fill: auto;
+  }
+}
