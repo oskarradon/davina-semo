@@ -44,7 +44,7 @@
         <div class="i i-2 collapsible" data-anchor-id="solo"><h2>Solo exhibitions</h2></div>
         <div class="content">
           <?php foreach($solo->group($returnYear) as $year => $soloPerYear): ?>
-            <div class="i i-3 collapsible" data-anchor-id="solo-<?= $year ?>"><h2><?= $year ?></h2></div>
+            <div class="i i-3 collapsible" data-anchor-id="s-<?= $year ?>"><h2><?= $year ?></h2></div>
             <div class="content">
               <?php foreach($soloPerYear as $s) : ?>
                 <?php snippet('article', ['article' => $s]); ?>
@@ -55,7 +55,7 @@
         <div class="i i-2 collapsible" data-anchor-id="group"><h2>Group exhibitions</h2></div>
         <div class="content">
           <?php foreach($group->group($returnYear) as $year => $groupPerYear): ?>
-            <div class="i i-3 collapsible" data-anchor-id="group-<?= $year ?>"><h2><?= $year ?></h2></div>
+            <div class="i i-3 collapsible" data-anchor-id="g-<?= $year ?>"><h2><?= $year ?></h2></div>
             <div class="content">
               <?php foreach($groupPerYear as $g) : ?>
                 <?php snippet('article', ['article' => $g]); ?>
@@ -66,7 +66,7 @@
         <div class="i i-2 collapsible" data-anchor-id="other"><h2>Other work</h2></div>
         <div class="content">
           <?php foreach($other->group($returnYear) as $year => $otherPerYear): ?>
-            <div class="i i-3 collapsible" data-anchor-id="other-<?= $year ?>"><h2><?= $year ?></h2></div>
+            <div class="i i-3 collapsible" data-anchor-id="o-<?= $year ?>"><h2><?= $year ?></h2></div>
             <div class="content">
               <?php foreach($otherPerYear as $o) : ?>
                 <?php snippet('article', ['article' => $o]); ?>
