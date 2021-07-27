@@ -165,9 +165,9 @@ function mainImgToggle() {
 
 const swiper = new Swiper(".swiper-container", {
   centeredSlides: true,
-  hashNavigation: {
-    watchState: true,
-  },
+  // hashNavigation: {
+  //   watchState: true,
+  // },
   keyboard: {
     enabled: true,
   },
