@@ -1,8 +1,8 @@
 <?php snippet('header', ['template' => $page->id()]); ?>
 
 <body>
-<main id="exhibition">
-  <!-- <div id="close-button"><span>x</span></div> -->
+<!-- <main id="exhibition"> -->
+  <a href="/" id="close-button"><span>x</span></a>
   <?php 
     $c = $page->files()->template("carousel");
     if($c->isNotEmpty()) : 
@@ -17,7 +17,7 @@
           foreach($files as $file) :
           static $currentFileCount = 0;
                   $currentFileCount++; ?>
-            <figure class="swiper-slide">
+            <figure class="swiper-slide" data-hash="<?= $file->hash() ?>">
               <?php if($file->type() == 'image') : ?>
                 <img class="<?= $file->orientation() ?>" src="<?= $file->url() ?>" alt="" loading="lazy" />
               <?php elseif($file->type() == 'video') : ?>
@@ -38,8 +38,10 @@
           </figure>
         <?php endforeach ?>
         </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
       </div>
     <?php endif ?>
-</main>
+<!-- </main> -->
 
 <?php snippet('footer'); ?>
