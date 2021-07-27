@@ -1,6 +1,6 @@
 /* hover behavior */
 
-.i:hover {
+.i:hover > * {
   background: var(--yellow);
   cursor: pointer;
   mix-blend-mode: multiply;
