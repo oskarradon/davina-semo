@@ -17,8 +17,8 @@ main#home {
   main#home {
     margin: 30px;
     height: calc(100vh - 60px);
-    -moz-columns: 300px 5;
-    columns: 300px 5;
+    -moz-columns: 330px auto;
+    columns: 330px auto;
     -moz-column-fill: auto;
     column-fill: auto;
   }
