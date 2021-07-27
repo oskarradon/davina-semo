@@ -2,7 +2,7 @@
 <?php if($data->link()->isNotEmpty()) : ?>
   <div class="i i-1"><a href="<?= $data->link()->url() ?>" target="_blank"><?= $data->title() ?></a></div>
 <?php else : ?>
-  <div class="i i-1 collapsible"><h2><?= $data->title() ?></h2></div>
+  <div class="i i-1 collapsible" data-anchor-id="<?= $data->slug() ?>"><h2><?= $data->title() ?></h2></div>
   <div class="content">
     <?php $links = $data->links()->toStructure();
         foreach ($links as $link) : ?>
