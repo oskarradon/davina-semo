@@ -1,5 +1,5 @@
 <article>
-  <div class="i i-4" data-micromodal-trigger="<?= $article->uid() ?>">
+  <div class="i i-4" data-anchor-id="<?= $article->uid() ?>">
     <a href="<?= $article->url() ?>">
       <h3><?= $article->title() ?></h3>
       <p><?= $article->start()->toDate('F j, Y') ?> &ndash; <?= $article->end()->toDate('F j, Y') ?></p>
