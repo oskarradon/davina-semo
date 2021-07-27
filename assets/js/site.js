@@ -9,8 +9,7 @@ for (const collapsible of document.querySelectorAll(".collapsible")) {
 }
 
 function updateHash(element) {
-  let anchor =
-      "#" + element.firstChild.innerHTML.replace(/\s+/g, "-").toLowerCase(),
+  let anchor = "#" + element.dataset.anchorId,
     currentHash = window.location.hash;
   if (currentHash === anchor) {
     history.pushState(null, null, " ");
@@ -33,12 +32,11 @@ expandCollapsibleElements(window.location.hash);
 
 function expandCollapsibleElements(hash) {
   for (const collapsible of document.querySelectorAll(".collapsible")) {
-    let anchor =
-      "#" + collapsible.firstChild.innerHTML.replace(/\s+/g, "-").toLowerCase();
+    let anchor = "#" + collapsible.dataset.anchorId;
     if (hash.includes(anchor)) {
       collapsible.classList.toggle("active");
       document.querySelector("div#main-image img").classList.add("hide");
-      document.getElementById("slider").classList.add("hide");
+      document.getElementsByTagName("aside")[0].classList.add("hide");
     }
   }
 }
@@ -84,8 +82,8 @@ if (slider) {
 // hides main img/model-viewer & slider if any 1st-level elements are expanded
 
 function mainImgToggle() {
-  let elements = document.getElementsByClassName("i-1");
-  let modelViewer = document.querySelector("model-viewer");
+  let elements = document.getElementsByClassName("i-1"),
+    modelViewer = document.querySelector("model-viewer");
 
   if (modelViewer) {
     for (let i = 0; i < elements.length; i++) {
@@ -100,11 +98,11 @@ function mainImgToggle() {
     for (let i = 0; i < elements.length; i++) {
       if (elements[i].classList.contains("active")) {
         mainImage.classList.add("hide");
-        slider.classList.add("hide");
+        document.getElementsByTagName("aside")[0].classList.add("hide");
         break;
       } else {
         mainImage.classList.remove("hide");
-        slider.classList.remove("hide");
+        document.getElementsByTagName("aside")[0].classList.remove("hide");
       }
     }
   }
@@ -162,7 +160,20 @@ function mainImgToggle() {
 // SWIPER
 // * * * *
 
-const swiper = new Swiper(".swiper-container", { centeredSlides: true });
+const swiper = new Swiper(".swiper-container", {
+  centeredSlides: true,
+  hashNavigation: {
+    watchState: true,
+  },
+  keyboard: {
+    enabled: true,
+  },
+  speed: 500,
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+});
 
 // for (const galleryToggle of document.querySelectorAll(".gallery-toggle")) {
 //   galleryToggle.addEventListener("click", function () {
