@@ -52,11 +52,14 @@ for (const collapsible of document.querySelectorAll(".collapsible")) {
   });
 }
 
-// document.getElementById("logo").addEventListener("click", function () {
-//   for (const collapsible of document.querySelectorAll(".collapsible")) {
-//     collapsible.classList.remove("active");
-//   }
-// });
+if (document.getElementById("logo")) {
+  document.getElementById("logo").addEventListener("click", function () {
+    for (const collapsible of document.querySelectorAll(".collapsible")) {
+      collapsible.classList.remove("active");
+      history.pushState(null, null, " ");
+    }
+  });
+}
 
 // * * * * * *
 // MAIN IMAGE
