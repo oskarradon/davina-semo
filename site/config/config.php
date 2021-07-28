@@ -8,5 +8,6 @@
  * All config options: https://getkirby.com/docs/reference/system/options
  */
 return [
-    'debug' => true,
+    // this must be set to false in production!! :)
+    // 'debug' => true,
 ];
