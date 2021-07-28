@@ -60,6 +60,7 @@ columns:
     sections:
       gallery:
         type: files
+        limit: 99999
         layout: cards
         info: "{{ file.dimensions }}"
         template: carousel
