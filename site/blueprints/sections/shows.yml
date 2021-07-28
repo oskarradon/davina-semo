@@ -2,5 +2,6 @@ type: pages
 parent: kirby.page("exhibitions")
 headline: Exhibitions
 layout: list
+limit: 9999999
 info: " {{ page.category }}, {{ page.start.toDate('F j, Y') }}"
 template: exhibition
