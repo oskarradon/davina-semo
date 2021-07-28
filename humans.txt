@@ -1,0 +1,16 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Scott Ponik -- Designer -- n/a
+    Oskar Radon -- Designer, Developer -- n/a
+    
+
+# THANKS
+
+    Davina Semo
+
+# TECHNOLOGY COLOPHON
+
+    CSS3, HTML5, Kirby CMS, Normalize.css
