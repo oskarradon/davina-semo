@@ -12,34 +12,28 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Facebook Open Graph data -->
-    <meta property="og:url" content="https://www.example.com/path/to/page.html">
+    <meta property="og:url" content="https://davinasemo.com">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="">
-    <meta property="og:image" content="https://www.example.com/path/to/image.jpg">
+    <meta property="og:title" content="Davina Semo">
+    <meta property="og:image" content="/assets/img/open-graph.jpg">
     <meta property="og:description" content="">
     <meta property="og:site_name" content="">
     <meta property="article:author" content="">
 
-    <!-- Twitter cards -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@site_account">
-    <meta name="twitter:creator" content="@individual_account">
-    <meta name="twitter:url" content="https://www.example.com/path/to/page.html">
-    <meta name="twitter:title" content="">
+    <meta name="twitter:url" content="https://davinasemo.com">
+    <meta name="twitter:title" content="Davina Semo">
     <meta name="twitter:description" content="">
-    <meta name="twitter:image" content="https://www.example.com/path/to/image.jpg">
+    <meta name="twitter:image" content="/assets/img/twitter.jpg">
 
-    <!-- Google's Schema.org -->
-    <link rel="author" href="">
-    <link rel="publisher" href="">
-    <meta itemprop="name" content="">
+    <link rel="author" href="Davina Semo">
+    <link rel="publisher" href="Davina Semo">
+    <meta itemprop="name" content="Davina Semo">
     <meta itemprop="description" content="">
-    <meta itemprop="image" content="">
+    <meta itemprop="image" content="/assets/img/open-graph.jpg">
 
     <link rel="manifest" href="site.webmanifest">
-    <link rel="apple-touch-icon" href="icon.png">
-    <!-- Place favicon.ico in the root directory -->
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
     <!-- Vendor stylesheets -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
