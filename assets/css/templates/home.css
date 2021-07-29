@@ -31,7 +31,7 @@ article {
 
 /* background image */
 
-#main-image,
+#main-object,
 .preview-image {
   width: 100vw;
   height: 100vh;
@@ -41,11 +41,11 @@ article {
   left: 0;
 }
 
-video#main-image {
+video#main-object {
   object-fit: cover;
 }
 
-#main-image img,
+#main-object img,
 .preview-image img {
   margin: 0;
   position: absolute;
@@ -81,8 +81,8 @@ aside.hide {
   opacity: 1;
 }
 
-#main-image,
-#main-image img,
+#main-object,
+#main-object img,
 .preview-image img,
 aside #slider {
   transition: opacity 350ms ease-in-out;

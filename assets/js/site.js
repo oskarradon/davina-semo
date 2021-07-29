@@ -13,7 +13,7 @@ for (const collapsible of document.querySelectorAll(".collapsible")) {
   collapsible.addEventListener("click", function () {
     this.classList.toggle("active");
     updateHash(collapsible);
-    mainImageToggle();
+    mainObjectToggle();
   });
 }
 
@@ -33,15 +33,15 @@ if (document.getElementById("logo")) {
 // * * * * * *
 
 function initZoomSlider() {
-  let mainImage = document.querySelector("div#main-image img"),
+  let mainObject = document.querySelector("div#main-object img"),
     slider = document.getElementById("slider");
 
   if (slider) {
-    mainImage.style.height = slider.value + "%";
+    mainObject.style.height = slider.value + "%";
     slider.addEventListener(
       "input",
       function () {
-        mainImage.style.height = slider.value + "%";
+        mainObject.style.height = slider.value + "%";
       },
       false
     );
@@ -53,10 +53,10 @@ initZoomSlider();
 // this function is called when a user clicks on a .collapsible element in the file tree
 // it hides main image/model-viewer & slider if any 1st-level elements are expanded
 
-function mainImageToggle() {
+function mainObjectToggle() {
   let elements = document.getElementsByClassName("i-1"),
     modelViewer = document.querySelector("model-viewer"),
-    mainImage = document.querySelector("div#main-image");
+    mainObject = document.querySelector("div#main-object");
 
   if (modelViewer) {
     for (let i = 0; i < elements.length; i++) {
@@ -67,14 +67,14 @@ function mainImageToggle() {
         modelViewer.classList.remove("hide");
       }
     }
-  } else if (mainImage) {
+  } else if (mainObject) {
     for (let i = 0; i < elements.length; i++) {
       if (elements[i].classList.contains("active")) {
-        mainImage.classList.add("hide");
+        mainObject.classList.add("hide");
         document.getElementsByTagName("aside")[0].classList.add("hide");
         break;
       } else {
-        mainImage.classList.remove("hide");
+        mainObject.classList.remove("hide");
         document.getElementsByTagName("aside")[0].classList.remove("hide");
       }
     }

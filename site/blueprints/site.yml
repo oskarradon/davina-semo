@@ -53,4 +53,4 @@ columns:
           layout: cards
           headline: Background Object
           cover: true
-          help: Only the first image or object will be used as the background, drag them to re-order. 3D objects must be in .glb format.
+          help: Only the first image, object, sound, or video file will be used as the background, drag them to re-order. 3D objects must be in .glb format.
