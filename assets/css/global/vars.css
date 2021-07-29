@@ -1,3 +1,21 @@
 :root {
-  --yellow:    #FFF851;
+  --yellow: #fff851;
+  --grey: #e2e2e2;
+
+  /* plyr styles */
+
+  --plyr-color-main: var(--grey);
+  --plyr-font-family: "FolioBkBT", Arial, Helvetica, sans-serif;
+  --plyr-tooltip-color: black;
+  --plyr-tooltip-radius: 30px;
+  --plyr-tooltip-shadow: 0 0 2px black;
+  --plyr-tooltip-arrow-size: 0px;
+  --plyr-audio-control-color: black;
+  --plyr-menu-color: black;
+  --plyr-menu-item-arrow-color: black;
+  --plyr-range-thumb-shadow: 0 0 2px black;
+  --plyr-video-progress-buffered-background: var(--grey);
+  --plyr-range-thumb-active-shadow-width: 0px;
+  --plyr-range-track-height: 6px;
+  --plyr-range-thumb-height: 15px;
 }
