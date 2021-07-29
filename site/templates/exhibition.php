@@ -2,7 +2,7 @@
 
 <body>
 <!-- <main id="exhibition"> -->
-  <a href="javascript:window.history.back();" id="close-button"><span>x</span></a>
+  <a href="/" id="close-button"><span>x</span></a>
   <?php 
     $c = $page->files()->template("carousel");
     if($c->isNotEmpty()) : 
