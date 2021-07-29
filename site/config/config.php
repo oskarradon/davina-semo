@@ -9,5 +9,5 @@
  */
 return [
     // this must be set to false in production!! :)
-    // 'debug' => true,
+    'debug' => true,
 ];
