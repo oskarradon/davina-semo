@@ -1,3 +1,84 @@
+// * * * * * * * *
+// EXPANDABLE TREE
+// * * * * * * * *
+
+// elements with class .collapsible have next sibling element with class .content
+// .collapsible elements are given class .active which toggles showing .content element
+// ex:
+//   <div class="collapsible"><p>click this</p></div>
+//   <div class="content"><p>Lorem ipsum dolor sit amet.</p></div>
+// ex: https://codepen.io/oskarradon/pen/JjbLBrY
+
+for (const collapsible of document.querySelectorAll(".collapsible")) {
+  collapsible.addEventListener("click", function () {
+    this.classList.toggle("active");
+    mainImageToggle();
+  });
+}
+
+// collapse all tree options when user clicks top level of tree
+
+if (document.getElementById("logo")) {
+  document.getElementById("logo").addEventListener("click", function () {
+    for (const collapsible of document.querySelectorAll(".collapsible")) {
+      collapsible.classList.remove("active");
+      history.pushState(null, null, " ");
+    }
+  });
+}
+
+// * * * * * *
+// MAIN IMAGE
+// * * * * * *
+
+function initZoomSlider() {
+  let mainImage = document.querySelector("div#main-image img"),
+    slider = document.getElementById("slider");
+
+  if (slider) {
+    mainImage.style.height = slider.value + "%";
+    slider.addEventListener(
+      "input",
+      function () {
+        mainImage.style.height = slider.value + "%";
+      },
+      false
+    );
+  }
+}
+
+initZoomSlider();
+
+// this function is called when a user clicks on a .collapsible element in the file tree
+// it hides main image/model-viewer & slider if any 1st-level elements are expanded
+
+function mainImageToggle() {
+  let elements = document.getElementsByClassName("i-1"),
+    modelViewer = document.querySelector("model-viewer");
+
+  if (modelViewer) {
+    for (let i = 0; i < elements.length; i++) {
+      if (elements[i].classList.contains("active")) {
+        modelViewer.classList.add("hide");
+        break; // important to exit loop once if statement evaluates to true the first time
+      } else {
+        modelViewer.classList.remove("hide");
+      }
+    }
+  } else if (mainImage) {
+    for (let i = 0; i < elements.length; i++) {
+      if (elements[i].classList.contains("active")) {
+        mainImage.classList.add("hide");
+        document.getElementsByTagName("aside")[0].classList.add("hide");
+        break;
+      } else {
+        mainImage.classList.remove("hide");
+        document.getElementsByTagName("aside")[0].classList.remove("hide");
+      }
+    }
+  }
+}
+
 // * * * * * * * * * * * *
 // READING AND WRITING URL
 // * * * * * * * * * * * *
@@ -32,81 +113,13 @@ expandCollapsibleElements(window.location.hash);
 
 function expandCollapsibleElements(hash) {
   for (const collapsible of document.querySelectorAll(".collapsible")) {
-    let anchor = "#" + collapsible.dataset.anchorId;
+    let anchor = "#" + collapsible.dataset.anchorId,
+      mainImage = document.querySelector("div#main-image img"),
+      aside = document.getElementsByTagName("aside")[0];
     if (hash.includes(anchor)) {
       collapsible.classList.toggle("active");
-      document.querySelector("div#main-image img").classList.add("hide");
-      document.getElementsByTagName("aside")[0].classList.add("hide");
-    }
-  }
-}
-
-// * * * * * * * *
-// EXPANDABLE TREE
-// * * * * * * * *
-
-for (const collapsible of document.querySelectorAll(".collapsible")) {
-  collapsible.addEventListener("click", function () {
-    this.classList.toggle("active");
-    mainImgToggle();
-  });
-}
-
-if (document.getElementById("logo")) {
-  document.getElementById("logo").addEventListener("click", function () {
-    for (const collapsible of document.querySelectorAll(".collapsible")) {
-      collapsible.classList.remove("active");
-      history.pushState(null, null, " ");
-    }
-  });
-}
-
-// * * * * * *
-// MAIN IMAGE
-// * * * * * *
-
-let mainImage = document.querySelector("div#main-image img");
-
-// image zoom slider
-
-let slider = document.getElementById("slider");
-
-if (slider) {
-  mainImage.style.height = slider.value + "%";
-  slider.addEventListener(
-    "input",
-    function () {
-      mainImage.style.height = slider.value + "%";
-    },
-    false
-  );
-}
-
-// hides main img/model-viewer & slider if any 1st-level elements are expanded
-
-function mainImgToggle() {
-  let elements = document.getElementsByClassName("i-1"),
-    modelViewer = document.querySelector("model-viewer");
-
-  if (modelViewer) {
-    for (let i = 0; i < elements.length; i++) {
-      if (elements[i].classList.contains("active")) {
-        modelViewer.classList.add("hide");
-        break; // important to exit loop once if statement evaluates to true the first time
-      } else {
-        modelViewer.classList.remove("hide");
-      }
-    }
-  } else if (mainImage) {
-    for (let i = 0; i < elements.length; i++) {
-      if (elements[i].classList.contains("active")) {
-        mainImage.classList.add("hide");
-        document.getElementsByTagName("aside")[0].classList.add("hide");
-        break;
-      } else {
-        mainImage.classList.remove("hide");
-        document.getElementsByTagName("aside")[0].classList.remove("hide");
-      }
+      mainImage.classList.add("hide");
+      aside.classList.add("hide");
     }
   }
 }
@@ -177,85 +190,3 @@ const swiper = new Swiper(".swiper-container", {
     prevEl: ".swiper-button-prev",
   },
 });
-
-// for (const galleryToggle of document.querySelectorAll(".gallery-toggle")) {
-//   galleryToggle.addEventListener("click", function () {
-//     this.classList.toggle("gallery-active");
-//   });
-//   galleryToggle
-//     .querySelectorAll(".close-button")
-//     .addEventListener("click", function () {
-//       this.classList.toggle("gallery-active");
-//     });
-// }
-
-// MicroModal.init();
-
-// * * * * *
-// LIGHTBOX
-// * * * * *
-
-// const customLightboxHTML = `<div id="glightbox-body" class="glightbox-container">
-//     <div class="gloader visible"></div>
-//     <div class="goverlay"></div>
-//     <div class="gcontainer">
-//     <div id="glightbox-slider" class="gslider"></div>
-//     <button class="gnext gbtn" tabindex="0" aria-label="Next" data-customattribute="example"></button>
-//     <button class="gprev gbtn" tabindex="1" aria-label="Previous"></button>
-//     <button class="gclose gbtn" tabindex="2" aria-label="Close">x</button>
-// </div>
-// </div>`;
-
-// // if .galleryToggle contains a gallery,
-// // open the corresponding lightbox on click
-
-// for (const toggle of document.querySelectorAll(".galleryToggle")) {
-//   let hasGallery = toggle.querySelector(".gallery") != null,
-//     galleryId = toggle.classList[3].replace("toggle", ""),
-//     gallerySelector = "figure a[data-gallery=gallery".concat(galleryId);
-//   if (hasGallery) {
-//     toggle.addEventListener("click", function () {
-//       let lightboxElements = toggle.querySelectorAll(".gallery figure");
-//       console.log(lightboxElements);
-//       lightboxContent = [];
-
-//       for (const el of lightboxElements) {
-//         lightboxContent.push({
-//           content: el,
-//         });
-//       }
-
-//       // initialize lightbox
-
-//       let lightbox = GLightbox({
-//         zoomable: false,
-//         autoplayVideos: true,
-//         // skin: "davina",
-//       });
-
-//       lightbox.setElements(lightboxContent);
-
-//       lightbox.open();
-//     });
-//   }
-// }
-
-// initialize lightbox
-
-// const lightbox = GLightbox({
-//   lightboxHTML: customLightboxHTML,
-//   zoomable: false,
-//   autoplayVideos: true,
-//   // skin: "davina",
-// });
-
-// for (const toggle of document.querySelectorAll(".galleryToggle")) {
-//   let hasGallery = toggle.querySelector(".gallery") != null,
-//     galleryId = toggle.classList[3].replace("toggle", ""),
-//     gallerySelector = "figure a[data-gallery=gallery".concat(galleryId);
-//   if (hasGallery) {
-//     toggle.addEventListener("click", function () {
-//       lightbox.open(document.querySelector(gallerySelector));
-//     });
-//   }
-// }
