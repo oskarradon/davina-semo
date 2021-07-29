@@ -56,7 +56,8 @@ initZoomSlider();
 function mainObjectToggle() {
   let elements = document.getElementsByClassName("i-1"),
     modelViewer = document.querySelector("model-viewer"),
-    mainObject = document.querySelector("div#main-object");
+    mainObject = document.getElementById("main-object"),
+    aside = document.getElementsByTagName("aside")[0];
 
   if (modelViewer) {
     for (let i = 0; i < elements.length; i++) {
@@ -71,11 +72,15 @@ function mainObjectToggle() {
     for (let i = 0; i < elements.length; i++) {
       if (elements[i].classList.contains("active")) {
         mainObject.classList.add("hide");
-        document.getElementsByTagName("aside")[0].classList.add("hide");
+        if (aside) {
+          aside.classList.add("hide");
+        }
         break;
       } else {
         mainObject.classList.remove("hide");
-        document.getElementsByTagName("aside")[0].classList.remove("hide");
+        if (aside) {
+          aside.classList.add("hide");
+        }
       }
     }
   }
@@ -111,7 +116,7 @@ function expandCollapsibleElements(hash) {
     let anchor = "#" + collapsible.dataset.anchorId;
     if (hash.includes(anchor)) {
       collapsible.classList.toggle("active");
-      mainImageToggle();
+      mainObjectToggle();
     }
   }
 }
@@ -147,3 +152,11 @@ if (
       window.history.back();
     });
 }
+
+// * * * * * * * * * * *
+// VIDEO / AUDIO PLAYER
+// * * * * * * * * * * *
+
+// Implements plyr javascript library: https://github.com/sampotts/plyr
+
+const player = new Plyr("#player");
