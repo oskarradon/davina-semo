@@ -3,5 +3,6 @@ parent: kirby.page("exhibitions")
 headline: Exhibitions
 layout: list
 limit: 9999999
+sortBy: start desc
 info: " {{ page.category }}, {{ page.start.toDate('F j, Y') }}"
 template: exhibition
