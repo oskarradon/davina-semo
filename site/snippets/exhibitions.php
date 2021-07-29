@@ -2,12 +2,14 @@
   // filtered collection of all current exhibitions
   $current = $data
     ->children()
+    ->filterBy('start', '!=', '')
     ->filter(function ($child) {
       return $child->start()->toDate() <= time() && $child->end()->toDate() >= time();
     });
   // filtered collection of all past exhibitions
   $past = $data
     ->children()
+    ->filterBy('start', '!=', '')
     ->filter(function ($child) {
       return $child->start()->toDate() > time() || $child->end()->toDate() < time();
     });
