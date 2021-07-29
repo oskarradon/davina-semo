@@ -10,10 +10,16 @@
     </model-viewer>
   
   <?php elseif($file->type() == 'video') : ?>
-
-    <video playsinline autoplay muted loop id="main-object">
-      <source src="<?= $file->url() ?>" type="<?= $file->mime() ?>">
-    </video>
+    <div id="main-object" class="flex-center">
+      <video id="player" playsinline autoplay muted loop>
+        <source src="<?= $file->url() ?>" type="<?= $file->mime() ?>">
+      </video>
+    </div>
+ 
+  <?php elseif($file->type() == 'audio') :  ?>
+  <div id="main-object" class="flex-center">
+    <audio id="player" controls src="<?= $file->url() ?>" type="<?= $file->mime() ?>"></audio>
+  </div>
 
   <?php else : ?>
     <div id="main-object"><?= $file ?></div>
