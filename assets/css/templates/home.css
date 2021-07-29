@@ -1,6 +1,7 @@
 /* hover behavior */
 
-.i:hover > * {
+.i:hover > *,
+#logo:hover {
   background: var(--yellow);
   cursor: pointer;
   mix-blend-mode: multiply;
@@ -41,7 +42,7 @@ article {
   left: 0;
 }
 
-video#main-object {
+#main-object video {
   object-fit: cover;
 }
 
@@ -88,8 +89,18 @@ aside #slider {
   transition: opacity 350ms ease-in-out;
 }
 
+#main-object.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #exhibitions {
   margin: 5px 30px 0 0;
+}
+
+.plyr__controls {
+  display: none;
 }
 
 /* zoom slider */
