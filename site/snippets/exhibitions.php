@@ -14,9 +14,9 @@
       return $child->start()->toDate() > time() || $child->end()->toDate() < time();
     });
   // filter past collection into categories
-  $solo = $past->filterBy('category', 'Solo exhibition');
-  $group = $past->filterBy('category', 'Group exhibition');
-  $other = $past->filterBy('category', 'Other work');
+  $solo = $past->filterBy('category', 'Solo exhibition')->sortBy('start', 'desc');
+  $group = $past->filterBy('category', 'Group exhibition')->sortBy('start', 'desc');
+  $other = $past->filterBy('category', 'Other work')->sortBy('start', 'desc');
   // only show "currently" section if there are pages that match above criteria
   if($current->isNotEmpty()):
 ?>
