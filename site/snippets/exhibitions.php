@@ -31,11 +31,11 @@
   </section>
 <?php endif ?>
 
-<?php
-  // collection of past exhibitions should never be empty, but just in case
-  if($past->isNotEmpty()):
-?>
   <section id="exhibitions">
+    <?php
+    // collection of past exhibitions should never be empty, but just in case
+    if($past->isNotEmpty()):
+  ?>
     <div class="i i-1 collapsible" data-anchor-id="exhibitions"><h2><?= $data->title() ?></h2></div>
     <div class="content">
       <?php
@@ -65,17 +65,23 @@
             </div>
           <?php endforeach; ?>
         </div>
-        <div class="i i-2 collapsible" data-anchor-id="other"><h2>Other work</h2></div>
+      </div>
+    <?php endif ?>
+    <?php
+    // collection of past exhibitions should never be empty, but just in case
+    if($other->isNotEmpty()):
+  ?>
+  <div class="i i-1 collapsible" data-anchor-id="other"><h2>Other work</h2></div>
+    <div class="content">
+      <?php foreach($other->group($returnYear) as $year => $otherPerYear): ?>
+        <div class="i i-2 collapsible" data-anchor-id="o-<?= $year ?>"><h2><?= $year ?></h2></div>
         <div class="content">
-          <?php foreach($other->group($returnYear) as $year => $otherPerYear): ?>
-            <div class="i i-3 collapsible" data-anchor-id="o-<?= $year ?>"><h2><?= $year ?></h2></div>
-            <div class="content">
-              <?php foreach($otherPerYear as $o) : ?>
-                <?php snippet('article', ['article' => $o]); ?>
-              <?php endforeach; ?>
-            </div>
+          <?php foreach($otherPerYear as $o) : ?>
+            <?php snippet('article', ['article' => $o]); ?>
           <?php endforeach; ?>
         </div>
-      </div>
-  </section>
-<?php endif ?>
+      <?php endforeach; ?>
+    </div>
+  <?php endif ?>
+</section>
+
