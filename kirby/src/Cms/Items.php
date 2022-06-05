@@ -7,16 +7,17 @@ use Exception;
 
 /**
  * A collection of items
+ * @since 3.5.0
  *
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Items extends Collection
 {
-    const ITEM_CLASS = '\Kirby\Cms\Item';
+    public const ITEM_CLASS = '\Kirby\Cms\Item';
 
     /**
      * @var array

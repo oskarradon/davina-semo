@@ -2,6 +2,8 @@
 
 namespace Kirby\Cms;
 
+use Kirby\Form\Form;
+
 /**
  * The Content class handles all fields
  * for content from pages, the site and users
@@ -9,7 +11,7 @@ namespace Kirby\Cms;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Content
@@ -198,7 +200,7 @@ class Content
      * passed key(s)
      *
      * @param string ...$keys
-     * @return self
+     * @return static
      */
     public function not(...$keys)
     {
@@ -227,7 +229,7 @@ class Content
      * Set the parent model
      *
      * @param \Kirby\Cms\Model $parent
-     * @return self
+     * @return $this
      */
     public function setParent(Model $parent)
     {
@@ -252,7 +254,7 @@ class Content
      *
      * @param array|null $content
      * @param bool $overwrite
-     * @return self
+     * @return $this
      */
     public function update(array $content = null, bool $overwrite = false)
     {

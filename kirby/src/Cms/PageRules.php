@@ -14,7 +14,7 @@ use Kirby\Toolkit\Str;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class PageRules
@@ -169,24 +169,10 @@ class PageRules
             return true;
         }
 
-        if ($page->permissions()->changeStatus() !== true) {
-            throw new PermissionException([
-                'key'  => 'page.changeStatus.permission',
-                'data' => [
-                    'slug' => $page->slug()
-                ]
-            ]);
-        }
+        static::publish($page);
 
         if ($position !== null && $position < 0) {
             throw new InvalidArgumentException(['key' => 'page.num.invalid']);
-        }
-
-        if ($page->isDraft() === true && empty($page->errors()) === false) {
-            throw new PermissionException([
-                'key'     => 'page.changeStatus.incomplete',
-                'details' => $page->errors()
-            ]);
         }
 
         return true;
@@ -201,14 +187,7 @@ class PageRules
      */
     public static function changeStatusToUnlisted(Page $page)
     {
-        if ($page->permissions()->changeStatus() !== true) {
-            throw new PermissionException([
-                'key'  => 'page.changeStatus.permission',
-                'data' => [
-                    'slug' => $page->slug()
-                ]
-            ]);
-        }
+        static::publish($page);
 
         return true;
     }
@@ -254,18 +233,18 @@ class PageRules
      */
     public static function changeTitle(Page $page, string $title): bool
     {
-        if (Str::length($title) === 0) {
-            throw new InvalidArgumentException([
-                'key' => 'page.changeTitle.empty',
-            ]);
-        }
-
         if ($page->permissions()->changeTitle() !== true) {
             throw new PermissionException([
                 'key'  => 'page.changeTitle.permission',
                 'data' => [
                     'slug' => $page->slug()
                 ]
+            ]);
+        }
+
+        if (Str::length($title) === 0) {
+            throw new InvalidArgumentException([
+                'key' => 'page.changeTitle.empty',
             ]);
         }
 
@@ -283,9 +262,12 @@ class PageRules
      */
     public static function create(Page $page): bool
     {
-        if (Str::length($page->slug()) < 1) {
-            throw new InvalidArgumentException([
-                'key' => 'page.slug.invalid',
+        if ($page->permissions()->create() !== true) {
+            throw new PermissionException([
+                'key' => 'page.create.permission',
+                'data' => [
+                    'slug' => $page->slug()
+                ]
             ]);
         }
 
@@ -294,15 +276,6 @@ class PageRules
         if ($page->exists() === true) {
             throw new DuplicateException([
                 'key'  => 'page.draft.duplicate',
-                'data' => [
-                    'slug' => $page->slug()
-                ]
-            ]);
-        }
-
-        if ($page->permissions()->create() !== true) {
-            throw new PermissionException([
-                'key' => 'page.create.permission',
                 'data' => [
                     'slug' => $page->slug()
                 ]
@@ -377,6 +350,36 @@ class PageRules
             ]);
         }
 
+        self::validateSlugLength($slug);
+
+        return true;
+    }
+
+    /**
+     * Check if the page can be published
+     * (status change from draft to listed or unlisted)
+     *
+     * @param Page $page
+     * @return bool
+     */
+    public static function publish(Page $page): bool
+    {
+        if ($page->permissions()->changeStatus() !== true) {
+            throw new PermissionException([
+                'key'  => 'page.changeStatus.permission',
+                'data' => [
+                    'slug' => $page->slug()
+                ]
+            ]);
+        }
+
+        if ($page->isDraft() === true && empty($page->errors()) === false) {
+            throw new PermissionException([
+                'key'     => 'page.changeStatus.incomplete',
+                'details' => $page->errors()
+            ]);
+        }
+
         return true;
     }
 
@@ -403,19 +406,27 @@ class PageRules
     }
 
     /**
-     * Ensures that the slug doesn't exceed the maximum length to make
-     * sure that the directory name will be accepted by the filesystem
+     * Ensures that the slug is not empty and doesn't exceed the maximum length
+     * to make sure that the directory name will be accepted by the filesystem
      *
      * @param string $slug New slug to check
      * @return void
-     * @throws \Kirby\Exception\InvalidArgumentException If the slug is too long
+     * @throws \Kirby\Exception\InvalidArgumentException If the slug is empty or too long
      */
     protected static function validateSlugLength(string $slug): void
     {
+        $slugLength = Str::length($slug);
+
+        if ($slugLength === 0) {
+            throw new InvalidArgumentException([
+                'key' => 'page.slug.invalid',
+            ]);
+        }
+
         if ($slugsMaxlength = App::instance()->option('slugs.maxlength', 255)) {
             $maxlength = (int)$slugsMaxlength;
 
-            if (Str::length($slug) > $maxlength) {
+            if ($slugLength > $maxlength) {
                 throw new InvalidArgumentException([
                     'key'  => 'page.slug.maxlength',
                     'data' => [

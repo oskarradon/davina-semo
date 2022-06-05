@@ -12,7 +12,7 @@ use Kirby\Toolkit\Properties;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class ContentTranslation
@@ -163,7 +163,7 @@ class ContentTranslation
 
     /**
      * @param string $code
-     * @return self
+     * @return $this
      */
     protected function setCode(string $code)
     {
@@ -173,7 +173,7 @@ class ContentTranslation
 
     /**
      * @param array|null $content
-     * @return self
+     * @return $this
      */
     protected function setContent(array $content = null)
     {
@@ -183,7 +183,7 @@ class ContentTranslation
 
     /**
      * @param \Kirby\Cms\Model $parent
-     * @return self
+     * @return $this
      */
     protected function setParent(Model $parent)
     {
@@ -193,7 +193,7 @@ class ContentTranslation
 
     /**
      * @param string|null $slug
-     * @return self
+     * @return $this
      */
     protected function setSlug(string $slug = null)
     {
@@ -208,7 +208,7 @@ class ContentTranslation
      */
     public function slug(): ?string
     {
-        return $this->slug = $this->slug ?? ($this->content()['slug'] ?? null);
+        return $this->slug ??= ($this->content()['slug'] ?? null);
     }
 
     /**
@@ -216,7 +216,7 @@ class ContentTranslation
      *
      * @param array|null $data
      * @param bool $overwrite
-     * @return self
+     * @return $this
      */
     public function update(array $data = null, bool $overwrite = false)
     {

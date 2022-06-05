@@ -6,10 +6,12 @@ use Closure;
 use Kirby\Data\Data;
 use Kirby\Exception\LogicException;
 use Kirby\Exception\PermissionException;
+use Kirby\Filesystem\Dir;
+use Kirby\Filesystem\F;
+use Kirby\Form\Form;
 use Kirby\Http\Idn;
-use Kirby\Toolkit\Dir;
-use Kirby\Toolkit\F;
 use Kirby\Toolkit\Str;
+use Throwable;
 
 /**
  * UserActions
@@ -17,7 +19,7 @@ use Kirby\Toolkit\Str;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 trait UserActions
@@ -26,10 +28,12 @@ trait UserActions
      * Changes the user email address
      *
      * @param string $email
-     * @return self
+     * @return static
      */
     public function changeEmail(string $email)
     {
+        $email = trim($email);
+
         return $this->commit('changeEmail', ['user' => $this, 'email' => Idn::decodeEmail($email)], function ($user, $email) {
             $user = $user->clone([
                 'email' => $email
@@ -39,6 +43,9 @@ trait UserActions
                 'email' => $email
             ]);
 
+            // update the users collection
+            $user->kirby()->users()->set($user->id(), $user);
+
             return $user;
         });
     }
@@ -47,7 +54,7 @@ trait UserActions
      * Changes the user language
      *
      * @param string $language
-     * @return self
+     * @return static
      */
     public function changeLanguage(string $language)
     {
@@ -60,6 +67,9 @@ trait UserActions
                 'language' => $language
             ]);
 
+            // update the users collection
+            $user->kirby()->users()->set($user->id(), $user);
+
             return $user;
         });
     }
@@ -68,10 +78,12 @@ trait UserActions
      * Changes the screen name of the user
      *
      * @param string $name
-     * @return self
+     * @return static
      */
     public function changeName(string $name)
     {
+        $name = trim($name);
+
         return $this->commit('changeName', ['user' => $this, 'name' => $name], function ($user, $name) {
             $user = $user->clone([
                 'name' => $name
@@ -81,6 +93,9 @@ trait UserActions
                 'name' => $name
             ]);
 
+            // update the users collection
+            $user->kirby()->users()->set($user->id(), $user);
+
             return $user;
         });
     }
@@ -89,7 +104,7 @@ trait UserActions
      * Changes the user password
      *
      * @param string $password
-     * @return self
+     * @return static
      */
     public function changePassword(string $password)
     {
@@ -100,6 +115,9 @@ trait UserActions
 
             $user->writePassword($password);
 
+            // update the users collection
+            $user->kirby()->users()->set($user->id(), $user);
+
             return $user;
         });
     }
@@ -108,7 +126,7 @@ trait UserActions
      * Changes the user role
      *
      * @param string $role
-     * @return self
+     * @return static
      */
     public function changeRole(string $role)
     {
@@ -120,6 +138,9 @@ trait UserActions
             $user->updateCredentials([
                 'role' => $role
             ]);
+
+            // update the users collection
+            $user->kirby()->users()->set($user->id(), $user);
 
             return $user;
         });
@@ -172,7 +193,7 @@ trait UserActions
      * Creates a new User from the given props and returns a new User object
      *
      * @param array|null $props
-     * @return self
+     * @return static
      */
     public static function create(array $props = null)
     {
@@ -232,14 +253,21 @@ trait UserActions
     public function createId(): string
     {
         $length = 8;
-        $id     = Str::random($length);
 
-        while ($this->kirby()->users()->has($id)) {
-            $length++;
-            $id = Str::random($length);
-        }
+        do {
+            try {
+                $id = Str::random($length);
+                if (UserRules::validId($this, $id) === true) {
+                    return $id;
+                }
 
-        return $id;
+                // we can't really test for a random match
+                // @codeCoverageIgnoreStart
+            } catch (Throwable $e) {
+                $length++;
+            }
+        } while (true);
+        // @codeCoverageIgnoreEnd
     }
 
     /**
@@ -304,7 +332,7 @@ trait UserActions
      * @param array|null $input
      * @param string|null $languageCode
      * @param bool $validate
-     * @return self
+     * @return static
      */
     public function update(array $input = null, string $languageCode = null, bool $validate = false)
     {
@@ -314,6 +342,9 @@ trait UserActions
         if ($user->isLoggedIn() === true) {
             $this->kirby()->auth()->setUser($user);
         }
+
+        // update the users collection
+        $user->kirby()->users()->set($user->id(), $user);
 
         return $user;
     }
@@ -327,6 +358,11 @@ trait UserActions
      */
     protected function updateCredentials(array $credentials): bool
     {
+        // normalize the email address
+        if (isset($credentials['email']) === true) {
+            $credentials['email'] = Str::lower(trim($credentials['email']));
+        }
+
         return $this->writeCredentials(array_merge($this->credentials(), $credentials));
     }
 

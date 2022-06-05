@@ -11,7 +11,7 @@ use Kirby\Exception\Exception;
  * @package   Kirby Toolkit
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
 class Pagination
@@ -66,7 +66,7 @@ class Pagination
      *
      * @param \Kirby\Toolkit\Collection $collection
      * @param mixed ...$arguments
-     * @return self
+     * @return static
      */
     public static function for(Collection $collection, ...$arguments)
     {
@@ -75,7 +75,12 @@ class Pagination
 
         $params = [];
 
-        if (is_array($a) === true) {
+        if (is_a($a, static::class) === true) {
+            /**
+             * First argument is a pagination/self object
+             */
+            return $a;
+        } elseif (is_array($a) === true) {
 
             /**
              * First argument is an option array
@@ -380,7 +385,7 @@ class Pagination
      * and validates that the properties match
      *
      * @param array $props Array with keys limit, total and/or page
-     * @return self
+     * @return $this
      */
     protected function setProperties(array $props)
     {
@@ -417,7 +422,7 @@ class Pagination
      * Sets the number of items per page
      *
      * @param int $limit
-     * @return self
+     * @return $this
      */
     protected function setLimit(int $limit = 20)
     {
@@ -433,7 +438,7 @@ class Pagination
      * Sets the total number of items
      *
      * @param int $total
-     * @return self
+     * @return $this
      */
     protected function setTotal(int $total = 0)
     {
@@ -450,7 +455,7 @@ class Pagination
      *
      * @param int|string|null $page Int or int in string form;
      *                              automatically determined if null
-     * @return self
+     * @return $this
      */
     protected function setPage($page = null)
     {

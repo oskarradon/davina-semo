@@ -4,7 +4,7 @@ namespace Kirby\Cms;
 
 use Exception;
 use Kirby\Data\Data;
-use Kirby\Toolkit\F;
+use Kirby\Filesystem\F;
 use Kirby\Toolkit\I18n;
 
 /**
@@ -14,7 +14,7 @@ use Kirby\Toolkit\I18n;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Role extends Model
@@ -49,7 +49,7 @@ class Role extends Model
 
     /**
      * @param array $inject
-     * @return self
+     * @return static
      */
     public static function admin(array $inject = [])
     {
@@ -92,7 +92,7 @@ class Role extends Model
     /**
      * @param array $props
      * @param array $inject
-     * @return self
+     * @return static
      */
     public static function factory(array $props, array $inject = [])
     {
@@ -126,7 +126,7 @@ class Role extends Model
     /**
      * @param string $file
      * @param array $inject
-     * @return self
+     * @return static
      */
     public static function load(string $file, array $inject = [])
     {
@@ -146,7 +146,7 @@ class Role extends Model
 
     /**
      * @param array $inject
-     * @return self
+     * @return static
      */
     public static function nobody(array $inject = [])
     {
@@ -166,8 +166,8 @@ class Role extends Model
     }
 
     /**
-     * @param [type] $description
-     * @return self
+     * @param mixed $description
+     * @return $this
      */
     protected function setDescription($description = null)
     {
@@ -177,7 +177,7 @@ class Role extends Model
 
     /**
      * @param string $name
-     * @return self
+     * @return $this
      */
     protected function setName(string $name)
     {
@@ -186,8 +186,8 @@ class Role extends Model
     }
 
     /**
-     * @param [type] $permissions
-     * @return self
+     * @param mixed $permissions
+     * @return $this
      */
     protected function setPermissions($permissions = null)
     {
@@ -196,8 +196,8 @@ class Role extends Model
     }
 
     /**
-     * @param [type] $title
-     * @return self
+     * @param mixed $title
+     * @return $this
      */
     protected function setTitle($title = null)
     {
@@ -210,7 +210,7 @@ class Role extends Model
      */
     public function title(): string
     {
-        return $this->title = $this->title ?? ucfirst($this->name());
+        return $this->title ??= ucfirst($this->name());
     }
 
     /**

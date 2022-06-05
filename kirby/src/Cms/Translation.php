@@ -8,12 +8,12 @@ use Kirby\Toolkit\Str;
 
 /**
  * Wrapper around Kirby's localization files,
- * which are store in `kirby/translations`.
+ * which are stored in `kirby/translations`.
  *
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Translation
@@ -139,15 +139,17 @@ class Translation
      * @param string $code
      * @param string $root
      * @param array $inject
-     * @return self
+     * @return static
      */
     public static function load(string $code, string $root, array $inject = [])
     {
         try {
-            return new Translation($code, array_merge(Data::read($root), $inject));
+            $data = array_merge(Data::read($root), $inject);
         } catch (Exception $e) {
-            return new Translation($code, []);
+            $data = [];
         }
+
+        return new static($code, $data);
     }
 
     /**

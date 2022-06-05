@@ -16,7 +16,7 @@ use Kirby\Toolkit\Str;
  * @package   Kirby Api
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Model
@@ -84,7 +84,7 @@ class Model
 
     /**
      * @param null $keys
-     * @return self
+     * @return $this
      * @throws \Exception
      */
     public function select($keys = null)
@@ -225,7 +225,7 @@ class Model
 
     /**
      * @param string $name
-     * @return self
+     * @return $this
      * @throws \Exception
      */
     public function view(string $name)

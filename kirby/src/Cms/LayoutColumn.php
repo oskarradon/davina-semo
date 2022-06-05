@@ -7,16 +7,19 @@ use Kirby\Toolkit\Str;
 /**
  * Represents a single layout column with
  * multiple blocks
+ * @since 3.5.0
  *
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class LayoutColumn extends Item
 {
-    const ITEMS_CLASS = '\Kirby\Cms\LayoutColumns';
+    use HasMethods;
+
+    public const ITEMS_CLASS = '\Kirby\Cms\LayoutColumns';
 
     /**
      * @var \Kirby\Cms\Blocks
@@ -45,17 +48,38 @@ class LayoutColumn extends Item
     }
 
     /**
+     * Magic getter function
+     *
+     * @param string $method
+     * @param mixed $args
+     * @return mixed
+     */
+    public function __call(string $method, $args)
+    {
+        // layout column methods
+        if ($this->hasMethod($method) === true) {
+            return $this->callMethod($method, $args);
+        }
+    }
+
+    /**
      * Returns the blocks collection
      *
+     * @param bool $includeHidden Sets whether to include hidden blocks
      * @return \Kirby\Cms\Blocks
      */
-    public function blocks()
+    public function blocks(bool $includeHidden = false)
     {
+        if ($includeHidden === false) {
+            return $this->blocks->filter('isHidden', false);
+        }
+
         return $this->blocks;
     }
 
     /**
      * Checks if the column is empty
+     * @since 3.5.2
      *
      * @return bool
      */
@@ -69,6 +93,7 @@ class LayoutColumn extends Item
 
     /**
      * Checks if the column is not empty
+     * @since 3.5.2
      *
      * @return bool
      */
@@ -101,7 +126,7 @@ class LayoutColumn extends Item
     public function toArray(): array
     {
         return [
-            'blocks' => $this->blocks()->toArray(),
+            'blocks' => $this->blocks(true)->toArray(),
             'id'     => $this->id(),
             'width'  => $this->width(),
         ];

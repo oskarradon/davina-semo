@@ -13,7 +13,7 @@ namespace Kirby\Cms;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Roles extends Collection
@@ -23,7 +23,7 @@ class Roles extends Collection
      * roles that can be created by the
      * current user
      *
-     * @return self
+     * @return $this|static
      * @throws \Exception
      */
     public function canBeChanged()
@@ -47,7 +47,7 @@ class Roles extends Collection
      * roles that can be created by the
      * current user
      *
-     * @return self
+     * @return $this|static
      * @throws \Exception
      */
     public function canBeCreated()
@@ -69,7 +69,7 @@ class Roles extends Collection
     /**
      * @param array $roles
      * @param array $inject
-     * @return self
+     * @return static
      */
     public static function factory(array $roles, array $inject = [])
     {
@@ -93,16 +93,22 @@ class Roles extends Collection
     /**
      * @param string|null $root
      * @param array $inject
-     * @return self
+     * @return static
      */
     public static function load(string $root = null, array $inject = [])
     {
+        $kirby = App::instance();
         $roles = new static();
 
         // load roles from plugins
-        foreach (App::instance()->extensions('blueprints') as $blueprintName => $blueprint) {
+        foreach ($kirby->extensions('blueprints') as $blueprintName => $blueprint) {
             if (substr($blueprintName, 0, 6) !== 'users/') {
                 continue;
+            }
+
+            // callback option can be return array or blueprint file path
+            if (is_callable($blueprint) === true) {
+                $blueprint = $blueprint($kirby);
             }
 
             if (is_array($blueprint) === true) {

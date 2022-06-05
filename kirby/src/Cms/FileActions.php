@@ -5,8 +5,8 @@ namespace Kirby\Cms;
 use Closure;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\LogicException;
-use Kirby\Image\Image;
-use Kirby\Toolkit\F;
+use Kirby\Filesystem\F;
+use Kirby\Form\Form;
 
 /**
  * FileActions
@@ -14,7 +14,7 @@ use Kirby\Toolkit\F;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 trait FileActions
@@ -25,7 +25,7 @@ trait FileActions
      *
      * @param string $name
      * @param bool $sanitize
-     * @return self
+     * @return $this|static
      * @throws \Kirby\Exception\LogicException
      */
     public function changeName(string $name, bool $sanitize = true)
@@ -75,6 +75,8 @@ trait FileActions
                 F::move($oldFile->contentFile(), $newFile->contentFile());
             }
 
+            $newFile->parent()->files()->remove($oldFile->id());
+            $newFile->parent()->files()->set($newFile->id(), $newFile);
 
             return $newFile;
         });
@@ -84,13 +86,15 @@ trait FileActions
      * Changes the file's sorting number in the meta file
      *
      * @param int $sort
-     * @return self
+     * @return static
      */
     public function changeSort(int $sort)
     {
-        return $this->commit('changeSort', ['file' => $this, 'position' => $sort], function ($file, $sort) {
-            return $file->save(['sort' => $sort]);
-        });
+        return $this->commit(
+            'changeSort',
+            ['file' => $this, 'position' => $sort],
+            fn ($file, $sort) => $file->save(['sort' => $sort])
+        );
     }
 
     /**
@@ -161,7 +165,7 @@ trait FileActions
      * way of generating files.
      *
      * @param array $props
-     * @return self
+     * @return static
      * @throws \Kirby\Exception\InvalidArgumentException
      * @throws \Kirby\Exception\LogicException
      */
@@ -178,7 +182,7 @@ trait FileActions
 
         // create the basic file and a test upload object
         $file = static::factory($props);
-        $upload = new Image($props['source']);
+        $upload = $file->asset($props['source']);
 
         // create a form for the file
         $form = Form::for($file, [
@@ -256,7 +260,7 @@ trait FileActions
      * Move the file to the public media folder
      * if it's not already there.
      *
-     * @return self
+     * @return $this
      */
     public function publish()
     {
@@ -272,12 +276,19 @@ trait FileActions
      * source.
      *
      * @param string $source
-     * @return self
+     * @return static
      * @throws \Kirby\Exception\LogicException
      */
     public function replace(string $source)
     {
-        return $this->commit('replace', ['file' => $this, 'upload' => new Image($source)], function ($file, $upload) {
+        $file = $this->clone();
+
+        $arguments = [
+            'file' => $file,
+            'upload' => $file->asset($source)
+        ];
+
+        return $this->commit('replace', $arguments, function ($file, $upload) {
 
             // delete all public versions
             $file->unpublish();
@@ -295,7 +306,7 @@ trait FileActions
     /**
      * Remove all public versions of this file
      *
-     * @return self
+     * @return $this
      */
     public function unpublish()
     {

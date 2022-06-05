@@ -12,7 +12,7 @@ use Kirby\Exception\InvalidArgumentException;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Permissions
@@ -27,10 +27,12 @@ class Permissions
      */
     protected $actions = [
         'access' => [
-            'panel'    => true,
-            'settings' => true,
-            'site'     => true,
-            'users'    => true,
+            'account'   => true,
+            'languages' => true,
+            'panel'     => true,
+            'site'      => true,
+            'system'    => true,
+            'users'     => true,
         ],
         'files' => [
             'changeName' => true,
@@ -153,10 +155,16 @@ class Permissions
      * @param string $category
      * @param string $action
      * @param $setting
-     * @return self
+     * @return $this
      */
     protected function setAction(string $category, string $action, $setting)
     {
+        // deprecated fallback for the settings/system view
+        // TODO: remove in 3.7
+        if ($category === 'access' && $action === 'settings') {
+            $action = 'system';
+        }
+
         // wildcard to overwrite the entire category
         if ($action === '*') {
             return $this->setCategory($category, $setting);
@@ -169,7 +177,7 @@ class Permissions
 
     /**
      * @param bool $setting
-     * @return self
+     * @return $this
      */
     protected function setAll(bool $setting)
     {
@@ -182,7 +190,7 @@ class Permissions
 
     /**
      * @param array $settings
-     * @return self
+     * @return $this
      */
     protected function setCategories(array $settings)
     {
@@ -204,7 +212,7 @@ class Permissions
     /**
      * @param string $category
      * @param bool $setting
-     * @return self
+     * @return $this
      * @throws \Kirby\Exception\InvalidArgumentException
      */
     protected function setCategory(string $category, bool $setting)

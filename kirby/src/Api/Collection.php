@@ -14,7 +14,7 @@ use Kirby\Toolkit\Str;
  * @package   Kirby Api
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Collection
@@ -77,7 +77,7 @@ class Collection
 
     /**
      * @param string|array|null $keys
-     * @return self
+     * @return $this
      * @throws \Exception
      */
     public function select($keys = null)
@@ -168,7 +168,7 @@ class Collection
 
     /**
      * @param string $view
-     * @return self
+     * @return $this
      */
     public function view(string $view)
     {

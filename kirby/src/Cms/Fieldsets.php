@@ -3,21 +3,23 @@
 namespace Kirby\Cms;
 
 use Closure;
+use Kirby\Toolkit\A;
 use Kirby\Toolkit\I18n;
 use Kirby\Toolkit\Str;
 
 /**
  * A collection of fieldsets
+ * @since 3.5.0
  *
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Fieldsets extends Items
 {
-    const ITEM_CLASS = '\Kirby\Cms\Fieldset';
+    public const ITEM_CLASS = '\Kirby\Cms\Fieldset';
 
     protected static function createFieldsets($params)
     {
@@ -41,7 +43,7 @@ class Fieldsets extends Items
             $fieldset = Blueprint::extend($fieldset);
 
             // make sure the type is always set
-            $fieldset['type'] = $fieldset['type'] ?? $type;
+            $fieldset['type'] ??= $type;
 
             // extract groups
             if ($fieldset['type'] === 'group') {
@@ -68,11 +70,12 @@ class Fieldsets extends Items
 
     public static function factory(array $items = null, array $params = [])
     {
-        $items = $items ?? option('blocks.fieldsets', [
+        $items ??= option('blocks.fieldsets', [
             'code'     => 'blocks/code',
             'gallery'  => 'blocks/gallery',
             'heading'  => 'blocks/heading',
             'image'    => 'blocks/image',
+            'line'     => 'blocks/line',
             'list'     => 'blocks/list',
             'markdown' => 'blocks/markdown',
             'quote'    => 'blocks/quote',
@@ -92,8 +95,9 @@ class Fieldsets extends Items
 
     public function toArray(?Closure $map = null): array
     {
-        return array_map($map ?? function ($fieldset) {
-            return $fieldset->toArray();
-        }, $this->data);
+        return A::map(
+            $this->data,
+            $map ?? fn ($fieldset) => $fieldset->toArray()
+        );
     }
 }

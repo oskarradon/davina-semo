@@ -2,6 +2,17 @@
 
 namespace Kirby\Cms;
 
+/**
+ * Converts the data from the old builder and editor fields
+ * to the format supported by the new block field.
+ * @since 3.5.0
+ *
+ * @package   Kirby Cms
+ * @author    Bastian Allgeier <bastian@getkirby.com>
+ * @link      https://getkirby.com
+ * @copyright Bastian Allgeier
+ * @license   https://getkirby.com/license
+ */
 class BlockConverter
 {
     public static function builderBlock(array $params): array
@@ -156,6 +167,14 @@ class BlockConverter
         return static::editorHeading($params, 'h6');
     }
 
+    public static function editorHr(array $params): array
+    {
+        return [
+            'content' => [],
+            'type'    => 'line'
+        ];
+    }
+
     public static function editorHeading(array $params, string $level): array
     {
         return [
@@ -219,7 +238,7 @@ class BlockConverter
     {
         return [
             'content' => [
-                'text' => $params['content']
+                'text' => '<p>' . $params['content'] . '</p>'
             ],
             'type' => 'text'
         ];

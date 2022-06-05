@@ -10,18 +10,19 @@ namespace Kirby\Cms;
  * - a Block in a collection of Blocks
  * - a Layout in a collection of Layouts
  * - a Column in a collection of Columns
+ * @since 3.5.0
  *
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Item
 {
-    const ITEMS_CLASS = '\Kirby\Cms\Items';
-
     use HasSiblings;
+
+    public const ITEMS_CLASS = '\Kirby\Cms\Items';
 
     /**
      * @var string

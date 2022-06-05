@@ -3,21 +3,24 @@
 namespace Kirby\Cms;
 
 use Kirby\Data\Data;
-use Kirby\Email\PHPMailer as Emailer;
 use Kirby\Exception\ErrorPageException;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\LogicException;
 use Kirby\Exception\NotFoundException;
+use Kirby\Filesystem\Dir;
+use Kirby\Filesystem\F;
 use Kirby\Http\Request;
+use Kirby\Http\Response;
 use Kirby\Http\Router;
 use Kirby\Http\Server;
+use Kirby\Http\Uri;
 use Kirby\Http\Visitor;
 use Kirby\Session\AutoSession;
+use Kirby\Text\KirbyTag;
+use Kirby\Text\KirbyTags;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Config;
 use Kirby\Toolkit\Controller;
-use Kirby\Toolkit\Dir;
-use Kirby\Toolkit\F;
 use Kirby\Toolkit\Properties;
 use Throwable;
 
@@ -31,19 +34,19 @@ use Throwable;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class App
 {
-    const CLASS_ALIAS = 'kirby';
-
     use AppCaches;
     use AppErrors;
     use AppPlugins;
     use AppTranslations;
     use AppUsers;
     use Properties;
+
+    public const CLASS_ALIAS = 'kirby';
 
     protected static $instance;
     protected static $version;
@@ -52,7 +55,9 @@ class App
 
     protected $api;
     protected $collections;
+    protected $core;
     protected $defaultLanguage;
+    protected $environment;
     protected $language;
     protected $languages;
     protected $locks;
@@ -83,15 +88,22 @@ class App
      */
     public function __construct(array $props = [], bool $setInstance = true)
     {
+        $this->core = new Core($this);
+
         // register all roots to be able to load stuff afterwards
         $this->bakeRoots($props['roots'] ?? []);
 
-        // stuff from config and additional options
-        $this->optionsFromConfig();
-        $this->optionsFromProps($props['options'] ?? []);
-
-        // register the Whoops error handler
-        $this->handleErrors();
+        try {
+            // stuff from config and additional options
+            $this->optionsFromConfig();
+            $this->optionsFromProps($props['options'] ?? []);
+            $this->optionsFromEnvironment();
+        } finally {
+            // register the Whoops error handler inside of a
+            // try-finally block to ensure it's still registered
+            // even if there is a problem loading the configurations
+            $this->handleErrors();
+        }
 
         // set the path to make it available for the url bakery
         $this->setPath($props['path'] ?? null);
@@ -224,7 +236,7 @@ class App
     /**
      * Normalizes and globally sets the configured options
      *
-     * @return self
+     * @return $this
      */
     protected function bakeOptions()
     {
@@ -260,11 +272,11 @@ class App
      * Sets the directory structure
      *
      * @param array|null $roots
-     * @return self
+     * @return $this
      */
     protected function bakeRoots(array $roots = null)
     {
-        $roots = array_merge(require dirname(__DIR__, 2) . '/config/roots.php', (array)$roots);
+        $roots = array_merge($this->core->roots(), (array)$roots);
         $this->roots = Ingredients::bake($roots);
         return $this;
     }
@@ -273,16 +285,11 @@ class App
      * Sets the Url structure
      *
      * @param array|null $urls
-     * @return self
+     * @return $this
      */
     protected function bakeUrls(array $urls = null)
     {
-        // inject the index URL from the config
-        if (isset($this->options['url']) === true) {
-            $urls['index'] = $this->options['url'];
-        }
-
-        $urls = array_merge(require $this->root('kirby') . '/config/urls.php', (array)$urls);
+        $urls = array_merge($this->core->urls(), (array)$urls);
         $this->urls = Ingredients::bake($urls);
         return $this;
     }
@@ -325,6 +332,10 @@ class App
     {
         $router = $this->router();
 
+        /**
+         * @todo Closures should not defined statically but
+         * for each instance to avoid this constant setting and unsetting
+         */
         $router::$beforeEach = function ($route, $path, $method) {
             $this->trigger('route:before', compact('route', 'path', 'method'));
         };
@@ -333,7 +344,12 @@ class App
             return $this->apply('route:after', compact('route', 'path', 'method', 'result', 'final'), 'result');
         };
 
-        return $router->call($path ?? $this->path(), $method ?? $this->request()->method());
+        $result = $router->call($path ?? $this->path(), $method ?? $this->request()->method());
+
+        $router::$beforeEach = null;
+        $router::$afterEach  = null;
+
+        return $result;
     }
 
     /**
@@ -342,7 +358,7 @@ class App
      *
      * @param array $props
      * @param bool $setInstance If false, the instance won't be set globally
-     * @return self
+     * @return static
      */
     public function clone(array $props = [], bool $setInstance = true)
     {
@@ -503,6 +519,17 @@ class App
     }
 
     /**
+     * Get access to object that lists
+     * all parts of Kirby core
+     *
+     * @return \Kirby\Cms\Core
+     */
+    public function core()
+    {
+        return $this->core;
+    }
+
+    /**
      * Returns the default language object
      *
      * @return \Kirby\Cms\Language|null
@@ -554,11 +581,25 @@ class App
      *
      * @param mixed $preset
      * @param array $props
-     * @return \Kirby\Email\PHPMailer
+     * @return \Kirby\Email\Email
      */
     public function email($preset = [], array $props = [])
     {
-        return new Emailer((new Email($preset, $props))->toArray(), $props['debug'] ?? false);
+        $debug = $props['debug'] ?? false;
+        $props = (new Email($preset, $props))->toArray();
+
+        return ($this->component('email'))($this, $props, $debug);
+    }
+
+    /**
+     * Returns the environment object with access
+     * to the detected host, base url and dedicated options
+     *
+     * @return \Kirby\Cms\Environment
+     */
+    public function environment()
+    {
+        return $this->environment;
     }
 
     /**
@@ -609,7 +650,7 @@ class App
      *
      * @param \Kirby\Cms\App|null $instance
      * @param bool $lazy If `true`, the instance is only returned if already existing
-     * @return self|null
+     * @return static|null
      */
     public static function instance(self $instance = null, bool $lazy = false)
     {
@@ -640,12 +681,11 @@ class App
         // any direct exception will be turned into an error page
         if (is_a($input, 'Throwable') === true) {
             if (is_a($input, 'Kirby\Exception\Exception') === true) {
-                $code    = $input->getHttpCode();
-                $message = $input->getMessage();
+                $code = $input->getHttpCode();
             } else {
-                $code    = $input->getCode();
-                $message = $input->getMessage();
+                $code = $input->getCode();
             }
+            $message = $input->getMessage();
 
             if ($code < 400 || $code > 599) {
                 $code = 500;
@@ -670,14 +710,25 @@ class App
             return $this->io(new NotFoundException());
         }
 
-        // Response Configuration
+        // (Modified) global response configuration, e.g. in routes
         if (is_a($input, 'Kirby\Cms\Responder') === true) {
+            // return the passed object unmodified (without injecting headers
+            // from the global object) to allow a complete response override
+            // https://github.com/getkirby/kirby/pull/4144#issuecomment-1034766726
             return $input->send();
         }
 
         // Responses
         if (is_a($input, 'Kirby\Http\Response') === true) {
-            return $input;
+            $data = $input->toArray();
+
+            // inject headers from the global response configuration
+            // lazily (only if they are not already set);
+            // the case-insensitive nature of headers will be
+            // handled by PHP's `header()` function
+            $data['headers'] = array_merge($response->headers(), $data['headers']);
+
+            return new Response($data);
         }
 
         // Pages
@@ -744,11 +795,17 @@ class App
      */
     public function kirbytags(string $text = null, array $data = []): string
     {
-        $data['kirby']  = $data['kirby']  ?? $this;
-        $data['site']   = $data['site']   ?? $data['kirby']->site();
-        $data['parent'] = $data['parent'] ?? $data['site']->page();
+        $data['kirby']  ??= $this;
+        $data['site']   ??= $data['kirby']->site();
+        $data['parent'] ??= $data['site']->page();
 
-        return KirbyTags::parse($text, $data, $this->options, $this);
+        $options = $this->options;
+
+        $text = $this->apply('kirbytags:before', compact('text', 'data', 'options'), 'text');
+        $text = KirbyTags::parse($text, $data, $options);
+        $text = $this->apply('kirbytags:after', compact('text', 'data', 'options'), 'text');
+
+        return $text;
     }
 
     /**
@@ -757,14 +814,23 @@ class App
      * @internal
      * @param string|null $text
      * @param array $data
-     * @param bool $inline
+     * @param bool $inline (deprecated: use $data['markdown']['inline'] instead)
      * @return string
+     * @todo add deprecation warning for $inline parameter in 3.7.0
+     * @todo rename $data parameter to $options in 3.7.0
+     * @todo remove $inline parameter in in 3.8.0
      */
     public function kirbytext(string $text = null, array $data = [], bool $inline = false): string
     {
+        $options = A::merge([
+            'markdown' => [
+                'inline' => $inline
+            ]
+        ], $data);
+
         $text = $this->apply('kirbytext:before', compact('text'), 'text');
-        $text = $this->kirbytags($text, $data);
-        $text = $this->markdown($text, $inline);
+        $text = $this->kirbytags($text, $options);
+        $text = $this->markdown($text, $options['markdown']);
 
         if ($this->option('smartypants', false) !== false) {
             $text = $this->smartypants($text);
@@ -817,15 +883,26 @@ class App
     /**
      * Returns all available site languages
      *
+     * @param bool
      * @return \Kirby\Cms\Languages
      */
-    public function languages()
+    public function languages(bool $clone = true)
     {
         if ($this->languages !== null) {
-            return clone $this->languages;
+            return $clone === true ? clone $this->languages : $this->languages;
         }
 
         return $this->languages = Languages::load();
+    }
+
+    /**
+     * Access Kirby's part loader
+     *
+     * @return \Kirby\Cms\Loader
+     */
+    public function load()
+    {
+        return new Loader($this);
     }
 
     /**
@@ -847,12 +924,34 @@ class App
      *
      * @internal
      * @param string|null $text
-     * @param bool $inline
+     * @param bool|array $options
      * @return string
+     * @todo rename $inline parameter to $options in 3.7.0
+     * @todo add deprecation warning for boolean $options in 3.7.0
+     * @todo remove boolean $options in in 3.8.0
      */
-    public function markdown(string $text = null, bool $inline = false): string
+    public function markdown(string $text = null, $inline = null): string
     {
-        return ($this->component('markdown'))($this, $text, $this->options['markdown'] ?? [], $inline);
+        // TODO: remove after renaming parameter
+        $options = $inline;
+
+        // support for the old syntax to enable inline mode as second argument
+        if (is_bool($options) === true) {
+            $options = [
+                'inline' => $options
+            ];
+        }
+
+        // merge global options with local options
+        $options = array_merge(
+            $this->options['markdown'] ?? [],
+            (array)$options
+        );
+
+        // TODO: deprecate passing the $inline parameter in 3.7.0
+        // TODO: remove passing the $inline parameter in 3.8.0
+        $inline = $options['inline'] ?? false;
+        return ($this->component('markdown'))($this, $text, $options, $inline);
     }
 
     /**
@@ -910,18 +1009,30 @@ class App
      */
     protected function optionsFromConfig(): array
     {
-        $server = $this->server();
-        $root   = $this->root('config');
-
+        // create an empty config container
         Config::$data = [];
 
-        $main   = F::load($root . '/config.php', []);
-        $host   = F::load($root . '/config.' . basename($server->host()) . '.php', []);
-        $addr   = F::load($root . '/config.' . basename($server->address()) . '.php', []);
+        // load the main config options
+        $root    = $this->root('config');
+        $options = F::load($root . '/config.php', []);
 
-        $config = Config::$data;
+        // merge into one clean options array
+        return $this->options = array_replace_recursive(Config::$data, $options);
+    }
 
-        return $this->options = array_replace_recursive($config, $main, $host, $addr);
+    /**
+     * Load all options for the current
+     * server environment
+     *
+     * @return array
+     */
+    protected function optionsFromEnvironment(): array
+    {
+        // create the environment based on the URL setup
+        $this->environment = new Environment($this->root('config'), $this->options['url'] ?? null);
+
+        // merge into one clean options array
+        return $this->options = array_replace_recursive($this->options, $this->environment->options());
     }
 
     /**
@@ -932,7 +1043,10 @@ class App
      */
     protected function optionsFromProps(array $options = []): array
     {
-        return $this->options = array_replace_recursive($this->options, $options);
+        return $this->options = array_replace_recursive(
+            $this->options,
+            $options
+        );
     }
 
     /**
@@ -995,6 +1109,10 @@ class App
         $parent = $parent ?? $this->site();
 
         if ($page = $parent->find($id)) {
+            /**
+             * We passed a single $id, we can be sure that the result is
+             * @var \Kirby\Cms\Page $page
+             */
             return $page;
         }
 
@@ -1212,7 +1330,7 @@ class App
         }
 
         $registry = $this->extensions('routes');
-        $system   = (include $this->root('kirby') . '/config/routes.php')($this);
+        $system   = $this->core->routes();
         $routes   = array_merge($system['before'], $registry, $system['after']);
 
         return $this->routes = $routes;
@@ -1226,6 +1344,10 @@ class App
      */
     public function session(array $options = [])
     {
+        // never cache responses that depend on the session
+        $this->response()->cache(false);
+        $this->response()->header('Cache-Control', 'no-store', true);
+
         return $this->sessionHandler()->get($options);
     }
 
@@ -1244,7 +1366,7 @@ class App
      * Create your own set of languages
      *
      * @param array|null $languages
-     * @return self
+     * @return $this
      */
     protected function setLanguages(array $languages = null)
     {
@@ -1266,7 +1388,7 @@ class App
      * used for the router
      *
      * @param string|null $path
-     * @return self
+     * @return $this
      */
     protected function setPath(string $path = null)
     {
@@ -1278,7 +1400,7 @@ class App
      * Sets the request
      *
      * @param array|null $request
-     * @return self
+     * @return $this
      */
     protected function setRequest(array $request = null)
     {
@@ -1293,7 +1415,7 @@ class App
      * Create your own set of roles
      *
      * @param array|null $roles
-     * @return self
+     * @return $this
      */
     protected function setRoles(array $roles = null)
     {
@@ -1310,7 +1432,7 @@ class App
      * Sets a custom Site object
      *
      * @param \Kirby\Cms\Site|array|null $site
-     * @return self
+     * @return $this
      */
     protected function setSite($site = null)
     {
@@ -1331,7 +1453,7 @@ class App
      */
     public function server()
     {
-        return $this->server = $this->server ?? new Server();
+        return $this->server ??= new Server();
     }
 
     /**
@@ -1479,11 +1601,26 @@ class App
      * Returns a system url
      *
      * @param string $type
-     * @return string
+     * @param bool $object If set to `true`, the URL is converted to an object
+     * @return string|\Kirby\Http\Uri
      */
-    public function url(string $type = 'index'): string
+    public function url(string $type = 'index', bool $object = false)
     {
-        return $this->urls->__get($type);
+        $url = $this->urls->__get($type);
+
+        if ($object === true) {
+            if (Url::isAbsolute($url)) {
+                return Url::toObject($url);
+            }
+
+            // index URL was configured without host, use the current host
+            return Uri::current([
+                'path'   => $url,
+                'query'  => null
+            ]);
+        }
+
+        return $url;
     }
 
     /**

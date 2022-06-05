@@ -7,9 +7,9 @@ namespace Composer\Autoload;
 class ComposerStaticInit4be00075b8cd7166490fab947ec893a9
 {
     public static $files = array (
-        '7e9bd612cc444b3eed788ebbe46263a0' => __DIR__ . '/..' . '/laminas/laminas-zendframework-bridge/src/autoload.php',
+        'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
+        'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '04c6c5c2f7095ccf6c481d3e53e1776f' => __DIR__ . '/..' . '/mustangostang/spyc/Spyc.php',
         'f864ae44e8154e5ff6f4eec32f46d37f' => __DIR__ . '/../..' . '/kirby/config/setup.php',
         '87988fc7b1c1f093da22a1a3de972f3a' => __DIR__ . '/../..' . '/kirby/config/helpers.php',
     );
@@ -19,13 +19,11 @@ class ComposerStaticInit4be00075b8cd7166490fab947ec893a9
         array (
             'Whoops\\' => 7,
         ),
-        'T' => 
-        array (
-            'TrueBV\\' => 7,
-        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Polyfill\\Intl\\Normalizer\\' => 33,
+            'Symfony\\Polyfill\\Intl\\Idn\\' => 26,
         ),
         'P' => 
         array (
@@ -34,7 +32,6 @@ class ComposerStaticInit4be00075b8cd7166490fab947ec893a9
         ),
         'L' => 
         array (
-            'Laminas\\ZendFrameworkBridge\\' => 28,
             'Laminas\\Escaper\\' => 16,
         ),
         'K' => 
@@ -48,13 +45,17 @@ class ComposerStaticInit4be00075b8cd7166490fab947ec893a9
         array (
             0 => __DIR__ . '/..' . '/filp/whoops/src/Whoops',
         ),
-        'TrueBV\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/true/punycode/src',
-        ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Symfony\\Polyfill\\Intl\\Normalizer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer',
+        ),
+        'Symfony\\Polyfill\\Intl\\Idn\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-intl-idn',
         ),
         'Psr\\Log\\' => 
         array (
@@ -64,18 +65,14 @@ class ComposerStaticInit4be00075b8cd7166490fab947ec893a9
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
-        'Laminas\\ZendFrameworkBridge\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/laminas/laminas-zendframework-bridge/src',
-        ),
         'Laminas\\Escaper\\' => 
         array (
             0 => __DIR__ . '/..' . '/laminas/laminas-escaper/src',
         ),
         'Kirby\\' => 
         array (
-            0 => __DIR__ . '/..' . '/getkirby/composer-installer/src',
-            1 => __DIR__ . '/../..' . '/kirby/src',
+            0 => __DIR__ . '/../..' . '/kirby/src',
+            1 => __DIR__ . '/..' . '/getkirby/composer-installer/src',
         ),
     );
 
@@ -119,7 +116,6 @@ class ComposerStaticInit4be00075b8cd7166490fab947ec893a9
         'Kirby\\Cms\\AppPlugins' => __DIR__ . '/../..' . '/kirby/src/Cms/AppPlugins.php',
         'Kirby\\Cms\\AppTranslations' => __DIR__ . '/../..' . '/kirby/src/Cms/AppTranslations.php',
         'Kirby\\Cms\\AppUsers' => __DIR__ . '/../..' . '/kirby/src/Cms/AppUsers.php',
-        'Kirby\\Cms\\Asset' => __DIR__ . '/../..' . '/kirby/src/Cms/Asset.php',
         'Kirby\\Cms\\Auth' => __DIR__ . '/../..' . '/kirby/src/Cms/Auth.php',
         'Kirby\\Cms\\Auth\\Challenge' => __DIR__ . '/../..' . '/kirby/src/Cms/Auth/Challenge.php',
         'Kirby\\Cms\\Auth\\EmailChallenge' => __DIR__ . '/../..' . '/kirby/src/Cms/Auth/EmailChallenge.php',
@@ -134,8 +130,9 @@ class ComposerStaticInit4be00075b8cd7166490fab947ec893a9
         'Kirby\\Cms\\ContentLock' => __DIR__ . '/../..' . '/kirby/src/Cms/ContentLock.php',
         'Kirby\\Cms\\ContentLocks' => __DIR__ . '/../..' . '/kirby/src/Cms/ContentLocks.php',
         'Kirby\\Cms\\ContentTranslation' => __DIR__ . '/../..' . '/kirby/src/Cms/ContentTranslation.php',
-        'Kirby\\Cms\\Dir' => __DIR__ . '/../..' . '/kirby/src/Cms/Dir.php',
+        'Kirby\\Cms\\Core' => __DIR__ . '/../..' . '/kirby/src/Cms/Core.php',
         'Kirby\\Cms\\Email' => __DIR__ . '/../..' . '/kirby/src/Cms/Email.php',
+        'Kirby\\Cms\\Environment' => __DIR__ . '/../..' . '/kirby/src/Cms/Environment.php',
         'Kirby\\Cms\\Event' => __DIR__ . '/../..' . '/kirby/src/Cms/Event.php',
         'Kirby\\Cms\\Field' => __DIR__ . '/../..' . '/kirby/src/Cms/Field.php',
         'Kirby\\Cms\\Fieldset' => __DIR__ . '/../..' . '/kirby/src/Cms/Fieldset.php',
@@ -143,15 +140,13 @@ class ComposerStaticInit4be00075b8cd7166490fab947ec893a9
         'Kirby\\Cms\\File' => __DIR__ . '/../..' . '/kirby/src/Cms/File.php',
         'Kirby\\Cms\\FileActions' => __DIR__ . '/../..' . '/kirby/src/Cms/FileActions.php',
         'Kirby\\Cms\\FileBlueprint' => __DIR__ . '/../..' . '/kirby/src/Cms/FileBlueprint.php',
-        'Kirby\\Cms\\FileFoundation' => __DIR__ . '/../..' . '/kirby/src/Cms/FileFoundation.php',
         'Kirby\\Cms\\FileModifications' => __DIR__ . '/../..' . '/kirby/src/Cms/FileModifications.php',
         'Kirby\\Cms\\FilePermissions' => __DIR__ . '/../..' . '/kirby/src/Cms/FilePermissions.php',
         'Kirby\\Cms\\FilePicker' => __DIR__ . '/../..' . '/kirby/src/Cms/FilePicker.php',
         'Kirby\\Cms\\FileRules' => __DIR__ . '/../..' . '/kirby/src/Cms/FileRules.php',
         'Kirby\\Cms\\FileVersion' => __DIR__ . '/../..' . '/kirby/src/Cms/FileVersion.php',
-        'Kirby\\Cms\\Filename' => __DIR__ . '/../..' . '/kirby/src/Cms/Filename.php',
         'Kirby\\Cms\\Files' => __DIR__ . '/../..' . '/kirby/src/Cms/Files.php',
-        'Kirby\\Cms\\Form' => __DIR__ . '/../..' . '/kirby/src/Cms/Form.php',
+        'Kirby\\Cms\\Find' => __DIR__ . '/../..' . '/kirby/src/Cms/Find.php',
         'Kirby\\Cms\\HasChildren' => __DIR__ . '/../..' . '/kirby/src/Cms/HasChildren.php',
         'Kirby\\Cms\\HasFiles' => __DIR__ . '/../..' . '/kirby/src/Cms/HasFiles.php',
         'Kirby\\Cms\\HasMethods' => __DIR__ . '/../..' . '/kirby/src/Cms/HasMethods.php',
@@ -160,8 +155,6 @@ class ComposerStaticInit4be00075b8cd7166490fab947ec893a9
         'Kirby\\Cms\\Ingredients' => __DIR__ . '/../..' . '/kirby/src/Cms/Ingredients.php',
         'Kirby\\Cms\\Item' => __DIR__ . '/../..' . '/kirby/src/Cms/Item.php',
         'Kirby\\Cms\\Items' => __DIR__ . '/../..' . '/kirby/src/Cms/Items.php',
-        'Kirby\\Cms\\KirbyTag' => __DIR__ . '/../..' . '/kirby/src/Cms/KirbyTag.php',
-        'Kirby\\Cms\\KirbyTags' => __DIR__ . '/../..' . '/kirby/src/Cms/KirbyTags.php',
         'Kirby\\Cms\\Language' => __DIR__ . '/../..' . '/kirby/src/Cms/Language.php',
         'Kirby\\Cms\\LanguageRouter' => __DIR__ . '/../..' . '/kirby/src/Cms/LanguageRouter.php',
         'Kirby\\Cms\\LanguageRoutes' => __DIR__ . '/../..' . '/kirby/src/Cms/LanguageRoutes.php',
@@ -171,6 +164,7 @@ class ComposerStaticInit4be00075b8cd7166490fab947ec893a9
         'Kirby\\Cms\\LayoutColumn' => __DIR__ . '/../..' . '/kirby/src/Cms/LayoutColumn.php',
         'Kirby\\Cms\\LayoutColumns' => __DIR__ . '/../..' . '/kirby/src/Cms/LayoutColumns.php',
         'Kirby\\Cms\\Layouts' => __DIR__ . '/../..' . '/kirby/src/Cms/Layouts.php',
+        'Kirby\\Cms\\Loader' => __DIR__ . '/../..' . '/kirby/src/Cms/Loader.php',
         'Kirby\\Cms\\Media' => __DIR__ . '/../..' . '/kirby/src/Cms/Media.php',
         'Kirby\\Cms\\Model' => __DIR__ . '/../..' . '/kirby/src/Cms/Model.php',
         'Kirby\\Cms\\ModelPermissions' => __DIR__ . '/../..' . '/kirby/src/Cms/ModelPermissions.php',
@@ -187,8 +181,6 @@ class ComposerStaticInit4be00075b8cd7166490fab947ec893a9
         'Kirby\\Cms\\PageSiblings' => __DIR__ . '/../..' . '/kirby/src/Cms/PageSiblings.php',
         'Kirby\\Cms\\Pages' => __DIR__ . '/../..' . '/kirby/src/Cms/Pages.php',
         'Kirby\\Cms\\Pagination' => __DIR__ . '/../..' . '/kirby/src/Cms/Pagination.php',
-        'Kirby\\Cms\\Panel' => __DIR__ . '/../..' . '/kirby/src/Cms/Panel.php',
-        'Kirby\\Cms\\PanelPlugins' => __DIR__ . '/../..' . '/kirby/src/Cms/PanelPlugins.php',
         'Kirby\\Cms\\Permissions' => __DIR__ . '/../..' . '/kirby/src/Cms/Permissions.php',
         'Kirby\\Cms\\Picker' => __DIR__ . '/../..' . '/kirby/src/Cms/Picker.php',
         'Kirby\\Cms\\Plugin' => __DIR__ . '/../..' . '/kirby/src/Cms/Plugin.php',
@@ -249,6 +241,13 @@ class ComposerStaticInit4be00075b8cd7166490fab947ec893a9
         'Kirby\\Exception\\LogicException' => __DIR__ . '/../..' . '/kirby/src/Exception/LogicException.php',
         'Kirby\\Exception\\NotFoundException' => __DIR__ . '/../..' . '/kirby/src/Exception/NotFoundException.php',
         'Kirby\\Exception\\PermissionException' => __DIR__ . '/../..' . '/kirby/src/Exception/PermissionException.php',
+        'Kirby\\Filesystem\\Asset' => __DIR__ . '/../..' . '/kirby/src/Filesystem/Asset.php',
+        'Kirby\\Filesystem\\Dir' => __DIR__ . '/../..' . '/kirby/src/Filesystem/Dir.php',
+        'Kirby\\Filesystem\\F' => __DIR__ . '/../..' . '/kirby/src/Filesystem/F.php',
+        'Kirby\\Filesystem\\File' => __DIR__ . '/../..' . '/kirby/src/Filesystem/File.php',
+        'Kirby\\Filesystem\\Filename' => __DIR__ . '/../..' . '/kirby/src/Filesystem/Filename.php',
+        'Kirby\\Filesystem\\IsFile' => __DIR__ . '/../..' . '/kirby/src/Filesystem/IsFile.php',
+        'Kirby\\Filesystem\\Mime' => __DIR__ . '/../..' . '/kirby/src/Filesystem/Mime.php',
         'Kirby\\Form\\Field' => __DIR__ . '/../..' . '/kirby/src/Form/Field.php',
         'Kirby\\Form\\FieldClass' => __DIR__ . '/../..' . '/kirby/src/Form/FieldClass.php',
         'Kirby\\Form\\Field\\BlocksField' => __DIR__ . '/../..' . '/kirby/src/Form/Field/BlocksField.php',
@@ -292,12 +291,35 @@ class ComposerStaticInit4be00075b8cd7166490fab947ec893a9
         'Kirby\\Image\\Exif' => __DIR__ . '/../..' . '/kirby/src/Image/Exif.php',
         'Kirby\\Image\\Image' => __DIR__ . '/../..' . '/kirby/src/Image/Image.php',
         'Kirby\\Image\\Location' => __DIR__ . '/../..' . '/kirby/src/Image/Location.php',
+        'Kirby\\Panel\\Dialog' => __DIR__ . '/../..' . '/kirby/src/Panel/Dialog.php',
+        'Kirby\\Panel\\Document' => __DIR__ . '/../..' . '/kirby/src/Panel/Document.php',
+        'Kirby\\Panel\\Dropdown' => __DIR__ . '/../..' . '/kirby/src/Panel/Dropdown.php',
+        'Kirby\\Panel\\Field' => __DIR__ . '/../..' . '/kirby/src/Panel/Field.php',
+        'Kirby\\Panel\\File' => __DIR__ . '/../..' . '/kirby/src/Panel/File.php',
+        'Kirby\\Panel\\Home' => __DIR__ . '/../..' . '/kirby/src/Panel/Home.php',
+        'Kirby\\Panel\\Json' => __DIR__ . '/../..' . '/kirby/src/Panel/Json.php',
+        'Kirby\\Panel\\Model' => __DIR__ . '/../..' . '/kirby/src/Panel/Model.php',
+        'Kirby\\Panel\\Page' => __DIR__ . '/../..' . '/kirby/src/Panel/Page.php',
+        'Kirby\\Panel\\Panel' => __DIR__ . '/../..' . '/kirby/src/Panel/Panel.php',
+        'Kirby\\Panel\\Plugins' => __DIR__ . '/../..' . '/kirby/src/Panel/Plugins.php',
+        'Kirby\\Panel\\Redirect' => __DIR__ . '/../..' . '/kirby/src/Panel/Redirect.php',
+        'Kirby\\Panel\\Search' => __DIR__ . '/../..' . '/kirby/src/Panel/Search.php',
+        'Kirby\\Panel\\Site' => __DIR__ . '/../..' . '/kirby/src/Panel/Site.php',
+        'Kirby\\Panel\\User' => __DIR__ . '/../..' . '/kirby/src/Panel/User.php',
+        'Kirby\\Panel\\View' => __DIR__ . '/../..' . '/kirby/src/Panel/View.php',
         'Kirby\\Parsley\\Element' => __DIR__ . '/../..' . '/kirby/src/Parsley/Element.php',
         'Kirby\\Parsley\\Inline' => __DIR__ . '/../..' . '/kirby/src/Parsley/Inline.php',
         'Kirby\\Parsley\\Parsley' => __DIR__ . '/../..' . '/kirby/src/Parsley/Parsley.php',
         'Kirby\\Parsley\\Schema' => __DIR__ . '/../..' . '/kirby/src/Parsley/Schema.php',
         'Kirby\\Parsley\\Schema\\Blocks' => __DIR__ . '/../..' . '/kirby/src/Parsley/Schema/Blocks.php',
         'Kirby\\Parsley\\Schema\\Plain' => __DIR__ . '/../..' . '/kirby/src/Parsley/Schema/Plain.php',
+        'Kirby\\Sane\\DomHandler' => __DIR__ . '/../..' . '/kirby/src/Sane/DomHandler.php',
+        'Kirby\\Sane\\Handler' => __DIR__ . '/../..' . '/kirby/src/Sane/Handler.php',
+        'Kirby\\Sane\\Html' => __DIR__ . '/../..' . '/kirby/src/Sane/Html.php',
+        'Kirby\\Sane\\Sane' => __DIR__ . '/../..' . '/kirby/src/Sane/Sane.php',
+        'Kirby\\Sane\\Svg' => __DIR__ . '/../..' . '/kirby/src/Sane/Svg.php',
+        'Kirby\\Sane\\Svgz' => __DIR__ . '/../..' . '/kirby/src/Sane/Svgz.php',
+        'Kirby\\Sane\\Xml' => __DIR__ . '/../..' . '/kirby/src/Sane/Xml.php',
         'Kirby\\Session\\AutoSession' => __DIR__ . '/../..' . '/kirby/src/Session/AutoSession.php',
         'Kirby\\Session\\FileSessionStore' => __DIR__ . '/../..' . '/kirby/src/Session/FileSessionStore.php',
         'Kirby\\Session\\Session' => __DIR__ . '/../..' . '/kirby/src/Session/Session.php',
@@ -313,16 +335,14 @@ class ComposerStaticInit4be00075b8cd7166490fab947ec893a9
         'Kirby\\Toolkit\\Component' => __DIR__ . '/../..' . '/kirby/src/Toolkit/Component.php',
         'Kirby\\Toolkit\\Config' => __DIR__ . '/../..' . '/kirby/src/Toolkit/Config.php',
         'Kirby\\Toolkit\\Controller' => __DIR__ . '/../..' . '/kirby/src/Toolkit/Controller.php',
-        'Kirby\\Toolkit\\Dir' => __DIR__ . '/../..' . '/kirby/src/Toolkit/Dir.php',
+        'Kirby\\Toolkit\\Date' => __DIR__ . '/../..' . '/kirby/src/Toolkit/Date.php',
+        'Kirby\\Toolkit\\Dom' => __DIR__ . '/../..' . '/kirby/src/Toolkit/Dom.php',
         'Kirby\\Toolkit\\Escape' => __DIR__ . '/../..' . '/kirby/src/Toolkit/Escape.php',
-        'Kirby\\Toolkit\\F' => __DIR__ . '/../..' . '/kirby/src/Toolkit/F.php',
         'Kirby\\Toolkit\\Facade' => __DIR__ . '/../..' . '/kirby/src/Toolkit/Facade.php',
-        'Kirby\\Toolkit\\File' => __DIR__ . '/../..' . '/kirby/src/Toolkit/File.php',
         'Kirby\\Toolkit\\Html' => __DIR__ . '/../..' . '/kirby/src/Toolkit/Html.php',
         'Kirby\\Toolkit\\I18n' => __DIR__ . '/../..' . '/kirby/src/Toolkit/I18n.php',
         'Kirby\\Toolkit\\Iterator' => __DIR__ . '/../..' . '/kirby/src/Toolkit/Iterator.php',
         'Kirby\\Toolkit\\Locale' => __DIR__ . '/../..' . '/kirby/src/Toolkit/Locale.php',
-        'Kirby\\Toolkit\\Mime' => __DIR__ . '/../..' . '/kirby/src/Toolkit/Mime.php',
         'Kirby\\Toolkit\\Obj' => __DIR__ . '/../..' . '/kirby/src/Toolkit/Obj.php',
         'Kirby\\Toolkit\\Pagination' => __DIR__ . '/../..' . '/kirby/src/Toolkit/Pagination.php',
         'Kirby\\Toolkit\\Properties' => __DIR__ . '/../..' . '/kirby/src/Toolkit/Properties.php',
@@ -337,16 +357,12 @@ class ComposerStaticInit4be00075b8cd7166490fab947ec893a9
         'Laminas\\Escaper\\Exception\\ExceptionInterface' => __DIR__ . '/..' . '/laminas/laminas-escaper/src/Exception/ExceptionInterface.php',
         'Laminas\\Escaper\\Exception\\InvalidArgumentException' => __DIR__ . '/..' . '/laminas/laminas-escaper/src/Exception/InvalidArgumentException.php',
         'Laminas\\Escaper\\Exception\\RuntimeException' => __DIR__ . '/..' . '/laminas/laminas-escaper/src/Exception/RuntimeException.php',
-        'Laminas\\ZendFrameworkBridge\\Autoloader' => __DIR__ . '/..' . '/laminas/laminas-zendframework-bridge/src/Autoloader.php',
-        'Laminas\\ZendFrameworkBridge\\ConfigPostProcessor' => __DIR__ . '/..' . '/laminas/laminas-zendframework-bridge/src/ConfigPostProcessor.php',
-        'Laminas\\ZendFrameworkBridge\\Module' => __DIR__ . '/..' . '/laminas/laminas-zendframework-bridge/src/Module.php',
-        'Laminas\\ZendFrameworkBridge\\Replacements' => __DIR__ . '/..' . '/laminas/laminas-zendframework-bridge/src/Replacements.php',
-        'Laminas\\ZendFrameworkBridge\\RewriteRules' => __DIR__ . '/..' . '/laminas/laminas-zendframework-bridge/src/RewriteRules.php',
         'League\\ColorExtractor\\Color' => __DIR__ . '/..' . '/league/color-extractor/src/League/ColorExtractor/Color.php',
         'League\\ColorExtractor\\ColorExtractor' => __DIR__ . '/..' . '/league/color-extractor/src/League/ColorExtractor/ColorExtractor.php',
         'League\\ColorExtractor\\Palette' => __DIR__ . '/..' . '/league/color-extractor/src/League/ColorExtractor/Palette.php',
         'Michelf\\SmartyPants' => __DIR__ . '/..' . '/michelf/php-smartypants/Michelf/SmartyPants.php',
         'Michelf\\SmartyPantsTypographer' => __DIR__ . '/..' . '/michelf/php-smartypants/Michelf/SmartyPantsTypographer.php',
+        'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
         'PHPMailer\\PHPMailer\\Exception' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/Exception.php',
         'PHPMailer\\PHPMailer\\OAuth' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/OAuth.php',
         'PHPMailer\\PHPMailer\\PHPMailer' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/PHPMailer.php',
@@ -365,11 +381,13 @@ class ComposerStaticInit4be00075b8cd7166490fab947ec893a9
         'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/DummyTest.php',
         'Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
         'Psr\\Log\\Test\\TestLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/TestLogger.php',
+        'Spyc' => __DIR__ . '/../..' . '/kirby/dependencies/spyc/Spyc.php',
+        'Symfony\\Polyfill\\Intl\\Idn\\Idn' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/Idn.php',
+        'Symfony\\Polyfill\\Intl\\Idn\\Info' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/Info.php',
+        'Symfony\\Polyfill\\Intl\\Idn\\Resources\\unidata\\DisallowedRanges' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/Resources/unidata/DisallowedRanges.php',
+        'Symfony\\Polyfill\\Intl\\Idn\\Resources\\unidata\\Regex' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/Resources/unidata/Regex.php',
+        'Symfony\\Polyfill\\Intl\\Normalizer\\Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Normalizer.php',
         'Symfony\\Polyfill\\Mbstring\\Mbstring' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/Mbstring.php',
-        'TrueBV\\Exception\\DomainOutOfBoundsException' => __DIR__ . '/..' . '/true/punycode/src/Exception/DomainOutOfBoundsException.php',
-        'TrueBV\\Exception\\LabelOutOfBoundsException' => __DIR__ . '/..' . '/true/punycode/src/Exception/LabelOutOfBoundsException.php',
-        'TrueBV\\Exception\\OutOfBoundsException' => __DIR__ . '/..' . '/true/punycode/src/Exception/OutOfBoundsException.php',
-        'TrueBV\\Punycode' => __DIR__ . '/..' . '/true/punycode/src/Punycode.php',
         'Whoops\\Exception\\ErrorException' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Exception/ErrorException.php',
         'Whoops\\Exception\\Formatter' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Exception/Formatter.php',
         'Whoops\\Exception\\Frame' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Exception/Frame.php',
