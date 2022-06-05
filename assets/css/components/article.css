@@ -29,6 +29,10 @@ h3 {
   content: "└";
 }
 
+section .content .p-1 {
+  margin: 0 0 10px 20px;
+}
+
 /* indentation classes */
 
 .i-1 {

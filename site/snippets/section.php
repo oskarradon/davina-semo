@@ -4,6 +4,9 @@
 <?php else : ?>
   <div class="i i-1 collapsible" data-anchor-id="<?= $data->slug() ?>"><h2><?= $data->title() ?></h2></div>
   <div class="content">
+    <div class="p-1">
+      <?= $data->description()->kt() ?>
+    </div>
     <?php $links = $data->links()->toStructure();
         foreach ($links as $link) : ?>
           <div class="i i-2">
