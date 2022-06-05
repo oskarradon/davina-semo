@@ -1,14 +1,14 @@
 {
-    "name": "getkirby/plainkit",
-    "description": "Kirby Plainkit",
+    "name": "oskarradon/davina-semo",
+    "description": "Davina Semo Portfolio",
     "type": "project",
-    "keywords": ["kirby", "cms", "starterkit"],
-    "homepage": "https://getkirby.com",
+    "keywords": ["kirby", "portfolio", "davina", "semo"],
+    "homepage": "https://davinasemo.com",
     "authors": [
         {
-            "name": "Bastian Allgeier",
-            "email": "bastian@getkirby.com",
-            "homepage": "https://getkirby.com"
+            "name": "Oskar Radon",
+            "email": "oskarradonkimball@gmail.com",
+            "homepage": "https://oskarradon.com"
         }
     ],
     "support": {
